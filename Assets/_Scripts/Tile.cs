@@ -16,7 +16,6 @@ public class Tile : Object
         axial = _axial;
         buildingData = _buildingData;
         _sceneObject = gameObject;
-        highlight = _sceneObject.GetComponent<HighlightHex>();
     }
 
     public void Build(BuildingScriptable building)
@@ -24,5 +23,12 @@ public class Tile : Object
         buildingData = building;
         Destroy(_sceneObject);
         _sceneObject = Instantiate(buildingData._initialPrefab, position, Quaternion.identity);
+    }    
+    
+    public void Highlight()
+    {
+        Debug.Log("teste");
+        HighlightHex highlight = _sceneObject.GetComponent<HighlightHex>();
+        highlight.On();
     }
 }

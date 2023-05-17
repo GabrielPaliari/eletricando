@@ -4,26 +4,22 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    private HexGrid _hexGrid;
+    private SquareGrid _grid;
     [SerializeField] private BuildingScriptable _defaultTilePrefab;
     [SerializeField] private BuildingScriptable _selectedComponent;
 
     private void Start()
     {
-        _hexGrid = new HexGrid(5, _defaultTilePrefab);
+        _grid = new SquareGrid(10, 10, _defaultTilePrefab);
     }
 
     private void Update()
     {
-        var _selectedTile = GetPointedTile();
+        var mousePos = Mouse3D.GetMouseWorldPosition();
+        var _selectedTile = _grid.GetTile(mousePos);
+        Debug.Log(_selectedTile);
 
-        //_selectedTile.highlight.Off();
-
-        //_selectedTile = GetPointedTile();
-        if (_selectedTile != null)
-        {
-            _selectedTile.highlight.On();            
-        }
+        _selectedTile.Highlight();      
 
 
 
@@ -31,12 +27,5 @@ public class BuildingManager : MonoBehaviour
         {
             _selectedTile.Build(_selectedComponent);
         }
-    }
-
-    private Tile GetPointedTile()
-    {
-        var mousePos = Mouse3D.GetMouseWorldPosition();
-        mousePos.z = 0f;
-        return _hexGrid.GetTile(mousePos);
     }
 }

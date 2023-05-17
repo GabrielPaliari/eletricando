@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,12 +12,13 @@ public class Mouse3D : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        Debug.Log(layerMask);
     }
 
     public static Vector3 GetMouseWorldPosition() => Instance.GetMouseWorldPosition_Instance();
 
     private Vector3 GetMouseWorldPosition_Instance()
-    {
+    {        
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, layerMask))
         {

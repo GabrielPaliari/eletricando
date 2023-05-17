@@ -3,7 +3,9 @@ guid: 6977cffe4b53dde489be9721ad3e1f88
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _defaultTilePrefab: {fileID: 11400000, guid: d24622f7dd52e994ba007c87e7e5a422, type: 2}
+  - _selectedComponent: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

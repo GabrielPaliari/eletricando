@@ -19,7 +19,7 @@ public class HexGrid : Object
         GenerateGrid();
     }
 
-    private Dictionary<Vector2Int, Tile> _tiles = new Dictionary<Vector2Int, Tile>(); // Dictionary to store the hexagons
+    private Dictionary<Vector2Int, Tile> _tiles = new Dictionary<Vector2Int, Tile>(); // Dictionary to store the cells
 
     private void GenerateGrid()
     {
@@ -27,7 +27,7 @@ public class HexGrid : Object
         {
             for (int y = -_gridRadius; y <= _gridRadius; y++)
             {
-                int z = -x - y; // Cube coordinates constraint: x + y + z = 0
+                int z = -x - y;
 
                 if (Mathf.Abs(x) <= _gridRadius && Mathf.Abs(y) <= _gridRadius && Mathf.Abs(z) <= _gridRadius)
                 {
