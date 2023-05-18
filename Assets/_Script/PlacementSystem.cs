@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlacementSystem : MonoBehaviour
 {
     [SerializeField]
-    private GameObject mouseIndicator, cellIndicator;
+    private GameObject mouseIndicator;
     [SerializeField]
     private InputManager inputManager;
     [SerializeField]
@@ -22,16 +22,18 @@ public class PlacementSystem : MonoBehaviour
 
     private GridData floorData, furnitureData;
 
-    private Renderer previewRenderer;
-
     private List<GameObject> placedGameObjects = new();
+
+    [SerializeField]
+    private PreviewSystem preview;
+
+    private Vector3Int lastDetectedPosition = Vector3Int.zero;
 
     private void Start()
     {
         StopPlacement();
         floorData = new();
         furnitureData = new();
-        previewRenderer = cellIndicator.GetComponentInChildren<Renderer>();
     }
 
     public void StartPlacement(int ID)
@@ -43,9 +45,10 @@ public class PlacementSystem : MonoBehaviour
             Debug.LogError($"No ID found {ID}");
             return;
         }
+        var selectedbject = database.objectsData[selectedObjectIndex];
 
         gridVisualiztion.SetActive(true);
-        cellIndicator.SetActive(true);
+        preview.StartShowingPlacementPreview(selectedbject.Prefab, selectedbject.Size);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }
@@ -70,15 +73,18 @@ public class PlacementSystem : MonoBehaviour
             database.objectsData[selectedObjectIndex].Size, 
             database.objectsData[selectedObjectIndex].ID, 
             placedGameObjects.Count - 1);
+
+        preview.UpdatePosition(grid.CellToWorld(gridPosition), false);
     }
 
     private void StopPlacement()
     {
         selectedObjectIndex = -1;
         gridVisualiztion.SetActive(false);
-        cellIndicator.SetActive(false);
+        preview.StopShowingPreview();
         inputManager.OnClicked -= PlaceStructure;
         inputManager.OnExit -= StopPlacement;
+        lastDetectedPosition = Vector3Int.zero;
     }
 
     private void Update()
@@ -88,12 +94,11 @@ public class PlacementSystem : MonoBehaviour
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
-        bool isPlacementValid = CheckPlacementValidity(gridPosition, selectedObjectIndex);
-        previewRenderer.material.color = isPlacementValid ? Color.white : Color.red;
-
-
-        mouseIndicator.transform.position = mousePosition;
-        cellIndicator.transform.position = grid.CellToWorld(gridPosition);
+        if (lastDetectedPosition != gridPosition) {
+            bool isPlacementValid = CheckPlacementValidity(gridPosition, selectedObjectIndex);
+            mouseIndicator.transform.position = mousePosition;
+            preview.UpdatePosition(grid.CellToWorld(gridPosition), isPlacementValid);
+        }
     }
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
