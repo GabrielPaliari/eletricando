@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class ObjectDatabaseSO : ScriptableObject
+public class ObjectsDatabaseSO : ScriptableObject
 {
     public List<ObjectData> objectsData;
-
 }
 
 [Serializable]
