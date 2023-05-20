@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Resistor
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Resistor
-  <ID>k__BackingField: 2
+  <ID>k__BackingField: 1
   <Size>k__BackingField: {x: 1, y: 2}
-  <Prefab>k__BackingField: {fileID: 3493615974341626966, guid: c8183485a28237d4385a3c7ef8659faa,
+  <Prefab>k__BackingField: {fileID: 4270027337467677060, guid: 65a5ead73e923814fa996e8908c0bdc1,
     type: 3}
