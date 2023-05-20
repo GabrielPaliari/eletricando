@@ -17,7 +17,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private GameObject gridVisualization;
 
-    private GridData furnitureData;
+    private GridData componentsData;
 
     [SerializeField]
     private PreviewSystem preview;
@@ -35,7 +35,7 @@ public class PlacementSystem : MonoBehaviour
     private void Start()
     {
         gridVisualization.SetActive(false);
-        furnitureData = new();
+        componentsData = new();
     }
 
     public void StartPlacement(int ID)
@@ -46,7 +46,7 @@ public class PlacementSystem : MonoBehaviour
                                            grid,
                                            preview,
                                            database,
-                                           furnitureData,
+                                           componentsData,
                                            objectPlacer,
                                            soundFeedback);
         inputManager.OnClicked += PlaceStructure;
@@ -57,7 +57,7 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         gridVisualization.SetActive(true);
-        buildingState = new RemovingState(grid, preview, furnitureData, objectPlacer, soundFeedback);
+        buildingState = new RemovingState(grid, preview, componentsData, objectPlacer, soundFeedback);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }

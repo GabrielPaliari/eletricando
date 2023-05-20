@@ -10,7 +10,7 @@ public class PlacementState : IBuildingState
     Grid grid;
     PreviewSystem previewSystem;
     ObjectsDatabaseSO database;
-    GridData furnitureData;
+    GridData componentsData;
     ObjectPlacer objectPlacer;
     SoundFeedback soundFeedback;
 
@@ -18,7 +18,7 @@ public class PlacementState : IBuildingState
                           Grid grid,
                           PreviewSystem previewSystem,
                           ObjectsDatabaseSO database,
-                          GridData furnitureData,
+                          GridData componentsData,
                           ObjectPlacer objectPlacer,
                           SoundFeedback soundFeedback)
     {
@@ -26,7 +26,7 @@ public class PlacementState : IBuildingState
         this.grid = grid;
         this.previewSystem = previewSystem;
         this.database = database;
-        this.furnitureData = furnitureData;
+        this.componentsData = componentsData;
         this.objectPlacer = objectPlacer;
         this.soundFeedback = soundFeedback;
 
@@ -60,7 +60,7 @@ public class PlacementState : IBuildingState
         int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab,
             grid.CellToWorld(gridPosition));
 
-        GridData selectedData = furnitureData;
+        GridData selectedData = componentsData;
         selectedData.AddObjectAt(gridPosition,
             database.objectsData[selectedObjectIndex].Size,
             database.objectsData[selectedObjectIndex].ID,
@@ -71,7 +71,7 @@ public class PlacementState : IBuildingState
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
     {
-        GridData selectedData = furnitureData;
+        GridData selectedData = componentsData;
 
         return selectedData.CanPlaceObejctAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
     }
