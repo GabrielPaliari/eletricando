@@ -172,7 +172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 282171881}
   m_Layer: 0
-  m_Name: BuildingSystem
+  m_Name: BuildingManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1551,7 +1551,7 @@ GameObject:
   - component: {fileID: 1203156369}
   - component: {fileID: 1203156368}
   m_Layer: 0
-  m_Name: SoundSystem
+  m_Name: SoundManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
