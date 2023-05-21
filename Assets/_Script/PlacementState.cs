@@ -47,40 +47,38 @@ public class PlacementState : IBuildingState
         previewSystem.StopShowingPreview();
     }
 
-    public void OnAction(Vector3Int gridPosition)
+    public void OnAction(Vector3Int gridPosition, RotationDir rotationDir)
     {
-
-        bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
-        if (placementValidity == false)
+        if (!CheckPlacementValidity(gridPosition, selectedObjectIndex, rotationDir))
         {
             soundFeedback.PlaySound(SoundType.wrongPlacement);
             return;
         }
         soundFeedback.PlaySound(SoundType.Place);
-        int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab,
-            grid.CellToWorld(gridPosition));
+        int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex], grid.CellToWorld(gridPosition), rotationDir);
 
         GridData selectedData = componentsData;
         selectedData.AddObjectAt(gridPosition,
             database.objectsData[selectedObjectIndex].Size,
+            rotationDir,
             database.objectsData[selectedObjectIndex].ID,
             index);
 
-        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), false);
+        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), false, rotationDir);
     }
 
-    private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
+    private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex, RotationDir rotationDir)
     {
         GridData selectedData = componentsData;
 
-        return selectedData.CanPlaceObejctAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
+        return selectedData.CanPlaceObejctAt(gridPosition, database.objectsData[selectedObjectIndex].Size, rotationDir);
     }
 
-    public void UpdateState(Vector3Int gridPosition)
+    public void UpdateState(Vector3Int gridPosition, RotationDir rotationDir)
     {
-        bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
+        bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex, rotationDir);
 
-        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), placementValidity);
+        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), placementValidity, rotationDir);
     }
 }
 

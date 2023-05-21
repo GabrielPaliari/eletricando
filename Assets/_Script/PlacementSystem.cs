@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static PlacementSystem;
 
 public class PlacementSystem : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private SoundFeedback soundFeedback;
 
+    private RotationDir rotationDir = RotationDir.Left;
+
     private void Start()
     {
         gridVisualization.SetActive(false);
@@ -50,6 +53,7 @@ public class PlacementSystem : MonoBehaviour
                                            objectPlacer,
                                            soundFeedback);
         inputManager.OnClicked += PlaceStructure;
+        inputManager.OnRotate += RotateStructure;
         inputManager.OnExit += StopPlacement;
     }
 
@@ -68,11 +72,22 @@ public class PlacementSystem : MonoBehaviour
         {
             return;
         }
+        Vector3Int gridPosition = GetPointedGridPosition();
+        buildingState.OnAction(gridPosition, rotationDir);
+
+    }
+
+    private Vector3Int GetPointedGridPosition()
+    {
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
+        return gridPosition;
+    }
 
-        buildingState.OnAction(gridPosition);
-
+    private void RotateStructure()
+    {
+        rotationDir = RotationUtil.GetNextRotation(rotationDir);
+        buildingState.UpdateState(GetPointedGridPosition(), rotationDir);
     }
 
     private void StopPlacement()
@@ -83,6 +98,7 @@ public class PlacementSystem : MonoBehaviour
         gridVisualization.SetActive(false);
         buildingState.EndState();
         inputManager.OnClicked -= PlaceStructure;
+        inputManager.OnRotate -= RotateStructure;
         inputManager.OnExit -= StopPlacement;
         lastDetectedPosition = Vector3Int.zero;
         buildingState = null;
@@ -96,7 +112,7 @@ public class PlacementSystem : MonoBehaviour
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
         if (lastDetectedPosition != gridPosition)
         {
-            buildingState.UpdateState(gridPosition);
+            buildingState.UpdateState(gridPosition, rotationDir);
             lastDetectedPosition = gridPosition;
         }
 

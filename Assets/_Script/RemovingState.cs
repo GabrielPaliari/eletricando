@@ -31,10 +31,10 @@ public class RemovingState : IBuildingState
         previewSystem.StopShowingPreview();
     }
 
-    public void OnAction(Vector3Int gridPosition)
+    public void OnAction(Vector3Int gridPosition, RotationDir rotationDir)
     {
         GridData selectedData = null;
-        if (componentsData.CanPlaceObejctAt(gridPosition, Vector2Int.one) == false)
+        if (componentsData.CanPlaceObejctAt(gridPosition, Vector2Int.one, rotationDir) == false)
         {
             selectedData = componentsData;
         }
@@ -54,17 +54,17 @@ public class RemovingState : IBuildingState
             objectPlacer.RemoveObjectAt(gameObjectIndex);
         }
         Vector3 cellPosition = grid.CellToWorld(gridPosition);
-        previewSystem.UpdatePosition(cellPosition, CheckIfSelectionIsValid(gridPosition));
+        previewSystem.UpdatePosition(cellPosition, CheckIfSelectionIsValid(gridPosition, rotationDir), rotationDir);
     }
 
-    private bool CheckIfSelectionIsValid(Vector3Int gridPosition)
+    private bool CheckIfSelectionIsValid(Vector3Int gridPosition, RotationDir dir)
     {
-        return !componentsData.CanPlaceObejctAt(gridPosition, Vector2Int.one);
+        return !componentsData.CanPlaceObejctAt(gridPosition, Vector2Int.one, dir);
     }
 
-    public void UpdateState(Vector3Int gridPosition)
+    public void UpdateState(Vector3Int gridPosition, RotationDir rotationDir)
     {
-        bool validity = CheckIfSelectionIsValid(gridPosition);
-        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), validity);
+        bool validity = CheckIfSelectionIsValid(gridPosition, rotationDir);
+        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), validity, rotationDir);
     }
 }

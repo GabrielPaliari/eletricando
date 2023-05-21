@@ -16,6 +16,8 @@ public class PreviewSystem : MonoBehaviour
 
     private Renderer cellIndicatorRenderer;
 
+    private Vector2Int objectSize = Vector2Int.one;
+
     private void Start()
     {
         previewMaterialInstance = new Material(previewMaterialPrefab);
@@ -25,6 +27,7 @@ public class PreviewSystem : MonoBehaviour
 
     public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size)
     {
+        objectSize = size;
         previewObject = Instantiate(prefab);
         PreparePreview(previewObject);
         PrepareCursor(size);
@@ -33,10 +36,14 @@ public class PreviewSystem : MonoBehaviour
 
     private void PrepareCursor(Vector2Int size)
     {
-        if (size.x > 0 || size.y > 0)
+        int width, height;
+        RotationUtil.GetObjectWidthAndHeight(size, RotationDir.Up, out width, out height);
+        var rotatedSize = new Vector2Int(width, height);
+
+        if (rotatedSize.x > 0 || rotatedSize.y > 0)
         {
-            cellIndicator.transform.localScale = new Vector3(size.x, 1, size.y);
-            cellIndicatorRenderer.material.mainTextureScale = size;
+            cellIndicator.transform.localScale = new Vector3(rotatedSize.x, 1, rotatedSize.y);
+            cellIndicatorRenderer.material.mainTextureScale = rotatedSize;
         }
     }
 
@@ -61,13 +68,12 @@ public class PreviewSystem : MonoBehaviour
             Destroy(previewObject);
     }
 
-    public void UpdatePosition(Vector3 position, bool validity)
+    public void UpdatePosition(Vector3 position, bool validity, RotationDir dir)
     {
         if (previewObject != null)
         {
-            MovePreview(position);
+            MovePreview(position, dir);
             ApplyFeedbackToPreview(validity);
-
         }
 
         MoveCursor(position);
@@ -95,12 +101,14 @@ public class PreviewSystem : MonoBehaviour
         cellIndicator.transform.position = position;
     }
 
-    private void MovePreview(Vector3 position)
+    private void MovePreview(Vector3 position, RotationDir dir)
     {
+        Vector2Int rotationOffset = RotationUtil.GetRotationOffset(dir, objectSize);
         previewObject.transform.position = new Vector3(
-            position.x,
+            position.x + rotationOffset.x,
             position.y + previewYOffset,
-            position.z);
+            position.z + rotationOffset.y);
+        previewObject.transform.rotation = RotationUtil.GetRotationAngle(dir);
     }
 
     internal void StartShowingRemovePreview()
