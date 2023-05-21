@@ -17,6 +17,7 @@ public class PreviewSystem : MonoBehaviour
     private Renderer cellIndicatorRenderer;
 
     private Vector2Int objectSize = Vector2Int.one;
+    private RotationDir previousRotationDir;
 
     private void Start()
     {
@@ -35,7 +36,9 @@ public class PreviewSystem : MonoBehaviour
     }
 
     private void PrepareCursor(Vector2Int size)
-    {
+    {   
+        previousRotationDir = RotationUtil.currentDir;
+
         int width, height;
         RotationUtil.GetObjectWidthAndHeight(size, out width, out height);
         var rotatedSize = new Vector2Int(width, height);
@@ -75,7 +78,10 @@ public class PreviewSystem : MonoBehaviour
             MovePreview(position);
             ApplyFeedbackToPreview(validity);
         }
-
+        if (previousRotationDir != RotationUtil.currentDir)
+        {          
+            PrepareCursor(objectSize);
+        }
         MoveCursor(position);
         ApplyFeedbackToCursor(validity);
     }
