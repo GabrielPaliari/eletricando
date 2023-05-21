@@ -5,9 +5,14 @@ using UnityEngine;
 
 public static class RotationUtil
 {
-    public static Quaternion GetRotationAngle(RotationDir dir)
+    public static RotationDir currentDir = RotationDir.Left;
+    public static void UpdateRotation() {
+        currentDir = GetNextRotation(currentDir);
+    }
+
+    public static Quaternion GetRotationAngle()
     {
-        switch (dir)
+        switch (currentDir)
         {
             default:
             case RotationDir.Left:
@@ -20,9 +25,9 @@ public static class RotationUtil
                 return Quaternion.Euler(0, 270, 0);
         }
     }
-    public static Vector2Int GetRotationOffset(RotationDir dir, Vector2Int objectSize)
+    public static Vector2Int GetRotationOffset(Vector2Int objectSize)
     {
-        switch (dir)
+        switch (currentDir)
         {
             default:
             case RotationDir.Left:
@@ -52,9 +57,9 @@ public static class RotationUtil
         return RotationDir.Left;
     }
 
-    public static void GetObjectWidthAndHeight(Vector2Int objectSize, RotationDir dir, out int width, out int height)
+    public static void GetObjectWidthAndHeight(Vector2Int objectSize, out int width, out int height)
     {
-        switch (dir)
+        switch (currentDir)
         {
             case RotationDir.Left:
             case RotationDir.Right:

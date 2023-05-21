@@ -6,16 +6,14 @@ using UnityEngine;
 public class GridData
 {
     Dictionary<Vector3Int, PlacementData> placedObjects = new();
-    RotationDir rotationDir = RotationDir.Left;
 
     public void AddObjectAt(Vector3Int gridPosition,
                             Vector2Int objectSize,
-                            RotationDir dir,
                             int ID,
                             int placedObjectIndex)
     {
-        List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize, dir);
-        PlacementData data = new PlacementData(positionToOccupy, ID, placedObjectIndex, rotationDir);
+        List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
+        PlacementData data = new PlacementData(positionToOccupy, ID, placedObjectIndex, RotationUtil.currentDir);
         foreach (var pos in positionToOccupy)
         {
             if (placedObjects.ContainsKey(pos))
@@ -24,11 +22,11 @@ public class GridData
         }
     }
 
-    private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, Vector2Int objectSize, RotationDir dir)
+    private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, Vector2Int objectSize)
     {
         List<Vector3Int> returnVal = new();
         int width, height;
-        RotationUtil.GetObjectWidthAndHeight(objectSize, dir, out width, out height);
+        RotationUtil.GetObjectWidthAndHeight(objectSize, out width, out height);
 
         for (int x = 0; x < width; x++)
         {
@@ -40,9 +38,9 @@ public class GridData
         return returnVal;
     }
 
-    public bool CanPlaceObejctAt(Vector3Int gridPosition, Vector2Int objectSize, RotationDir dir)
+    public bool CanPlaceObejctAt(Vector3Int gridPosition, Vector2Int objectSize)
     {
-        List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize, dir);
+        List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
         foreach (var pos in positionToOccupy)
         {
             if (placedObjects.ContainsKey(pos))

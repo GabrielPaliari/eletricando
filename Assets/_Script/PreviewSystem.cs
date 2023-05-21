@@ -37,7 +37,7 @@ public class PreviewSystem : MonoBehaviour
     private void PrepareCursor(Vector2Int size)
     {
         int width, height;
-        RotationUtil.GetObjectWidthAndHeight(size, RotationDir.Up, out width, out height);
+        RotationUtil.GetObjectWidthAndHeight(size, out width, out height);
         var rotatedSize = new Vector2Int(width, height);
 
         if (rotatedSize.x > 0 || rotatedSize.y > 0)
@@ -68,11 +68,11 @@ public class PreviewSystem : MonoBehaviour
             Destroy(previewObject);
     }
 
-    public void UpdatePosition(Vector3 position, bool validity, RotationDir dir)
+    public void UpdatePosition(Vector3 position, bool validity)
     {
         if (previewObject != null)
         {
-            MovePreview(position, dir);
+            MovePreview(position);
             ApplyFeedbackToPreview(validity);
         }
 
@@ -101,14 +101,14 @@ public class PreviewSystem : MonoBehaviour
         cellIndicator.transform.position = position;
     }
 
-    private void MovePreview(Vector3 position, RotationDir dir)
+    private void MovePreview(Vector3 position)
     {
-        Vector2Int rotationOffset = RotationUtil.GetRotationOffset(dir, objectSize);
+        Vector2Int rotationOffset = RotationUtil.GetRotationOffset(objectSize);
         previewObject.transform.position = new Vector3(
             position.x + rotationOffset.x,
             position.y + previewYOffset,
             position.z + rotationOffset.y);
-        previewObject.transform.rotation = RotationUtil.GetRotationAngle(dir);
+        previewObject.transform.rotation = RotationUtil.GetRotationAngle();
     }
 
     internal void StartShowingRemovePreview()

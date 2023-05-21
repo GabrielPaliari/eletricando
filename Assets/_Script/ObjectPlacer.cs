@@ -8,16 +8,16 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField]
     private List<GameObject> placedGameObjects = new();
 
-    public int PlaceObject(PlaceableComponentSO componentData, Vector3 position, RotationDir rotationDir)
+    public int PlaceObject(PlaceableComponentSO componentData, Vector3 position)
     {
         GameObject newObject = Instantiate(componentData.Prefab);
 
-        Vector2Int rotationOffset = RotationUtil.GetRotationOffset(rotationDir, componentData.Size);
+        Vector2Int rotationOffset = RotationUtil.GetRotationOffset(componentData.Size);
         newObject.transform.position = new Vector3(
             position.x + rotationOffset.x,
             position.y,
             position.z + rotationOffset.y);
-        newObject.transform.rotation = RotationUtil.GetRotationAngle(rotationDir);
+        newObject.transform.rotation = RotationUtil.GetRotationAngle();
 
         placedGameObjects.Add(newObject);
         return placedGameObjects.Count - 1;

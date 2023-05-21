@@ -33,8 +33,6 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private SoundFeedback soundFeedback;
 
-    private RotationDir rotationDir = RotationDir.Left;
-
     private void Start()
     {
         gridVisualization.SetActive(false);
@@ -73,7 +71,7 @@ public class PlacementSystem : MonoBehaviour
             return;
         }
         Vector3Int gridPosition = GetPointedGridPosition();
-        buildingState.OnAction(gridPosition, rotationDir);
+        buildingState.OnAction(gridPosition);
 
     }
 
@@ -86,8 +84,8 @@ public class PlacementSystem : MonoBehaviour
 
     private void RotateStructure()
     {
-        rotationDir = RotationUtil.GetNextRotation(rotationDir);
-        buildingState.UpdateState(GetPointedGridPosition(), rotationDir);
+        RotationUtil.UpdateRotation();
+        buildingState.UpdateState(GetPointedGridPosition());
     }
 
     private void StopPlacement()
@@ -112,7 +110,7 @@ public class PlacementSystem : MonoBehaviour
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
         if (lastDetectedPosition != gridPosition)
         {
-            buildingState.UpdateState(gridPosition, rotationDir);
+            buildingState.UpdateState(gridPosition);
             lastDetectedPosition = gridPosition;
         }
 
