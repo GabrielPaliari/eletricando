@@ -14,6 +14,9 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     private LayerMask placementLayermask;
 
+    [SerializeField]
+    private LayerMask wireConectorsLayermask;
+
     public event Action OnClicked, OnExit, OnRotate;
 
     private void Update()
@@ -40,5 +43,18 @@ public class InputManager : MonoBehaviour
             lastPosition = hit.point;
         }
         return lastPosition;
+    }
+
+    public GameObject GetSelectedWireConector()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = sceneCamera.nearClipPlane;
+        Ray ray = sceneCamera.ScreenPointToRay(mousePos);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100, wireConectorsLayermask))
+        {
+            return hit.collider.gameObject;
+        }
+        return null;
     }
 }
