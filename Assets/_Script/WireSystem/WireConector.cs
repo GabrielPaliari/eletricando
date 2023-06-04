@@ -17,7 +17,6 @@ public class WireConector : MonoBehaviour
 
         c.a = 0.5f;
         conectorIndicatorRenderer.material.color = c;
-        Debug.Log("Applied Feedback");
     }
 
     private void OnMouseExit()
