@@ -21,6 +21,9 @@ public class WireConector : MonoBehaviour
 
     private void OnMouseExit()
     {
-        conectorIndicatorRenderer.material.color = new Color(255,255,255, 0.5f);
+        Color c = Color.white;
+
+        c.a = 0.5f;
+        conectorIndicatorRenderer.material.color = c;
     }
 }

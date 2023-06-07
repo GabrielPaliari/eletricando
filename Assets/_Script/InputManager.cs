@@ -19,6 +19,9 @@ public class InputManager : MonoBehaviour
 
     public event Action OnClicked, OnExit, OnRotate;
 
+    [Header("Events")]
+    public GameEvent onEsc;
+
     public void CallOnExit()
     {
         OnExit?.Invoke();
@@ -29,7 +32,10 @@ public class InputManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
             OnClicked?.Invoke();
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
             OnExit?.Invoke();
+            onEsc.Raise();
+        }
         if (Input.GetKeyDown(KeyCode.R))
             OnRotate?.Invoke();
     }

@@ -33,6 +33,11 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private SoundFeedback soundFeedback;
 
+    [Header("Events")]
+    public GameEvent onBuildComponentSelected;
+    public GameEvent onRemoveComponentSelected;
+
+
     private void Start()
     {
         gridVisualization.SetActive(false);
@@ -41,6 +46,7 @@ public class PlacementSystem : MonoBehaviour
 
     public void StartPlacement(int ID)
     {
+        onBuildComponentSelected.Raise();
         StopPlacement();
         gridVisualization.SetActive(true);
         buildingState = new PlacementState(ID,
@@ -57,6 +63,7 @@ public class PlacementSystem : MonoBehaviour
 
     public void StartRemoving()
     {
+        onRemoveComponentSelected.Raise();
         StopPlacement();
         gridVisualization.SetActive(true);
         buildingState = new RemovingState(grid, preview, componentsData, objectPlacer, soundFeedback);

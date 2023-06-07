@@ -381,6 +381,8 @@ GameObject:
   m_Component:
   - component: {fileID: 344138181}
   - component: {fileID: 344138182}
+  - component: {fileID: 344138183}
+  - component: {fileID: 344138184}
   m_Layer: 0
   m_Name: WireSystem
   m_TagString: Untagged
@@ -416,6 +418,65 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 968331900}
+  startWidth: 0.1
+  endWidth: 0.1
+  lineColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &344138183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344138180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a361dcc5bf9f0145b82baa009d008eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 0d416f838db2eba42a5c9b71adf6bd78, type: 2}
+  callback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 344138182}
+        m_TargetAssemblyTypeName: WireSystem, Assembly-CSharp
+        m_MethodName: ExitWireMode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &344138184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344138180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a361dcc5bf9f0145b82baa009d008eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: fc8af9726b4f36646942279d43c044ac, type: 2}
+  callback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 344138182}
+        m_TargetAssemblyTypeName: WireSystem, Assembly-CSharp
+        m_MethodName: ExitWireMode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1095,10 @@ MonoBehaviour:
   preview: {fileID: 1857736661}
   objectPlacer: {fileID: 1643004764}
   soundFeedback: {fileID: 1203156369}
+  onBuildComponentSelected: {fileID: 11400000, guid: 0d416f838db2eba42a5c9b71adf6bd78,
+    type: 2}
+  onRemoveComponentSelected: {fileID: 11400000, guid: 56d1325de19db7349bc09b47da23cab5,
+    type: 2}
 --- !u!1 &968331899
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,6 +1135,7 @@ MonoBehaviour:
   wireConectorsLayermask:
     serializedVersion: 2
     m_Bits: 64
+  onEsc: {fileID: 11400000, guid: fc8af9726b4f36646942279d43c044ac, type: 2}
 --- !u!4 &968331901
 Transform:
   m_ObjectHideFlags: 0

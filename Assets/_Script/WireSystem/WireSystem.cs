@@ -1,18 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
-using UnityEngine.SocialPlatforms;
-using static UnityEditor.PlayerSettings;
 
 public class WireSystem : MonoBehaviour
 {
     [SerializeField]
     private InputManager inputManager;
-    [SerializeField]
-    public event Action OnBeginWiring, OnEndWiring;
     private WireConector firstWireConector;
     private WireConector secondWireConector;
     
@@ -30,6 +23,17 @@ public class WireSystem : MonoBehaviour
     {
         setState(WireState.WireModeOn);
         inputManager.CallOnExit();
+    }
+
+    public void ExitWireMode()
+    {
+        setState(WireState.WireModeOff);
+        ResetConnection();
+    }
+
+    private void Start()
+    {
+        setState(WireState.WireModeOff);
     }
 
     private void Update()
@@ -63,16 +67,20 @@ public class WireSystem : MonoBehaviour
                     }
                 }
                 break;
-            case WireState.SecondSelected:
-
-                break;
         }
+    }
+
+    private void ResetConnection()
+    {
+        Destroy(wireObject);
+        wireObject = null;
     }
 
     private void EndWiring()
     {
         lineRenderer.SetPosition(1, secondWireConector.transform.position);
-        setState(WireState.SecondSelected);
+        wireObject = null;
+        setState(WireState.WireModeOn);
     }
 
     private void StartWiring()
@@ -102,6 +110,7 @@ public class WireSystem : MonoBehaviour
 }
 public enum WireState
 {
+    WireModeOff,
     WireModeOn,
     FirstHovered,
     FirstSelected,
