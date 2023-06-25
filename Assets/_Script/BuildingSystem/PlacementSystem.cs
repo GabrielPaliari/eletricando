@@ -36,7 +36,9 @@ public class PlacementSystem : MonoBehaviour
     [Header("Events")]
     public GameEvent onBuildComponentSelected;
     public GameEvent onRemoveComponentSelected;
+    public GameEvent onPlaceComponent;
 
+    private int selectedComponentId; 
 
     private void Start()
     {
@@ -46,6 +48,7 @@ public class PlacementSystem : MonoBehaviour
 
     public void StartPlacement(int ID)
     {
+        selectedComponentId = ID;
         onBuildComponentSelected.Raise();
         StopPlacement();
         gridVisualization.SetActive(true);
@@ -80,6 +83,8 @@ public class PlacementSystem : MonoBehaviour
         Vector3Int gridPosition = GetPointedGridPosition();
         buildingState.OnAction(gridPosition);
 
+        var selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == selectedComponentId);
+        onPlaceComponent.Raise(new ElectricData("teste"));
     }
 
     private Vector3Int GetPointedGridPosition()
