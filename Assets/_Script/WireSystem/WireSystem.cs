@@ -1,6 +1,8 @@
 using System;
-using System.Net;
 using UnityEngine;
+using UnityEngine.Splines;
+using System.Collections;
+using System.Collections.Generic;
 
 public class WireSystem : MonoBehaviour
 {
@@ -9,6 +11,11 @@ public class WireSystem : MonoBehaviour
     private WireConector firstWireConector;
     private WireConector secondWireConector;
     
+    [SerializeField]
+    private SplineContainer splineContainer;
+    [SerializeField]
+    private SplineExtrude splineExtrude;
+
     [Header("Line Renderer Settings")]
     [SerializeField] private float startWidth = 0.1f;
     [SerializeField] private float endWidth = 0.1f;
@@ -78,29 +85,46 @@ public class WireSystem : MonoBehaviour
 
     private void EndWiring()
     {
-        lineRenderer.SetPosition(1, secondWireConector.transform.position);
+        //lineRenderer.SetPosition(1, secondWireConector.transform.position);
+        splineContainer.AddSpline(CreateSplineFromPoints());
+        splineExtrude.Rebuild();
         wireObject = null;
         setState(WireState.WireModeOn);
+    }
+
+    private Spline CreateSplineFromPoints()
+    {
+        Vector3 posA = firstWireConector.transform.position;
+        Vector3 posB = secondWireConector.transform.position;
+        
+        Vector3 posM = (posA + posB) / 2;
+        
+        posM.y = posM.y * 1/ (float)Math.Log(Vector3.Distance(posA, posB)/2 + 3);
+
+        var spline = new Spline();
+        spline.Add(new BezierKnot(posA), TangentMode.AutoSmooth);
+        spline.Add(new BezierKnot(posM), TangentMode.AutoSmooth);
+        spline.Add(new BezierKnot(posB), TangentMode.AutoSmooth);
+        return spline;
     }
 
     private void StartWiring()
     {
         wireObject = new GameObject("Wire");
-        lineRenderer = wireObject.AddComponent<LineRenderer>();
 
-        lineRenderer.positionCount = 2;
-        lineRenderer.startWidth = startWidth;
-        lineRenderer.endWidth = endWidth;
-        lineRenderer.startColor = lineColor;
-        lineRenderer.endColor = lineColor;
+        //lineRenderer.positionCount = 2;
+        //lineRenderer.startWidth = startWidth;
+        //lineRenderer.endWidth = endWidth;
+        //lineRenderer.startColor = lineColor;
+        //lineRenderer.endColor = lineColor;
 
-        lineRenderer.SetPosition(0, firstWireConector.transform.position);
+        //lineRenderer.SetPosition(0, firstWireConector.transform.position);
     }
 
     private void UpdateWireVisual()
     {
         var pos = inputManager.GetSelectedMapPosition();
-        lineRenderer.SetPosition(1, pos);
+        //lineRenderer.SetPosition(1, pos);
     }
 
     private void setState(WireState state)
