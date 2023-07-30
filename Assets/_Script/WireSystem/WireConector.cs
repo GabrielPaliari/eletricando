@@ -2,8 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ESignalType
+{
+    Input,
+    Output,
+}
 public class WireConector : MonoBehaviour
 {
+    [SerializeField] public ESignalType type;
+    [SerializeField] public int index;
     private Renderer conectorIndicatorRenderer;
 
     private void Start()

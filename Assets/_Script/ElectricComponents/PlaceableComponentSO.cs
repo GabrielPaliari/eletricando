@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Electric Component", menuName = "ElectricComponents/ElectricComponent")]
@@ -15,4 +16,5 @@ public class PlaceableComponentSO : ScriptableObject
     public Vector2Int Size { get; private set; } = Vector2Int.one;
     [field: SerializeField]
     public GameObject Prefab { get; private set; }
+
 }

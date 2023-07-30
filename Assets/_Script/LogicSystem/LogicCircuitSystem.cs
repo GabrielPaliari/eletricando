@@ -1,16 +1,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEngine.Rendering.DebugUI;
+using System;
 
 public class LogicCircuitSystem : MonoBehaviour
 {
+    private int currentComponentId = 0;
     private static LogicCircuitSystem instance;
     private Dictionary<int, Dictionary<int, UnityEvent<bool>>> outputEvents;
 
     public static LogicCircuitSystem Instance => instance;
 
-    private void Awake()
+    public event Action OnClicked;
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+            OnClicked?.Invoke();
+
+    }
+        private void Awake()
     {
         if (instance == null)
         {
@@ -26,9 +35,10 @@ public class LogicCircuitSystem : MonoBehaviour
         outputEvents = new Dictionary<int, Dictionary<int, UnityEvent<bool>>>();
     }
 
-    public int AddComponent(string name)
+    public int AddComponent()
     {
-        int id = name.GetHashCode();
+        currentComponentId++;
+        int id = currentComponentId;
         if (!outputEvents.ContainsKey(id))
         {
             outputEvents[id] = new Dictionary<int, UnityEvent<bool>>();

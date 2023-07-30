@@ -8,8 +8,8 @@ public class WireSystem : MonoBehaviour
 {
     [SerializeField]
     private InputManager inputManager;
-    private WireConector firstWireConector;
-    private WireConector secondWireConector;
+    private GameObject firstComponentGO;
+    private GameObject secondComponentGO;
     
     [SerializeField]
     private SplineContainer splineContainer;
@@ -51,8 +51,7 @@ public class WireSystem : MonoBehaviour
                 GameObject connectorObject = inputManager.GetSelectedWireConector();
                 if (connectorObject != null)
                 {
-                    firstWireConector = connectorObject.GetComponent<WireConector>();
-                    firstWireConector.ApplyFeedbackToIndicator(true);
+                    firstComponentGO = connectorObject;
                     if (Input.GetMouseButtonDown(0))
                     {
                         StartWiring();
@@ -66,8 +65,7 @@ public class WireSystem : MonoBehaviour
                 GameObject secConnectorObject = inputManager.GetSelectedWireConector();
                 if (secConnectorObject != null)
                 {
-                    secondWireConector = secConnectorObject.GetComponent<WireConector>();
-                    secondWireConector.ApplyFeedbackToIndicator(true);
+                    secondComponentGO = secConnectorObject;
                     if (Input.GetMouseButtonDown(0))
                     {
                         EndWiring();
@@ -85,6 +83,13 @@ public class WireSystem : MonoBehaviour
 
     private void EndWiring()
     {
+        var firstLogicGate = firstComponentGO.GetComponentInParent<LogicGate>();
+        var firstConnector = firstComponentGO.GetComponent<WireConector>();
+
+        var secondLogicGate = secondComponentGO.GetComponentInParent<LogicGate>();
+        var secondConnector = secondComponentGO.GetComponent<WireConector>();
+
+        LogicCircuitSystem.Instance.RegisterOutputListener(firstLogicGate, firstConnector.index, secondLogicGate, secondConnector.index);
         //lineRenderer.SetPosition(1, secondWireConector.transform.position);
         splineContainer.AddSpline(CreateSplineFromPoints());
         splineExtrude.Rebuild();
@@ -94,8 +99,8 @@ public class WireSystem : MonoBehaviour
 
     private Spline CreateSplineFromPoints()
     {
-        Vector3 posA = firstWireConector.transform.position;
-        Vector3 posB = secondWireConector.transform.position;
+        Vector3 posA = firstComponentGO.transform.position;
+        Vector3 posB = secondComponentGO.transform.position;
         
         Vector3 posM = (posA + posB) / 2;
         

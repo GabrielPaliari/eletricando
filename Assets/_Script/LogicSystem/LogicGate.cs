@@ -9,40 +9,53 @@ public delegate bool OutputFunction(BitArray inputs);
 public class LogicGate : MonoBehaviour
 {
     public int id;
-    private BitArray inputsValues = new BitArray(0);
-    private BitArray outputsValues = new BitArray(0);
-    private BitArray stateValues = new BitArray(0);
+    private ILogicGateSpec specification;
+    
+    private BitArray inputsValues;
+    
+    private BitArray outputsValues;
+    private OutputFunction[] outputFunctions;
     private UnityEvent<bool>[] outputEmitters;
     
-    private OutputFunction[] outputFunctions;
+    private BitArray stateValues;
     private StateFunction[] stateFunctions;
-    private int inputsLength = 2;
-    private int outputsLength = 1;
-    private int stateLength = 1;
 
     public void OnInputChange(int inputIndex, bool value)
     {
-        inputsValues[inputIndex] = value;
+        if (inputsValues != null) {
+            inputsValues[inputIndex] = value;
+        }
         UpdateOutputs();
         UpdateState();
     }
 
-    private void Start()
+    public void Initialize()
     {
-        inputsValues.Length = inputsLength;
-        outputsValues.Length = outputsLength;
-        stateValues.Length = stateLength;
-        outputEmitters = new UnityEvent<bool>[outputsLength];
-        stateFunctions = new StateFunction[stateLength];
-        outputFunctions = new OutputFunction[outputsLength];
+        specification = GetComponent<ILogicGateSpec>();
+        if (specification != null )
+        {
+            id = LogicCircuitSystem.Instance.AddComponent();
+            
+            inputsValues = new BitArray(specification.inputsLength);
+            
+            outputsValues = new BitArray(specification.outputsLength);
+            outputFunctions = specification.outputFunctions;
+            outputEmitters = new UnityEvent<bool>[specification.outputsLength];
 
-        id = LogicCircuitSystem.Instance.AddComponent(name);
-        RegisterOutputs();
+            stateValues = new BitArray(specification.stateLength);
+            stateFunctions = specification.stateFunctions;
+
+            RegisterOutputs();
+        }
+        else
+        {
+            Debug.LogError("No ILogicGateSpec found in prefab");
+        }
     }
 
     private void RegisterOutputs()
     {
-        for (int oIndex = 0; oIndex < outputsLength; oIndex++)
+        for (int oIndex = 0; oIndex < outputFunctions.Length; oIndex++)
         {
             var emitter = LogicCircuitSystem.Instance.RegisterOutputEmitter(id, oIndex);
             outputEmitters[oIndex] = emitter;
@@ -54,9 +67,10 @@ public class LogicGate : MonoBehaviour
         LogicCircuitSystem.Instance.UnregisterComponent(id);
     }
 
-    private void UpdateOutputs()
+    public void UpdateOutputs()
     {
-        for (int n = 0; 0 < outputsValues.Length; n++)
+        if (outputFunctions == null || outputFunctions.Length == 0) return;
+        for (int n = 0; n < outputFunctions.Length; n++)
         {
             var newOutput = outputFunctions[n](inputsValues);
             if (outputsValues[n] != newOutput)
@@ -66,11 +80,13 @@ public class LogicGate : MonoBehaviour
             }
         }
     }
-    private void UpdateState()
+    public void UpdateState()
     {
-        for (int n = 0; 0 < stateFunctions.Length; n++)
+        if (stateFunctions == null || stateFunctions.Length == 0) return;
+        for (int n = 0; n < stateFunctions.Length; n++)
         {
-            var newState = stateFunctions[n](inputsValues);
+            var stateFunction = stateFunctions[n];
+            var newState = stateFunction(inputsValues);
             if (stateValues[n] != newState)
             {
                 stateValues[n] = newState;

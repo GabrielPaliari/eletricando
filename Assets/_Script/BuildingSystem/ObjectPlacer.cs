@@ -11,6 +11,9 @@ public class ObjectPlacer : MonoBehaviour
     public int PlaceObject(PlaceableComponentSO componentData, Vector3 position)
     {
         GameObject newObject = Instantiate(componentData.Prefab);
+        LogicGate logicGate = newObject.GetComponent<LogicGate>();
+
+        if(logicGate != null ) { logicGate.Initialize(); }
 
         Vector2Int rotationOffset = RotationUtil.GetRotationOffset(componentData.Size);
         newObject.transform.position = new Vector3(

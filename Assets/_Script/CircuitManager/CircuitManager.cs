@@ -29,7 +29,6 @@ public class CircuitManager : MonoBehaviour
     public void AddComponentToCircuit(Component sender, object data)
     {
         ElectricData component = data as ElectricData;
-        Debug.Log(component.componentName);
     }
 }
 
