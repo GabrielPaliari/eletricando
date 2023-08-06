@@ -62,10 +62,11 @@ public class LogicCircuitSystem : MonoBehaviour
         return emitter;
     }
 
-    public void RegisterOutputListener(LogicGate outputGate, int outputIndex, LogicGate inputGate, int inputIndex)
+    public void RegisterOutputListener(LogicGate outputGate, int outputIndex, LogicGate inputGate, int inputIndex, LogicGate wire)
     {
         UnityEvent<bool> emitter = outputEvents[outputGate.id][outputIndex];
         emitter.AddListener((outValue) => inputGate.OnInputChange(inputIndex, outValue));
+        emitter.AddListener((outValue) => wire.OnInputChange(0, outValue));
     }
 
     public void UnregisterComponent(int component)

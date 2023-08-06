@@ -26,16 +26,7 @@ public class LED : MonoBehaviour, ILogicGateSpec
 
     private bool OnOffState(BitArray inputs)
     {
-        if (inputs[0])
-        {
-            Debug.Log("LED ligado");
-            lightMeshRenderer.material = onMaterial;
-        }
-        else
-        {
-            Debug.Log("LED desligado");
-            lightMeshRenderer.material = offMaterial;
-        }
+        lightMeshRenderer.material = inputs[0] ? onMaterial : offMaterial;
         return inputs[0];
     }
 }

@@ -10,21 +10,10 @@ public class WireSystem : MonoBehaviour
     private InputManager inputManager;
     private GameObject firstComponentGO;
     private GameObject secondComponentGO;
-    
-    [SerializeField]
-    private SplineContainer splineContainer;
-    [SerializeField]
-    private SplineExtrude splineExtrude;
 
-    [Header("Line Renderer Settings")]
-    [SerializeField] private float startWidth = 0.1f;
-    [SerializeField] private float endWidth = 0.1f;
-    [SerializeField] private Color lineColor = Color.black;
-
+    [SerializeField]
+    private GameObject wirePrefab;    
     private WireState wireState;
-    
-    private GameObject wireObject;
-    private LineRenderer lineRenderer;
     
     public void EnterWireMode()
     {
@@ -77,8 +66,6 @@ public class WireSystem : MonoBehaviour
 
     private void ResetConnection()
     {
-        Destroy(wireObject);
-        wireObject = null;
     }
 
     private void EndWiring()
@@ -89,41 +76,30 @@ public class WireSystem : MonoBehaviour
         var secondLogicGate = secondComponentGO.GetComponentInParent<LogicGate>();
         var secondConnector = secondComponentGO.GetComponent<WireConector>();
 
-        LogicCircuitSystem.Instance.RegisterOutputListener(firstLogicGate, firstConnector.index, secondLogicGate, secondConnector.index);
-        //lineRenderer.SetPosition(1, secondWireConector.transform.position);
-        splineContainer.AddSpline(CreateSplineFromPoints());
-        splineExtrude.Rebuild();
-        wireObject = null;
+        var wireObject = Instantiate(wirePrefab);
+        var wireLogic = wireObject.GetComponent<WireLogic>();
+        LogicGate wire = wireObject.GetComponent<LogicGate>();
+        wire.Initialize();
+
+        LogicCircuitSystem.Instance.RegisterOutputListener(firstLogicGate, firstConnector.index, secondLogicGate, secondConnector.index, wire);
+        wireLogic.CreateBranch(GetWirePositions());
         setState(WireState.WireModeOn);
     }
 
-    private Spline CreateSplineFromPoints()
+    private List<Vector3> GetWirePositions()
     {
+        var pointList = new List<Vector3>();
         Vector3 posA = firstComponentGO.transform.position;
         Vector3 posB = secondComponentGO.transform.position;
-        
-        Vector3 posM = (posA + posB) / 2;
-        
-        posM.y = posM.y * 1/ (float)Math.Log(Vector3.Distance(posA, posB)/2 + 3);
+        pointList.Add(posA);
+        pointList.Add(posB);
 
-        var spline = new Spline();
-        spline.Add(new BezierKnot(posA), TangentMode.AutoSmooth);
-        spline.Add(new BezierKnot(posM), TangentMode.AutoSmooth);
-        spline.Add(new BezierKnot(posB), TangentMode.AutoSmooth);
-        return spline;
+        return pointList;
     }
 
     private void StartWiring()
     {
-        wireObject = new GameObject("Wire");
-
-        //lineRenderer.positionCount = 2;
-        //lineRenderer.startWidth = startWidth;
-        //lineRenderer.endWidth = endWidth;
-        //lineRenderer.startColor = lineColor;
-        //lineRenderer.endColor = lineColor;
-
-        //lineRenderer.SetPosition(0, firstWireConector.transform.position);
+        
     }
 
     private void UpdateWireVisual()
