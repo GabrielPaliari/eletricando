@@ -24,9 +24,7 @@ public class LogicGate : MonoBehaviour
     {
         if (inputsValues != null) {
             inputsValues[inputIndex] = value;
-        }
-        UpdateOutputs();
-        UpdateState();
+        }   
     }
 
     public void Initialize()
@@ -34,7 +32,7 @@ public class LogicGate : MonoBehaviour
         specification = GetComponent<ILogicGateSpec>();
         if (specification != null )
         {
-            id = LogicCircuitSystem.Instance.AddComponent();
+            id = LogicCircuitSystem.Instance.AddComponent(this);
             
             inputsValues = new BitArray(specification.inputsLength);
             
@@ -67,7 +65,13 @@ public class LogicGate : MonoBehaviour
         LogicCircuitSystem.Instance.UnregisterComponent(id);
     }
 
-    public void UpdateOutputs()
+    public void UpdateGate()
+    {
+        UpdateOutputs();
+        UpdateState();
+    }
+
+    private void UpdateOutputs()
     {
         if (outputFunctions == null || outputFunctions.Length == 0) return;
         for (int n = 0; n < outputFunctions.Length; n++)
@@ -80,7 +84,7 @@ public class LogicGate : MonoBehaviour
             }
         }
     }
-    public void UpdateState()
+    private void UpdateState()
     {
         if (stateFunctions == null || stateFunctions.Length == 0) return;
         for (int n = 0; n < stateFunctions.Length; n++)

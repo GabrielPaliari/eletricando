@@ -7,17 +7,23 @@ public class LogicCircuitSystem : MonoBehaviour
 {
     private int currentComponentId = 0;
     private static LogicCircuitSystem instance;
+    private List<LogicGate> logicGates = new List<LogicGate>();
     private Dictionary<int, Dictionary<int, UnityEvent<bool>>> outputEvents;
 
     public static LogicCircuitSystem Instance => instance;
 
     public event Action OnClicked;
+    
+    public void Start()
+    {
+        TickSystem.Instance.OnPropagationTick += UpdateLogicGates;
+    }
 
     private void Update()
     {
+        // TODO: Transformar input system em um singleton e chamar aqui
         if (Input.GetMouseButtonDown(0))
             OnClicked?.Invoke();
-
     }
         private void Awake()
     {
@@ -35,13 +41,21 @@ public class LogicCircuitSystem : MonoBehaviour
         outputEvents = new Dictionary<int, Dictionary<int, UnityEvent<bool>>>();
     }
 
-    public int AddComponent()
+    public void UpdateLogicGates()
+    {
+        logicGates.ForEach(logicGate => {
+            logicGate.UpdateGate();
+        });
+    }
+
+    public int AddComponent(LogicGate logicGate)
     {
         currentComponentId++;
         int id = currentComponentId;
         if (!outputEvents.ContainsKey(id))
         {
             outputEvents[id] = new Dictionary<int, UnityEvent<bool>>();
+            logicGates.Add(logicGate);
         }
         return id;
     }
