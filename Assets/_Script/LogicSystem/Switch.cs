@@ -53,7 +53,10 @@ public class Switch : MonoBehaviour, ILogicGateSpec
         {
             logicGate.OnInputChange(0, false);
         }
-        indicatorMeshRenderer.material = isOn ? onMaterial :offMaterial;
-        indicatorTransform.DOLocalMoveX(isOn ? onIndicatorX : offIndicatorX, animDuration).SetEase(Ease.InOutCubic);
+        if (indicatorMeshRenderer != null && indicatorTransform != null)
+        {
+            indicatorMeshRenderer.material = isOn ? onMaterial :offMaterial;
+            indicatorTransform.DOLocalMoveX(isOn ? onIndicatorX : offIndicatorX, animDuration).SetEase(Ease.InOutCubic);
+        }
     }
 }

@@ -26,7 +26,10 @@ public class LED : MonoBehaviour, ILogicGateSpec
 
     private bool OnOffState(BitArray inputs)
     {
-        lightMeshRenderer.material = inputs[0] ? onMaterial : offMaterial;
+        if (lightMeshRenderer != null)
+        {
+            lightMeshRenderer.material = inputs[0] ? onMaterial : offMaterial;
+        }
         return inputs[0];
     }
 }

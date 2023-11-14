@@ -14,7 +14,6 @@ public class AND : MonoBehaviour, ILogicGateSpec
 
     private bool ANDFunction(BitArray inputs)
     {
-        Debug.Log($"i0 {inputs[0]}, {inputs[1]}");
-        return inputs[0] && inputs[1];
+        return inputs[0] & inputs[1];
     }
 }

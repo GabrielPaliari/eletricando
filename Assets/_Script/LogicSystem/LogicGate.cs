@@ -77,11 +77,8 @@ public class LogicGate : MonoBehaviour
         for (int n = 0; n < outputFunctions.Length; n++)
         {
             var newOutput = outputFunctions[n](inputsValues);
-            if (outputsValues[n] != newOutput)
-            {
-                outputsValues[n] = newOutput;
-                outputEmitters[n].Invoke(newOutput);
-            }
+            outputsValues[n] = newOutput;
+            outputEmitters[n].Invoke(newOutput);
         }
     }
     private void UpdateState()

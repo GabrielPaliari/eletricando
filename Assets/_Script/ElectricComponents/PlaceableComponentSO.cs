@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Electric Component", menuName = "ElectricComponents/ElectricComponent")]
+[CreateAssetMenu(fileName = "New Electric Component", menuName = "Custom/ElectricComponent")]
 [Serializable]
 public class PlaceableComponentSO : ScriptableObject
 {
