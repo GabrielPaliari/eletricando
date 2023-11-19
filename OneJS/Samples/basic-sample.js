@@ -1,8 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.App = void 0;
 var preact_1 = require("preact");
+var hooks_1 = require("preact/hooks");
 var App = function () {
-    return ((0, preact_1.h)("div", null,
+    var ref = (0, hooks_1.useRef)();
+    return ((0, preact_1.h)("div", { ref: ref },
         (0, preact_1.h)("label", { text: "Select something to remove from your suitcase:" }),
         (0, preact_1.h)("box", null,
             (0, preact_1.h)("toggle", { name: "boots", label: "Boots", value: true }),
@@ -20,4 +23,4 @@ var App = function () {
             (0, preact_1.h)("button", { name: "ok", text: "OK" }),
             (0, preact_1.h)("textfield", { onInput: function (e) { return log(e.newData); }, onKeyDown: function (e) { return log(e.keyCode); } }))));
 };
-(0, preact_1.render)((0, preact_1.h)(App, null), document.body);
+exports.App = App;

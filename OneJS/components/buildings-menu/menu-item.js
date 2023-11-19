@@ -5,13 +5,15 @@ var preact_1 = require("preact");
 var MenuItem = function (props) {
     var defaultInnerStyle = {
         borderRadius: 4,
-        justifyContent: "Center",
-        alignItems: "Center",
-        color: "white",
-        padding: 20,
-        fontSize: 20,
+        height: 40,
+        backgroundImage: props.image,
+        unityBackgroundScaleMode: "ScaleToFit",
     };
-    return ((0, preact_1.h)("div", { class: "rounded bg-teal-700 m-3", onClick: props.onClick },
-        (0, preact_1.h)("div", { style: defaultInnerStyle }, props.name)));
+    var borderStyle = {
+        borderColor: props.isSelected ? "white" : "transparent",
+        borderWidth: 4,
+    };
+    return ((0, preact_1.h)("div", { style: borderStyle, class: "rounded bg-teal-700 m-1 p-2", onClick: props.onClick },
+        (0, preact_1.h)("div", { style: defaultInnerStyle })));
 };
 exports.MenuItem = MenuItem;

@@ -140,7 +140,7 @@ namespace OneJS.Dom {
                 _eventCache[name](_ve, callback, TrickleDown.NoTrickleDown);
                 // Debug.Log("Registered " + name + " on " + _ve.name);
             } else {
-                var eventType = typeof(VisualElement).Assembly.GetType($"UnityEngine.UIElements.{name}Event");
+                var eventType = _document.FindUIElementEventType(name);
                 if (isValueChanged) {
                     var notifyInterface = _ve.GetType().GetInterfaces().Where(i => i.Name == "INotifyValueChanged`1")
                         .FirstOrDefault();
@@ -178,7 +178,7 @@ namespace OneJS.Dom {
             if (!_registeredCallbacks.ContainsKey(name))
                 return;
             var callbackHolders = _registeredCallbacks[name];
-            var eventType = typeof(VisualElement).Assembly.GetType($"UnityEngine.UIElements.{name}Event");
+            var eventType = _document.FindUIElementEventType(name);
             if (eventType != null) {
                 var flags = BindingFlags.Public | BindingFlags.Instance;
                 var mi = _ve.GetType().GetMethods(flags)
@@ -217,7 +217,7 @@ namespace OneJS.Dom {
         }
 
         public void removeChild(Dom child) {
-            if (!this._ve.Contains(child.ve))
+            if (child == null || !this._ve.Contains(child.ve))
                 return;
             using (var evt = TransitionCancelEvent.GetPooled()) {
                 evt.target = child.ve;
@@ -262,6 +262,8 @@ namespace OneJS.Dom {
                 }
             } else if (name == "id" || name == "name") {
                 _ve.name = val.ToString();
+            } else if (name == "disabled") {
+                _ve.SetEnabled(!Convert.ToBoolean(val));
             } else {
                 name = name.Replace("-", "");
                 var flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase;

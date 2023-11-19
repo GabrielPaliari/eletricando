@@ -10,13 +10,16 @@
                 "*"
             ]
         },
+        "strictNullChecks": true,
         "skipLibCheck": true,
         "removeComments": true,
         "jsx": "react",
         "jsxFactory": "h",
         "target": "es5",
         "module": "commonjs",
-        "forceConsistentCasingInFileNames": false,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
         "lib": [
             "ES6", "es2017"
         ]

@@ -13,7 +13,7 @@ public class PlacementSystem : MonoBehaviour
     private Grid grid;
 
     [SerializeField]
-    private ObjectsDatabaseSO database;
+    public ObjectsDatabaseSO database;
 
     [SerializeField]
     private GameObject gridVisualization;
@@ -38,7 +38,7 @@ public class PlacementSystem : MonoBehaviour
     public GameEvent onRemoveComponentSelected;
     public GameEvent onPlaceComponent;
 
-    private int selectedComponentId; 
+    private int selectedComponentId;
 
     private void Start()
     {

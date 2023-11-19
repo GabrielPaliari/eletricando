@@ -1,4 +1,48 @@
-﻿## [2023-04-23] v1.5.9 - Quite a bit of QoL stuff, Tweaks, and Bugfixes
+﻿## [2023-10-22] v1.6.8
+
+* Cyclic error fix for preact falsey check in Hookstate
+* TSDefConverter moved to using UI Toolkit instead of IMGUI (credit to @iDevelopThings)
+* Various Jint tweaks (RunAvailableContinuations & UnwrapIfPromise)
+* Updated Jint with rest/spread bug fix
+* Fixed the # char bug for TW classes
+* Added _includeOverriddenMembers for TSDefConverter
+* Fixed OpenDir for Linux
+
+## [2023-09-09] v1.6.7
+
+* Auto-reimport uss after generation (Tailwind)
+* useEventfulState() forceUpdate() regression fix
+
+## [2023-08-31] v1.6.6 - Stability and Misc Additions
+
+* Updated Jint to [beta-2050]
+* jsx-runtime support
+* OnPreprocessBuild now accommodates when there's no scene listed in the build settings
+* Added comps sample scene
+* Added GradientTextureFill Job example
+* Added onEngineDestroy
+* Added webapi.getImage()
+* Added OnInitOptions to ScriptEngine
+* Dom.addEventListener now go through all loaded assemblies
+* Fixed regression in InitAllUIElementEvents()
+* Added TagTypeResolver to ScriptEngine
+* JSON module import
+* Added default tasks.json for vscode
+* Added EventfulPropertyAttribute and corresponding source generator
+* Added ValueTuple check in TSDefConverter
+
+## [2023-07-03] v1.6.4 - Comp Library and More
+
+* Added a new Component Library under ScriptLib/onejs/comps. These are inspired by HeadlessUI.
+  * Please see the v1.6 Docs for more information.
+* ScriptLib folder now will contain the .ts files. This is to make it easier to refer to the TS implementation instead of the compiled JS.
+
+## [2023-05-30] v1.6.1 - Major Tailwind Rework
+
+* Support for Tailwind compiler has landed!
+* Documentation here: https://onejs.com/docs/v1.6/tailwind
+
+## [2023-04-23] v1.5.9 - Quite a bit of QoL stuff, Tweaks, and Bugfixes
 
 * Added more CLR exception handling logging
 * VisualElementExts ForceUpdate()
