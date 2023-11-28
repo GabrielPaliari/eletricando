@@ -1,8 +1,7 @@
-const { theme, paths, plugins: onejsPlugins, corePlugins } = require('./ScriptLib/onejs-tw-config')
-const plugin = require("tailwindcss/plugin")
-
+const { theme, plugins: onejsPlugins, corePlugins } = require('./ScriptLib/onejs-tw-config')
+const plugin = require("tailwindcss/plugin");
 module.exports = {
-    content: [...paths, "./index.js"],
+    content: ["./components/shared/tooltip.js", "./components/buildings-menu/*.js", "./index.js"],
     theme: theme,
     plugins: [...onejsPlugins, plugin(function ({ addUtilities }) {
         addUtilities({

@@ -1,5 +1,6 @@
 import { Style } from "preact/jsx";
 import { h } from "preact";
+import { Tooltip } from "components/shared/tooltip";
 
 export interface MenuItemProps {
   name: string;

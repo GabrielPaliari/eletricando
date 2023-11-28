@@ -4,6 +4,7 @@ exports.BuildingMenu = void 0;
 var preact_1 = require("preact");
 var menu_item_1 = require("./menu-item");
 var hooks_1 = require("preact/hooks");
+var tooltip_1 = require("components/shared/tooltip");
 var placementSystem = require("placementSystem");
 var wireSystem = require("wireSystem");
 var getComponentFunction = function (id, setSelected) {
@@ -39,9 +40,10 @@ var BuildingMenu = function () {
         ]);
     });
     var menuData = componentsData;
-    return ((0, preact_1.h)("nav", { className: " bg-indigo-800 rounded-lg w-16" }, menuData.map(function (_a) {
+    return ((0, preact_1.h)("div", { class: "bg-indigo-800 rounded-lg w-20" }, menuData.map(function (_a) {
         var id = _a[0], name = _a[1], onClick = _a[2], image = _a[3];
-        return ((0, preact_1.h)(menu_item_1.MenuItem, { name: name, onClick: onClick, image: image, isSelected: selected === id }));
+        return ((0, preact_1.h)(tooltip_1.Tooltip, { content: name },
+            (0, preact_1.h)(menu_item_1.MenuItem, { name: name, onClick: onClick, image: image, isSelected: selected === id })));
     })));
 };
 exports.BuildingMenu = BuildingMenu;

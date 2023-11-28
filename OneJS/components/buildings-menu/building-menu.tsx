@@ -2,6 +2,7 @@ import { h } from "preact";
 import { MenuItem } from "./menu-item";
 import { List } from "System/Collections/Generic";
 import { useState } from "preact/hooks";
+import { Tooltip } from "components/shared/tooltip";
 
 const placementSystem = require("placementSystem");
 const wireSystem = require("wireSystem");
@@ -50,17 +51,19 @@ export const BuildingMenu = () => {
   const menuData: [number, string, () => void, any][] = componentsData;
 
   return (
-    <nav className=" bg-indigo-800 rounded-lg w-16">
+    <div class="bg-indigo-800 rounded-lg w-20">
       {menuData.map(([id, name, onClick, image]) => {
         return (
-          <MenuItem
-            name={name}
-            onClick={onClick}
-            image={image}
-            isSelected={selected === id}
-          ></MenuItem>
+          <Tooltip content={name}>
+            <MenuItem
+              name={name}
+              onClick={onClick}
+              image={image}
+              isSelected={selected === id}
+            ></MenuItem>
+          </Tooltip>
         );
       })}
-    </nav>
+    </div>
   );
 };
