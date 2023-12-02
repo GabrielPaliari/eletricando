@@ -6,6 +6,18 @@
   margin: 4px
 }
 
+.h-20 {
+  height: 80px
+}
+
+.h-80 {
+  height: 320px
+}
+
+.h-40 {
+  height: 160px
+}
+
 .w-16 {
   width: 64px
 }
@@ -16,6 +28,10 @@
 
 .max-w-sm {
   max-width: 384px
+}
+
+.overflow-scroll {
+  overflow: scroll
 }
 
 .rounded {
@@ -36,6 +52,10 @@
 
 .bg-teal-700 {
   background-color: #0f766e
+}
+
+.bg-teal-100 {
+  background-color: #ccfbf1
 }
 
 .p-2 {

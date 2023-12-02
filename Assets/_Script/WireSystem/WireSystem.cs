@@ -14,36 +14,51 @@ public class WireSystem : MonoBehaviour
     [SerializeField]
     private GameObject wirePrefab;    
     private WireState wireState;
-    
+    public GameEvent onHighlightInputs;
+    public GameEvent onHighlightOutputs;
+    public GameEvent onDisableHighlights;
+    LineRenderer lineRenderer;
+
+
     public void EnterWireMode()
     {
         setState(WireState.WireModeOn);
+        onHighlightOutputs.Raise();
         inputManager.CallOnExit();
     }
 
     public void ExitWireMode()
     {
         setState(WireState.WireModeOff);
+        onDisableHighlights.Raise();
         ResetConnection();
     }
 
     private void Start()
     {
         setState(WireState.WireModeOff);
+        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.enabled = false;
     }
 
     private void Update()
     {
+        if (Input.GetKeyUp(KeyCode.D) && wireState != WireState.WireModeOff) {
+            setState(WireState.DeleteMode);
+            Debug.Log("Delete Wire Mode");
+        }
         switch (wireState)
         {
             case WireState.WireModeOn:
-                GameObject connectorObject = inputManager.GetSelectedWireConector();
-                if (connectorObject != null)
+                if (Input.GetMouseButtonUp(0))
                 {
-                    firstComponentGO = connectorObject;
-                    if (Input.GetMouseButtonDown(0))
+                    GameObject connectorObject = inputManager.GetSelectedWireConector();
+                    if (connectorObject != null)
                     {
+                    firstComponentGO = connectorObject;
+                    
                         StartWiring();
+                        onHighlightInputs.Raise();
                         setState(WireState.FirstSelected);
                     }
                 }
@@ -51,13 +66,23 @@ public class WireSystem : MonoBehaviour
             case WireState.FirstSelected:
             case WireState.SecondHovered:
                 UpdateWireVisual();
-                GameObject secConnectorObject = inputManager.GetSelectedWireConector();
-                if (secConnectorObject != null)
+                if (Input.GetMouseButtonUp(0))
                 {
-                    secondComponentGO = secConnectorObject;
-                    if (Input.GetMouseButtonDown(0))
+                    GameObject secConnectorObject = inputManager.GetSelectedWireConector();
+                    if (secConnectorObject != null)
                     {
+                        secondComponentGO = secConnectorObject;
                         EndWiring();
+                    }
+                }
+                break;
+            case WireState.DeleteMode:
+                if (Input.GetMouseButtonUp(0))
+                {
+                    RaycastHit hit = inputManager.GetHoveredWire();
+                    if (hit.collider != null)
+                    {                        
+                       GameObject.Destroy(hit.collider.gameObject);
                     }
                 }
                 break;
@@ -70,6 +95,7 @@ public class WireSystem : MonoBehaviour
 
     private void EndWiring()
     {
+        lineRenderer.enabled = false;
         var firstLogicGate = firstComponentGO.GetComponentInParent<LogicGate>();
         var firstConnector = firstComponentGO.GetComponent<WireConector>();
 
@@ -83,7 +109,7 @@ public class WireSystem : MonoBehaviour
 
         LogicCircuitSystem.Instance.RegisterOutputListener(firstLogicGate, firstConnector.index, secondLogicGate, secondConnector.index, wire);
         wireLogic.CreateBranch(GetWirePositions());
-        setState(WireState.WireModeOn);
+        EnterWireMode();
     }
 
     private List<Vector3> GetWirePositions()
@@ -99,13 +125,15 @@ public class WireSystem : MonoBehaviour
 
     private void StartWiring()
     {
-        
+        lineRenderer.enabled = true;
     }
 
     private void UpdateWireVisual()
     {
-        var pos = inputManager.GetSelectedMapPosition();
-        //lineRenderer.SetPosition(1, pos);
+        var startPos = firstComponentGO.transform.position;
+        var endPos = inputManager.GetSelectedMapPosition();
+        lineRenderer.SetPosition(0, startPos); 
+        lineRenderer.SetPosition(1, endPos);
     }
 
     private void setState(WireState state)
@@ -120,5 +148,6 @@ public enum WireState
     FirstHovered,
     FirstSelected,
     SecondHovered,
-    SecondSelected
+    SecondSelected,
+    DeleteMode
 }

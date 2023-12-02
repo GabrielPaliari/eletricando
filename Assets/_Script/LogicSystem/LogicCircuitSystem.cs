@@ -78,10 +78,15 @@ public class LogicCircuitSystem : MonoBehaviour
 
     public void RegisterOutputListener(LogicGate outputGate, int outputIndex, LogicGate inputGate, int inputIndex, LogicGate wire)
     {
+        // TODO: Armazenar inputGate, inputIndex numa variável para saber quais inputs estão conectadas
         UnityEvent<bool> emitter = outputEvents[outputGate.id][outputIndex];
         emitter.AddListener((outValue) => inputGate.OnInputChange(inputIndex, outValue));
         emitter.AddListener((outValue) => wire.OnInputChange(0, outValue));
     }
+
+    // Função para registrar inputs com conexão
+
+    // Função para dado uma input e um componente, saber 
 
     public void UnregisterComponent(int component)
     {

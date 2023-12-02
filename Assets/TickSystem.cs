@@ -14,7 +14,7 @@ public class TickSystem : MonoBehaviour
     private float tickTimer;
     private int tick;
     
-    [SerializeField] private float tickDuration = 1f;
+    [SerializeField] private float tickDuration = .2f;
     [SerializeField] private int clockDuration = 5;
 
     private void Awake()

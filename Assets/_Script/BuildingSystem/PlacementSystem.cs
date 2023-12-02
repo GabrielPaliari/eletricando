@@ -84,7 +84,6 @@ public class PlacementSystem : MonoBehaviour
         buildingState.OnAction(gridPosition);
 
         var selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == selectedComponentId);
-        onPlaceComponent.Raise(new ElectricData("teste"));
     }
 
     private Vector3Int GetPointedGridPosition()

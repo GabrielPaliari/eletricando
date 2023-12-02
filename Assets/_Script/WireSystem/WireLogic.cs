@@ -14,6 +14,7 @@ public class WireLogic : MonoBehaviour, ILogicGateSpec
     public int stateLength => 1;
 
     [SerializeField] private MeshFilter meshFilter;
+    [SerializeField] private MeshCollider meshCollider;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private SplineContainer splineContainer;
     [SerializeField] private SplineExtrude splineExtrude;
@@ -25,7 +26,8 @@ public class WireLogic : MonoBehaviour, ILogicGateSpec
 
     private void Start()
     {
-        meshFilter.mesh = new Mesh();
+        Mesh mesh = new Mesh();
+        meshFilter.mesh = mesh;
     }
 
     private bool OnOffState(BitArray inputs)
@@ -34,15 +36,11 @@ public class WireLogic : MonoBehaviour, ILogicGateSpec
         return inputs[0];
     }
 
-    private void Update()
-    {
-        splineExtrude.Rebuild();
-    }
-
     private void UpdateVisuals(bool isOn)
     {
         meshRenderer.material = isOn ? onMaterial : offMaterial;
         splineExtrude.Rebuild();
+        meshCollider.sharedMesh = meshFilter.mesh;
     }
 
     public void CreateBranch(List<Vector3> points)
