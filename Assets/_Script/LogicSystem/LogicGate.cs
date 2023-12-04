@@ -9,7 +9,7 @@ public delegate bool OutputFunction(BitArray inputs);
 public class LogicGate : MonoBehaviour
 {
     public int id;
-    private ILogicGateSpec specification;
+    public ILogicGateSpec specification;
     
     private BitArray inputsValues;
     
@@ -44,6 +44,7 @@ public class LogicGate : MonoBehaviour
             stateFunctions = specification.stateFunctions;
 
             RegisterOutputs();
+            LogicCircuitSystem.Instance.RegisterWireConectors(id, specification.inputsLength, specification.outputsLength);
         }
         else
         {
@@ -62,7 +63,7 @@ public class LogicGate : MonoBehaviour
 
     private void OnDestroy()
     {
-        LogicCircuitSystem.Instance.UnregisterComponent(id);
+        LogicCircuitSystem.Instance.UnregisterComponent(this);
     }
 
     public void UpdateGate()

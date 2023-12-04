@@ -17,6 +17,7 @@ public class WireSystem : MonoBehaviour
     public GameEvent onHighlightInputs;
     public GameEvent onHighlightOutputs;
     public GameEvent onDisableHighlights;
+    public GameEvent onRemoveLogicGate;
     LineRenderer lineRenderer;
 
 
@@ -56,7 +57,6 @@ public class WireSystem : MonoBehaviour
                     if (connectorObject != null)
                     {
                     firstComponentGO = connectorObject;
-                    
                         StartWiring();
                         onHighlightInputs.Raise();
                         setState(WireState.FirstSelected);
@@ -81,8 +81,8 @@ public class WireSystem : MonoBehaviour
                 {
                     RaycastHit hit = inputManager.GetHoveredWire();
                     if (hit.collider != null)
-                    {                        
-                       GameObject.Destroy(hit.collider.gameObject);
+                    {
+                        Destroy(hit.collider.gameObject);
                     }
                 }
                 break;

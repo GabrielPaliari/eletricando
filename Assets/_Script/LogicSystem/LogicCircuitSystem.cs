@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using System.Linq;
 
 public class LogicCircuitSystem : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class LogicCircuitSystem : MonoBehaviour
     private static LogicCircuitSystem instance;
     private List<LogicGate> logicGates = new List<LogicGate>();
     private Dictionary<int, Dictionary<int, UnityEvent<bool>>> outputEvents;
+    private Dictionary<int, Dictionary<int, List<LogicGate>>> wiresConnected;
 
     public static LogicCircuitSystem Instance => instance;
 
@@ -39,6 +41,7 @@ public class LogicCircuitSystem : MonoBehaviour
         }
 
         outputEvents = new Dictionary<int, Dictionary<int, UnityEvent<bool>>>();
+        wiresConnected = new Dictionary<int, Dictionary<int, List<LogicGate>>>();
     }
 
     public void UpdateLogicGates()
@@ -56,6 +59,10 @@ public class LogicCircuitSystem : MonoBehaviour
         {
             outputEvents[id] = new Dictionary<int, UnityEvent<bool>>();
             logicGates.Add(logicGate);
+        }
+        if (!wiresConnected.ContainsKey(id))
+        {
+            wiresConnected[id] = new Dictionary<int, List<LogicGate>>();
         }
         return id;
     }
@@ -76,20 +83,58 @@ public class LogicCircuitSystem : MonoBehaviour
         return emitter;
     }
 
-    public void RegisterOutputListener(LogicGate outputGate, int outputIndex, LogicGate inputGate, int inputIndex, LogicGate wire)
+    public void RegisterWireConectors(int component, int inputsLength, int outputsLength)
     {
-        // TODO: Armazenar inputGate, inputIndex numa variável para saber quais inputs estão conectadas
-        UnityEvent<bool> emitter = outputEvents[outputGate.id][outputIndex];
-        emitter.AddListener((outValue) => inputGate.OnInputChange(inputIndex, outValue));
-        emitter.AddListener((outValue) => wire.OnInputChange(0, outValue));
+        for (int i = 0; i < inputsLength; i++) {
+            wiresConnected[component][i] = new List<LogicGate>();
+        }
+        for (int j = 0; j < outputsLength; j++) { 
+            wiresConnected[component][inputsLength+j] = new List<LogicGate>();
+        }
     }
 
-    // Função para registrar inputs com conexão
-
-    // Função para dado uma input e um componente, saber 
-
-    public void UnregisterComponent(int component)
+    public void RegisterOutputListener(LogicGate outputGate, int outputIndex, LogicGate inputGate, int inputIndex, LogicGate wire)
     {
-        outputEvents.Remove(component);
+        UnityEvent<bool> outputEmitter = outputEvents[outputGate.id][outputIndex];
+        outputEmitter.AddListener((outValue) => wire.OnInputChange(0, outValue));
+
+        wiresConnected[inputGate.id][inputIndex].Add(wire);
+        wiresConnected[outputGate.id][inputGate.specification.inputsLength + outputIndex].Add(wire);
+
+
+        UnityEvent<bool> wireEmitter = outputEvents[wire.id][0];
+        wireEmitter.AddListener((outValue) => inputGate.OnInputChange(inputIndex, outValue));
+    }
+
+    public void UnregisterComponent(LogicGate logicGate)
+    {
+        if (logicGate != null && logicGate.gameObject != null)
+        {
+            Destroy(logicGate.gameObject);
+        } else
+        {
+            return;
+        }
+        if (outputEvents.ContainsKey(logicGate.id))
+        {
+            var componentOutputsEvents = outputEvents[logicGate.id];
+            componentOutputsEvents.ToList().ForEach((emitter) => {
+                emitter.Value.Invoke(false);
+                emitter.Value.RemoveAllListeners();
+            });
+            outputEvents.Remove(logicGate.id);
+        }
+        if (wiresConnected.ContainsKey(logicGate.id))
+        {
+            // Remove Wires Connected
+            var allOutputsWires = wiresConnected[logicGate.id];
+            allOutputsWires.ToList().ForEach((outputWires) => {
+                outputWires.Value.ForEach((wire) =>
+                {
+                    UnregisterComponent(wire);
+                });
+            });
+            wiresConnected.Remove(logicGate.id);
+        }
     }
 }

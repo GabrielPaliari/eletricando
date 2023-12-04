@@ -461,6 +461,7 @@ MonoBehaviour:
   onHighlightOutputs: {fileID: 11400000, guid: 06534472bff89ff47897753db6221b11, type: 2}
   onDisableHighlights: {fileID: 11400000, guid: f5249aa5a7beb854799ec94ad9060daf,
     type: 2}
+  onRemoveLogicGate: {fileID: 11400000, guid: 1d16305a595f82647b4d7bcf4a533d14, type: 2}
 --- !u!114 &344138183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1630,6 +1631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placedGameObjects: []
+  onRemoveLogicGate: {fileID: 11400000, guid: 1d16305a595f82647b4d7bcf4a533d14, type: 2}
 --- !u!1 &1857736660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,7 +1792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c6ddc26dace91748aab06f047f1311e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tickDuration: 1
+  tickDuration: 0.2
   clockDuration: 5
 --- !u!1 &2106277216
 GameObject:
@@ -1802,6 +1804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2106277218}
   - component: {fileID: 2106277217}
+  - component: {fileID: 2106277219}
   m_Layer: 0
   m_Name: LogicCircuit
   m_TagString: Untagged
@@ -1836,3 +1839,31 @@ Transform:
   m_Father: {fileID: 239772218}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2106277219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106277216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a361dcc5bf9f0145b82baa009d008eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 1d16305a595f82647b4d7bcf4a533d14, type: 2}
+  callback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2106277217}
+        m_TargetAssemblyTypeName: LogicCircuitSystem, Assembly-CSharp
+        m_MethodName: UnregisterComponent
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: teste 2
+          m_BoolArgument: 0
+        m_CallState: 2

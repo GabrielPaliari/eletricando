@@ -15,7 +15,7 @@ public class TickSystem : MonoBehaviour
     private int tick;
     
     [SerializeField] private float tickDuration = .2f;
-    [SerializeField] private int clockDuration = 5;
+    [SerializeField] private int clockDuration = 1;
 
     private void Awake()
     {
@@ -31,7 +31,6 @@ public class TickSystem : MonoBehaviour
         }
         tick = 0;
         tickTimer = 0;
-        tickDuration = 1f;
     }
 
     // Update is called once per frame

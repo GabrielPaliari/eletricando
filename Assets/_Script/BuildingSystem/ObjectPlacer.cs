@@ -7,6 +7,7 @@ public class ObjectPlacer : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> placedGameObjects = new();
+    public GameEvent onRemoveLogicGate;
 
     public int PlaceObject(PlaceableComponentSO componentData, Vector3 position)
     {

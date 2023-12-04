@@ -45,6 +45,7 @@ public class InputManager : MonoBehaviour
     public bool IsPointerOverUI()
         => EventSystem.current.IsPointerOverGameObject();
 
+    // TODO: Refactorar essas 3 funções seguintes encapsulando a lógica em uma só
     public Vector3 GetSelectedMapPosition()
     {
         Vector3 mousePos = Input.mousePosition;

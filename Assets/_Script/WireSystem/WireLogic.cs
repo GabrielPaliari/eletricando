@@ -5,12 +5,14 @@ using UnityEngine.Splines;
 
 public class WireLogic : MonoBehaviour, ILogicGateSpec
 {
-    public OutputFunction[] outputFunctions => new OutputFunction[] { };
+    public OutputFunction[] outputFunctions => new OutputFunction[] {
+        BufferInput
+    };
     public StateFunction[] stateFunctions => new StateFunction[] {
         OnOffState
     };
     public int inputsLength => 1;
-    public int outputsLength => 0;
+    public int outputsLength => 1;
     public int stateLength => 1;
 
     [SerializeField] private MeshFilter meshFilter;
@@ -28,7 +30,7 @@ public class WireLogic : MonoBehaviour, ILogicGateSpec
     {
         Mesh mesh = new Mesh();
         meshFilter.mesh = mesh;
-    }
+    }    
 
     private bool OnOffState(BitArray inputs)
     {
@@ -36,11 +38,23 @@ public class WireLogic : MonoBehaviour, ILogicGateSpec
         return inputs[0];
     }
 
+    private bool BufferInput(BitArray inputs)
+    {
+        return inputs[0];
+    }
+
     private void UpdateVisuals(bool isOn)
     {
+        if (meshRenderer == null)
+        {
+            return;
+        }
         meshRenderer.material = isOn ? onMaterial : offMaterial;
         splineExtrude.Rebuild();
-        meshCollider.sharedMesh = meshFilter.mesh;
+        if (meshFilter.mesh.vertexCount > 0)
+        {
+            meshCollider.sharedMesh = meshFilter.mesh;
+        }
     }
 
     public void CreateBranch(List<Vector3> points)

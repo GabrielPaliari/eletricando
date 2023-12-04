@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79b40700ff203704f96ffab952a89023, type: 3}
-  m_Name: OnRemoveComponentSelected
+  m_Name: OnRemoveMode
   m_EditorClassIdentifier: 
   listeners: []
