@@ -20,19 +20,27 @@ public class WireSystem : MonoBehaviour
     public GameEvent onRemoveLogicGate;
     LineRenderer lineRenderer;
 
-
-    public void EnterWireMode()
+    private void setState(WireState state)
     {
-        setState(WireState.WireModeOn);
-        onHighlightOutputs.Raise();
-        inputManager.CallOnExit();
+        wireState = state;
+        UpdateUserFeedback();
     }
 
-    public void ExitWireMode()
+    private void UpdateUserFeedback()
     {
-        setState(WireState.WireModeOff);
-        onDisableHighlights.Raise();
-        ResetConnection();
+        switch (wireState)
+        {
+            case WireState.WireModeOn:
+                onHighlightOutputs.Raise();
+                break;
+            case WireState.FirstSelected:
+                onHighlightInputs.Raise();
+                break;
+            case WireState.WireModeOff:
+            case WireState.DeleteMode:
+                onDisableHighlights.Raise();
+                break;
+        }
     }
 
     private void Start()
@@ -44,58 +52,84 @@ public class WireSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.D) && wireState != WireState.WireModeOff) {
-            setState(WireState.DeleteMode);
-            Debug.Log("Delete Wire Mode");
+        if (Input.GetKeyUp(KeyCode.D)) {
+            if (wireState == WireState.DeleteMode)
+            {
+                setState(WireState.WireModeOn);
+            } else if (wireState != WireState.WireModeOff)
+            {
+                setState(WireState.DeleteMode);
+            }
         }
         switch (wireState)
         {
             case WireState.WireModeOn:
                 if (Input.GetMouseButtonUp(0))
                 {
-                    GameObject connectorObject = inputManager.GetSelectedWireConector();
-                    if (connectorObject != null)
-                    {
-                    firstComponentGO = connectorObject;
-                        StartWiring();
-                        onHighlightInputs.Raise();
-                        setState(WireState.FirstSelected);
-                    }
+                    StartWiring();
                 }
                 break;
             case WireState.FirstSelected:
             case WireState.SecondHovered:
-                UpdateWireVisual();
+                UpdatePreviewVisual();
                 if (Input.GetMouseButtonUp(0))
                 {
-                    GameObject secConnectorObject = inputManager.GetSelectedWireConector();
-                    if (secConnectorObject != null)
-                    {
-                        secondComponentGO = secConnectorObject;
-                        EndWiring();
-                    }
+                    EndWiring();
                 }
                 break;
             case WireState.DeleteMode:
                 if (Input.GetMouseButtonUp(0))
                 {
-                    RaycastHit hit = inputManager.GetHoveredWire();
-                    if (hit.collider != null)
-                    {
-                        Destroy(hit.collider.gameObject);
-                    }
+                    DeleteWire();
                 }
                 break;
         }
     }
 
-    private void ResetConnection()
+    public void EnterWireMode()
     {
+        setState(WireState.WireModeOn);
+        inputManager.CallOnExit();
+    }
+
+    public void ExitWireMode()
+    {
+        setState(WireState.WireModeOff);
+    }
+
+    private void StartWiring()
+    {
+        GameObject connectorObject = inputManager.GetSelectedWireConector();
+        if (connectorObject != null)
+        {
+            lineRenderer.enabled = true;
+            firstComponentGO = connectorObject;
+            setState(WireState.FirstSelected);
+        }
+    }
+
+    private void UpdatePreviewVisual()
+    {
+        var startPos = firstComponentGO.transform.position;
+        var endPos = inputManager.GetSelectedMapPosition();
+        lineRenderer.SetPosition(0, startPos);
+        lineRenderer.SetPosition(1, endPos);
     }
 
     private void EndWiring()
     {
-        lineRenderer.enabled = false;
+        GameObject secConnectorObject = inputManager.GetSelectedWireConector();
+        if (secConnectorObject != null)
+        {
+            secondComponentGO = secConnectorObject;
+            lineRenderer.enabled = false;
+            CreateWirePrefab();
+            EnterWireMode();
+        }
+    }
+
+    private void CreateWirePrefab()
+    {
         var firstLogicGate = firstComponentGO.GetComponentInParent<LogicGate>();
         var firstConnector = firstComponentGO.GetComponent<WireConector>();
 
@@ -109,7 +143,6 @@ public class WireSystem : MonoBehaviour
 
         LogicCircuitSystem.Instance.RegisterOutputListener(firstLogicGate, firstConnector.index, secondLogicGate, secondConnector.index, wire);
         wireLogic.CreateBranch(GetWirePositions());
-        EnterWireMode();
     }
 
     private List<Vector3> GetWirePositions()
@@ -123,22 +156,13 @@ public class WireSystem : MonoBehaviour
         return pointList;
     }
 
-    private void StartWiring()
+    private void DeleteWire()
     {
-        lineRenderer.enabled = true;
-    }
-
-    private void UpdateWireVisual()
-    {
-        var startPos = firstComponentGO.transform.position;
-        var endPos = inputManager.GetSelectedMapPosition();
-        lineRenderer.SetPosition(0, startPos); 
-        lineRenderer.SetPosition(1, endPos);
-    }
-
-    private void setState(WireState state)
-    {
-        wireState = state;
+        RaycastHit hit = inputManager.GetHoveredWire();
+        if (hit.collider != null)
+        {
+            Destroy(hit.collider.gameObject);
+        }
     }
 }
 public enum WireState
