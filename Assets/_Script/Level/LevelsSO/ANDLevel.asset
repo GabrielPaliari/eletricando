@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ee0eacc692a6a4ba298fbe943f9e84, type: 3}
   m_Name: ANDLevel
   m_EditorClassIdentifier: 
-  id: 0
+  id: 2
   title: 
   subtitle: 
   description: 
   inputsA: 
-  inputsB: 
+  inputsB: 00000000
   outputs: 
   componentsAvailable: 
