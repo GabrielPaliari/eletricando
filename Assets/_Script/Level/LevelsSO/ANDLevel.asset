@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: ANDLevel
   m_EditorClassIdentifier: 
   id: 2
-  title: 
-  subtitle: 
-  description: 
+  title: "N\xEDvel 2"
+  subtitle: Uma coisa "E" outra
+  description: "A porta E tem 2 entradas e s\xF3 tem sa\xEDda verdadeira se TODAS
+    as suas entradas forem verdadeiras."
   inputsA: 
   inputsB: 00000000
   outputs: 

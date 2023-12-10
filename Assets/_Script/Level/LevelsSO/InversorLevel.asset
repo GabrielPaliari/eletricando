@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: InversorLevel
   m_EditorClassIdentifier: 
   id: 1
-  title: 
-  subtitle: 
-  description: 
+  title: "N\xEDvel 1"
+  subtitle: Invertendo para desinverter
+  description: "O componente mais b\xE1sico da l\xF3gica \xE9 o inversor. Como o
+    nome diz, ele \xE9 capaz de inverter o sinal de entrada (se a entrada \xE9 0
+    ele devolve 1 e se \xE9 1 ele devolve 0. \n\nUtilize o inversor para inverter
+    as entradas e produzir as sa\xEDdas esperadas."
   inputsA: 
   inputsB: 
   outputs: 

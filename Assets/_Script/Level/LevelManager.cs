@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,15 +8,12 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
     
     [SerializeField]
-    private GameObject levelButtonPrefab;
-    
-    [SerializeField]
-    private GameObject levelsGridParent;
-    
-    [SerializeField]
-    private LevelsListSO levelsList;
+    private GameObject _loadingCanvas;
 
-    private LevelSO m_selectedLevel;
+    [SerializeField]
+    private Image _progressBar;
+
+    public LevelSO _selectedLevel;
 
     private void Awake()
     {
@@ -33,21 +28,27 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        if (levelsGridParent != null) { 
-            levelsList.levelData.ForEach((level) =>
-            {
-                var levelButton = Instantiate(levelButtonPrefab);
-                levelButton.transform.SetParent(levelsGridParent.transform, false);
-                levelButton.GetComponent<LevelButton>().level = level;
-            });
-        }
-    }
-
     public void LoadLevel(LevelSO level)
     {
-        m_selectedLevel = level;
-        SceneManager.LoadScene("CircuitBuild");
-    } 
+        _selectedLevel = level;
+        StartCoroutine(LoadAsync("CircuitBuild"));          
+    }
+
+    public void LoadMainMenu()
+    {
+        _selectedLevel = null;
+        StartCoroutine(LoadAsync("MainMenu"));
+    }
+
+    IEnumerator LoadAsync(string sceneName)
+    {
+        _loadingCanvas.SetActive(true);
+        AsyncOperation scene = SceneManager.LoadSceneAsync(sceneName);
+        while (!scene.isDone)
+        {
+            _progressBar.fillAmount = scene.progress;
+            yield return null;
+        }
+        _loadingCanvas.SetActive(false);
+    }
 }
