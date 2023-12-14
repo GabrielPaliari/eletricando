@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6303ee4c548db140a11313407a2444b, type: 3}
-  m_Name: Database
+  m_Name: Level1Components
   m_EditorClassIdentifier: 
   objectsData:
-  - {fileID: 11400000, guid: dc14c713bc7fa4e4bb70b2ee6b2363b1, type: 2}
-  - {fileID: 11400000, guid: 61c63c50ddb763a4199d9882c0c5fbf6, type: 2}
   - {fileID: 11400000, guid: e3f4454b84ce51942bbedc62e7f1fb4e, type: 2}
-  - {fileID: 11400000, guid: 9d960bf4a5b7b7a46a11825025adfdb0, type: 2}
+  - {fileID: 11400000, guid: dc14c713bc7fa4e4bb70b2ee6b2363b1, type: 2}
   - {fileID: 11400000, guid: 6aae7fe3c5a246749bc0b98927874b30, type: 2}

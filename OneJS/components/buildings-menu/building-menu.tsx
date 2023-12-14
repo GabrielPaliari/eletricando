@@ -3,8 +3,16 @@ import { MenuItem } from "./menu-item";
 import { List } from "System/Collections/Generic";
 import { useState } from "preact/hooks";
 import { Tooltip } from "components/shared/tooltip";
+import { Debug } from "UnityEngine";
 
 const placementSystem = require("placementSystem");
+const levelManager: {
+  _selectedLevel: {
+    componentsAvailable: {
+      objectsData: List<PlaceableComponentSO>;
+    };
+  };
+} = require("levelManager");
 const wireSystem = require("wireSystem");
 
 interface PlaceableComponentSO {
@@ -36,17 +44,17 @@ const getComponentFunction = (
 
 export const BuildingMenu = () => {
   const [selected, setSelected] = useState(-100);
-  const componentsDatabase: List<PlaceableComponentSO> =
-    placementSystem.database?.objectsData;
   const componentsData: [number, string, () => void, any][] = [];
-  componentsDatabase.ForEach(({ Name, ID, menuImage }) =>
+  const componentsAvailable: List<PlaceableComponentSO> =
+    levelManager._selectedLevel.componentsAvailable.objectsData;
+  componentsAvailable.ForEach((comp) => {
     componentsData.push([
-      ID,
-      Name,
-      getComponentFunction(ID, setSelected),
-      menuImage,
-    ])
-  );
+      comp.ID,
+      comp.Name,
+      getComponentFunction(comp.ID, setSelected),
+      comp.menuImage,
+    ]);
+  });
 
   const menuData: [number, string, () => void, any][] = componentsData;
 

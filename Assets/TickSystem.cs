@@ -9,13 +9,13 @@ public class TickSystem : MonoBehaviour
     private static TickSystem instance;
     public static TickSystem Instance => instance;
 
-    public event Action OnPropagationTick, OnClockTick;
+    public GameEvent OnPropagationTick, OnClockTick;
     
     private float tickTimer;
     private int tick;
     
-    [SerializeField] private float tickDuration = .2f;
-    [SerializeField] private int clockDuration = 1;
+    [SerializeField] private float tickDuration;
+    [SerializeField] private int clockDuration;
 
     private void Awake()
     {
@@ -41,11 +41,11 @@ public class TickSystem : MonoBehaviour
         {
             tickTimer -= tickDuration;
             tick++;
-            OnPropagationTick?.Invoke();
+            OnPropagationTick.Raise();
             
             if (tick >= clockDuration)
             {
-                OnClockTick?.Invoke();
+                OnClockTick.Raise();
                 tick -= clockDuration;
             }
         }

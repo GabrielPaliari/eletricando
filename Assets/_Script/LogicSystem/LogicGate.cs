@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,6 +21,8 @@ public class LogicGate : MonoBehaviour
     private BitArray stateValues;
     private StateFunction[] stateFunctions;
 
+    public List<int> signalSequence;
+
     public void OnInputChange(int inputIndex, bool value)
     {
         if (inputsValues != null) {
@@ -30,7 +33,7 @@ public class LogicGate : MonoBehaviour
     public void Initialize()
     {
         specification = GetComponent<ILogicGateSpec>();
-        if (specification != null )
+        if (specification != null)
         {
             id = LogicCircuitSystem.Instance.AddComponent(this);
             

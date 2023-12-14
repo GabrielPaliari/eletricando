@@ -32,7 +32,7 @@ public class LevelManager : MonoBehaviour
     {
         _selectedLevel = level;
         StartCoroutine(LoadAsync("CircuitBuild"));          
-    }
+    }    
 
     public void LoadMainMenu()
     {

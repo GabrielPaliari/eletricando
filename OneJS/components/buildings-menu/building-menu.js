@@ -6,6 +6,7 @@ var menu_item_1 = require("./menu-item");
 var hooks_1 = require("preact/hooks");
 var tooltip_1 = require("components/shared/tooltip");
 var placementSystem = require("placementSystem");
+var levelManager = require("levelManager");
 var wireSystem = require("wireSystem");
 var getComponentFunction = function (id, setSelected) {
     var componentFunction;
@@ -26,17 +27,15 @@ var getComponentFunction = function (id, setSelected) {
     };
 };
 var BuildingMenu = function () {
-    var _a;
-    var _b = (0, hooks_1.useState)(-100), selected = _b[0], setSelected = _b[1];
-    var componentsDatabase = (_a = placementSystem.database) === null || _a === void 0 ? void 0 : _a.objectsData;
+    var _a = (0, hooks_1.useState)(-100), selected = _a[0], setSelected = _a[1];
     var componentsData = [];
-    componentsDatabase.ForEach(function (_a) {
-        var Name = _a.Name, ID = _a.ID, menuImage = _a.menuImage;
-        return componentsData.push([
-            ID,
-            Name,
-            getComponentFunction(ID, setSelected),
-            menuImage,
+    var componentsAvailable = levelManager._selectedLevel.componentsAvailable.objectsData;
+    componentsAvailable.ForEach(function (comp) {
+        componentsData.push([
+            comp.ID,
+            comp.Name,
+            getComponentFunction(comp.ID, setSelected),
+            comp.menuImage,
         ]);
     });
     var menuData = componentsData;

@@ -10,10 +10,11 @@ public class GridData
     public void AddObjectAt(Vector3Int gridPosition,
                             Vector2Int objectSize,
                             int ID,
-                            int placedObjectIndex)
+                            int placedObjectIndex,
+                            bool indestructible = false)
     {
         List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
-        PlacementData data = new PlacementData(positionToOccupy, ID, placedObjectIndex, RotationUtil.currentDir);
+        PlacementData data = new PlacementData(positionToOccupy, ID, placedObjectIndex, RotationUtil.currentDir, indestructible);
         foreach (var pos in positionToOccupy)
         {
             if (placedObjects.ContainsKey(pos))
@@ -49,6 +50,13 @@ public class GridData
         return true;
     }
 
+    public bool HasIndestructibleObject(Vector3Int gridPosition)
+    {
+        if (placedObjects.ContainsKey(gridPosition) == false)
+            return false;
+        return placedObjects[gridPosition].isIndestructible;
+    }
+
     internal int GetRepresentationIndex(Vector3Int gridPosition)
     {
         if (placedObjects.ContainsKey(gridPosition) == false)
@@ -72,12 +80,15 @@ public class PlacementData
     public int PlacedObjectIndex { get; private set; }
     public RotationDir RotationDir { get; private set; }
 
-    public PlacementData(List<Vector3Int> occupiedPositions, int iD, int placedObjectIndex, RotationDir dir)
+    public bool isIndestructible;
+
+    public PlacementData(List<Vector3Int> occupiedPositions, int iD, int placedObjectIndex, RotationDir dir, bool indestructible)
     {
         this.occupiedPositions = occupiedPositions;
         ID = iD;
         PlacedObjectIndex = placedObjectIndex;
         RotationDir = dir;
+        isIndestructible = indestructible;
     }
 }
 

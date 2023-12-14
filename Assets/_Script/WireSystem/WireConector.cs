@@ -11,7 +11,7 @@ public class WireConector : MonoBehaviour
 {
     [SerializeField] public ESignalType type;
     [SerializeField] public int index;
-    [SerializeField] private Collider wireCollider;
+    [SerializeField] private Collider conectorCollider;
 
     private Renderer conectorIndicatorRenderer;
 
@@ -23,7 +23,7 @@ public class WireConector : MonoBehaviour
     private void applyHighlight()
     {
         conectorIndicatorRenderer.enabled = true;
-        wireCollider.enabled = true;
+        conectorCollider.enabled = true;
         Color c = Color.green;
 
         c.a = 0.5f;
@@ -35,7 +35,7 @@ public class WireConector : MonoBehaviour
     public void removeHighlight()
     {
         conectorIndicatorRenderer.enabled = false;
-        wireCollider.enabled = false;
+        conectorCollider.enabled = false;
         Color c = Color.white;
 
         c.a = 0.5f;

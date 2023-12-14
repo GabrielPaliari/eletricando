@@ -153,6 +153,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7851286881167693695}
     m_Modifications:
+    - target: {fileID: 1448415663649682291, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
+        type: 3}
+      propertyPath: wireCollider
+      value: 
+      objectReference: {fileID: 131419918756348859}
+    - target: {fileID: 1448415663649682291, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
+        type: 3}
+      propertyPath: conectorCollider
+      value: 
+      objectReference: {fileID: 131419918756348859}
     - target: {fileID: 3852115118877083262, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
         type: 3}
       propertyPath: m_Name
@@ -228,6 +238,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ce30c65ccc52094da29cabd3dcbe80f, type: 3}
+--- !u!65 &131419918756348859 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 387022861077950652, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
+    type: 3}
+  m_PrefabInstance: {fileID: 327670432144798471}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5778432377952478966 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6106040124030227953, guid: 6ce30c65ccc52094da29cabd3dcbe80f,

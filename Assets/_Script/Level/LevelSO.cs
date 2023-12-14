@@ -23,15 +23,8 @@ public class LevelSO : ScriptableObject
     public string description;
 
     [SerializeField]
-    public List<int> inputsA;
+    public List<BuildedComponentSO> preBuiltComponents;
 
     [SerializeField]
-    public List<int> inputsB;
-
-    [SerializeField]
-    public List<int> outputs;
-
-    [Tooltip("Id do componente")]
-    [SerializeField]
-    public List<int> componentsAvailable;
+    public ObjectsDatabaseSO componentsAvailable;
 }

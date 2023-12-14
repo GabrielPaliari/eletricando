@@ -9,10 +9,11 @@ public class ObjectPlacer : MonoBehaviour
     private List<GameObject> placedGameObjects = new();
     public GameEvent onRemoveLogicGate;
 
-    public int PlaceObject(PlaceableComponentSO componentData, Vector3 position)
+    public int PlaceObject(PlaceableComponentSO componentData, Vector3 position, List<int> signalSequence)
     {
         GameObject newObject = Instantiate(componentData.Prefab);
         LogicGate logicGate = newObject.GetComponent<LogicGate>();
+        logicGate.signalSequence = signalSequence;
 
         if(logicGate != null ) { logicGate.Initialize(); }
 

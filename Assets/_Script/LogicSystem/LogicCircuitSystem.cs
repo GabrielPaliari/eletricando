@@ -16,11 +16,6 @@ public class LogicCircuitSystem : MonoBehaviour
 
     public event Action OnClicked;
     
-    public void Start()
-    {
-        TickSystem.Instance.OnPropagationTick += UpdateLogicGates;
-    }
-
     private void Update()
     {
         // TODO: Transformar input system em um singleton e chamar aqui
@@ -85,6 +80,7 @@ public class LogicCircuitSystem : MonoBehaviour
 
     public void RegisterWireConectors(int component, int inputsLength, int outputsLength)
     {
+        // TODO: separar na memória as entradas das saídas
         for (int i = 0; i < inputsLength; i++) {
             wiresConnected[component][i] = new List<LogicGate>();
         }
@@ -99,8 +95,6 @@ public class LogicCircuitSystem : MonoBehaviour
         outputEmitter.AddListener((outValue) => wire.OnInputChange(0, outValue));
 
         wiresConnected[inputGate.id][inputIndex].Add(wire);
-        wiresConnected[outputGate.id][inputGate.specification.inputsLength + outputIndex].Add(wire);
-
 
         UnityEvent<bool> wireEmitter = outputEvents[wire.id][0];
         wireEmitter.AddListener((outValue) => inputGate.OnInputChange(inputIndex, outValue));

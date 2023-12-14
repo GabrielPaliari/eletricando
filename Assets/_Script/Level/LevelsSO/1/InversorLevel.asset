@@ -19,7 +19,8 @@ MonoBehaviour:
     nome diz, ele \xE9 capaz de inverter o sinal de entrada (se a entrada \xE9 0
     ele devolve 1 e se \xE9 1 ele devolve 0. \n\nUtilize o inversor para inverter
     as entradas e produzir as sa\xEDdas esperadas."
-  inputsA: 
-  inputsB: 
-  outputs: 
-  componentsAvailable: 
+  preBuiltComponents:
+  - {fileID: 11400000, guid: 58b11676223e9f04180d94f05b83073f, type: 2}
+  - {fileID: 11400000, guid: bbddae437b08109438a6527efa9de401, type: 2}
+  componentsAvailable: {fileID: 11400000, guid: da66196a80f02c64c9137ffb109508a2,
+    type: 2}

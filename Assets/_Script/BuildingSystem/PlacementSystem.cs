@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static PlacementSystem;
 
 public class PlacementSystem : MonoBehaviour
 {
@@ -72,6 +68,22 @@ public class PlacementSystem : MonoBehaviour
         buildingState = new RemovingState(grid, preview, componentsData, objectPlacer, soundFeedback);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
+    }
+
+    public void PreBuildLevelComponents()
+    {
+        var level = LevelManager.Instance._selectedLevel;
+        GridData selectedData = componentsData;
+        level.preBuiltComponents.ForEach(component => {
+            var selectedComponentIndex = database.objectsData.FindIndex(data => data.ID == component.componentId);
+            RotationUtil.currentDir = component.rotation;
+            int index = objectPlacer.PlaceObject(database.objectsData[selectedComponentIndex], grid.CellToWorld(component.position), component.signalSequence);
+            selectedData.AddObjectAt(component.position,
+                database.objectsData[selectedComponentIndex].Size,
+                database.objectsData[selectedComponentIndex].ID,
+                index,
+                true);
+        });
     }
 
     private void PlaceStructure()
