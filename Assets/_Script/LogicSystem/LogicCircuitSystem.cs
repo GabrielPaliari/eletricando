@@ -22,7 +22,7 @@ public class LogicCircuitSystem : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
             OnClicked?.Invoke();
     }
-        private void Awake()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -54,6 +54,7 @@ public class LogicCircuitSystem : MonoBehaviour
         {
             outputEvents[id] = new Dictionary<int, UnityEvent<bool>>();
             logicGates.Add(logicGate);
+
         }
         if (!wiresConnected.ContainsKey(id))
         {

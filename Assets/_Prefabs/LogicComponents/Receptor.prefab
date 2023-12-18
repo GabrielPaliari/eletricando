@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7851286881167693695}
   - component: {fileID: 3114479574220358710}
-  - component: {fileID: 5302169070075597188}
   - component: {fileID: 4995801766095681802}
+  - component: {fileID: 7044076277904534783}
   m_Layer: 0
-  m_Name: Emissor
+  m_Name: Receptor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,19 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
---- !u!114 &5302169070075597188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3493615974341626966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d09422dd4a2611648849cd495b470734, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _nameTMP: {fileID: 2091175465996016968}
 --- !u!114 &4995801766095681802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,8 +66,8 @@ MonoBehaviour:
   callback:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5302169070075597188}
-        m_TargetAssemblyTypeName: Emissor, Assembly-CSharp
+      - m_Target: {fileID: 7044076277904534783}
+        m_TargetAssemblyTypeName: Receptor, Assembly-CSharp
         m_MethodName: OnClock
         m_Mode: 1
         m_Arguments:
@@ -91,6 +78,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7044076277904534783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3493615974341626966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b17abb6edfc524aa2931f6730639a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _nameTMP: {fileID: 2091175465996016968}
 --- !u!1 &4675623453263195952
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,7 +358,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 9003353085549565770, guid: 389742017ed084d44b269050fb5a77bd,
+      objectReference: {fileID: 1926562394105597943, guid: 389742017ed084d44b269050fb5a77bd,
         type: 3}
     - target: {fileID: 919132149155446097, guid: cee1e000b17c961448f96f9c3df47a1c,
         type: 3}
@@ -387,7 +387,7 @@ PrefabInstance:
     - target: {fileID: 1448415663649682291, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
         type: 3}
       propertyPath: type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1448415663649682291, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
         type: 3}
@@ -402,7 +402,7 @@ PrefabInstance:
     - target: {fileID: 3852115118877083262, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
         type: 3}
       propertyPath: m_Name
-      value: Output
+      value: Input
       objectReference: {fileID: 0}
     - target: {fileID: 6106040124030227953, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
         type: 3}

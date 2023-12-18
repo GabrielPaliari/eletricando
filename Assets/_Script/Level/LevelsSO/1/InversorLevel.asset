@@ -16,11 +16,11 @@ MonoBehaviour:
   title: "N\xEDvel 1"
   subtitle: Invertendo para desinverter
   description: "O componente mais b\xE1sico da l\xF3gica \xE9 o inversor. Como o
-    nome diz, ele \xE9 capaz de inverter o sinal de entrada (se a entrada \xE9 0
-    ele devolve 1 e se \xE9 1 ele devolve 0. \n\nUtilize o inversor para inverter
-    as entradas e produzir as sa\xEDdas esperadas."
+    nome diz, ele \xE9 capaz de inverter um sinal (se receber 0 de um lado, ir\xE1
+    emitir 1 do outro)\n\nUtilize um inversor para inverter o sinal do emissor e
+    produzir os valores corretos para o receptor."
   preBuiltComponents:
   - {fileID: 11400000, guid: 58b11676223e9f04180d94f05b83073f, type: 2}
-  - {fileID: 11400000, guid: bbddae437b08109438a6527efa9de401, type: 2}
+  - {fileID: 11400000, guid: f5b5b053087bc094eac2881824e38db3, type: 2}
   componentsAvailable: {fileID: 11400000, guid: da66196a80f02c64c9137ffb109508a2,
     type: 2}

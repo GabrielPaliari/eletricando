@@ -12,10 +12,12 @@ public class ObjectPlacer : MonoBehaviour
     public int PlaceObject(PlaceableComponentSO componentData, Vector3 position, List<int> signalSequence)
     {
         GameObject newObject = Instantiate(componentData.Prefab);
-        LogicGate logicGate = newObject.GetComponent<LogicGate>();
-        logicGate.signalSequence = signalSequence;
 
+        LogicGate logicGate = newObject.GetComponent<LogicGate>();
         if(logicGate != null ) { logicGate.Initialize(); }
+
+        ISignalSeqGateSpec signalGate = newObject.GetComponent<ISignalSeqGateSpec>();
+        if (signalGate != null) { signalGate.Initialize(logicGate.id, signalSequence); }
 
         Vector2Int rotationOffset = RotationUtil.GetRotationOffset(componentData.Size);
         newObject.transform.position = new Vector3(

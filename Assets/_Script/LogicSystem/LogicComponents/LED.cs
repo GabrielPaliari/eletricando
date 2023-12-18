@@ -18,7 +18,6 @@ public class LED : MonoBehaviour, ILogicGateSpec
     [SerializeField]
     private Material offMaterial;
 
-
     void Start()
     {
         lightMeshRenderer.material = offMaterial;

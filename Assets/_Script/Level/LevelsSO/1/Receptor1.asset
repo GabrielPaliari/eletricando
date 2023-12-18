@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 760661c6592a2444b8aa60c1d2edded9, type: 3}
-  m_Name: Emissor1
+  m_Name: Receptor1
   m_EditorClassIdentifier: 
-  componentId: 4
-  position: {x: -1, y: 0, z: 2}
-  rotation: 0
-  signalSequence: 01000000010000000000000000000000
+  componentId: 5
+  position: {x: -1, y: 0, z: -4}
+  rotation: 2
+  signalSequence: 00000000000000000100000001000000

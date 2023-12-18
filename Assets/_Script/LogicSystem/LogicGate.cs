@@ -21,8 +21,6 @@ public class LogicGate : MonoBehaviour
     private BitArray stateValues;
     private StateFunction[] stateFunctions;
 
-    public List<int> signalSequence;
-
     public void OnInputChange(int inputIndex, bool value)
     {
         if (inputsValues != null) {

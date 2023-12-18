@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 760661c6592a2444b8aa60c1d2edded9, type: 3}
-  m_Name: Emissor2
+  m_Script: {fileID: 11500000, guid: 3975e4c517e7f384592f0650970d9fba, type: 3}
+  m_Name: SignalsColorsDef
   m_EditorClassIdentifier: 
-  componentId: 4
-  position: {x: -1, y: 0, z: -4}
-  rotation: 2
-  signalSequence: 010000000100000000000000000000000100000000000000
+  signalColors:
+  - {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 0}
+  - {r: 0, g: 1, b: 1, a: 1}
+  rightAttemptColor: {r: 0, g: 1, b: 0, a: 1}
+  wrongAttemptColor: {r: 1, g: 0, b: 0, a: 1}
