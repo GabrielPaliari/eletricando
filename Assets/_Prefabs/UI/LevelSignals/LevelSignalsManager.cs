@@ -41,7 +41,6 @@ public class LevelSignalsManager : MonoBehaviour
 
     private void _RegisterSignalComponent(SignalComponentData sigComp)
     {
-        Debug.Log($"Teste {sigComp.id}");
         var signalsRowUI = Instantiate(signalsRowUI_pf);
         signalsRowUI.transform.SetParent(signalsCompsGrid.transform, false);
 
