@@ -462,6 +462,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2091890286}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &277725345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,8 +723,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  maxHeight: 10
-  minHeight: 3
+  maxHeight: 15
+  minHeight: 4
   heightDampening: 5
   keyboardZoomingSensitivity: 0.5
   scrollWheelZoomingSensitivity: 25
@@ -3180,6 +3192,12 @@ MonoBehaviour:
   OnClockTick: {fileID: 11400000, guid: 05cb108034c6f474494147bfba2eb037, type: 2}
   tickDuration: 0.1
   clockDuration: 10
+--- !u!1 &2091890286 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4188878828029796216, guid: 26c20f303905a7d48b0b4b5ee16226bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 530229329648992165}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2106277216
 GameObject:
   m_ObjectHideFlags: 0
@@ -3359,32 +3377,32 @@ PrefabInstance:
     - target: {fileID: 695262821508000998, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 695262821508000998, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 695262821508000998, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 383.3
       objectReference: {fileID: 0}
     - target: {fileID: 695262821508000998, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 42.3
       objectReference: {fileID: 0}
     - target: {fileID: 695262821508000998, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 242.65
       objectReference: {fileID: 0}
     - target: {fileID: 695262821508000998, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -51.15
       objectReference: {fileID: 0}
     - target: {fileID: 1336297422870048583, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}
@@ -3419,32 +3437,32 @@ PrefabInstance:
     - target: {fileID: 1451671071983882695, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1451671071983882695, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1451671071983882695, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 215.29997
       objectReference: {fileID: 0}
     - target: {fileID: 1451671071983882695, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 36.3
       objectReference: {fileID: 0}
     - target: {fileID: 1451671071983882695, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 191.65
       objectReference: {fileID: 0}
     - target: {fileID: 1451671071983882695, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -24.15
       objectReference: {fileID: 0}
     - target: {fileID: 2231258682289827097, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}
@@ -3650,6 +3668,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LevelSignalsUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188878828029796216, guid: 26c20f303905a7d48b0b4b5ee16226bb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5767403310725625522, guid: 26c20f303905a7d48b0b4b5ee16226bb,
         type: 3}

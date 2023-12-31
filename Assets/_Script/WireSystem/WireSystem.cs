@@ -38,6 +38,7 @@ public class WireSystem : MonoBehaviour
                 break;
             case WireState.WireModeOff:
             case WireState.DeleteMode:
+                DisablePreview();
                 onDisableHighlights.Raise();
                 break;
         }
@@ -52,7 +53,7 @@ public class WireSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.D)) {
+        if (Input.GetKeyUp(KeyCode.R)) {
             if (wireState == WireState.DeleteMode)
             {
                 setState(WireState.WireModeOn);
@@ -64,13 +65,12 @@ public class WireSystem : MonoBehaviour
         switch (wireState)
         {
             case WireState.WireModeOn:
-                if (Input.GetMouseButtonUp(0))
+                if (Input.GetMouseButtonDown(0))
                 {
                     StartWiring();
                 }
                 break;
             case WireState.FirstSelected:
-            case WireState.SecondHovered:
                 UpdatePreviewVisual();
                 if (Input.GetMouseButtonUp(0))
                 {
@@ -121,10 +121,18 @@ public class WireSystem : MonoBehaviour
         GameObject secConnectorObject = inputManager.GetSelectedWireConector();
         if (secConnectorObject != null)
         {
-            secondComponentGO = secConnectorObject;
-            lineRenderer.enabled = false;
+            secondComponentGO = secConnectorObject;           
             CreateWirePrefab();
-            EnterWireMode();
+        }
+        DisablePreview();
+        EnterWireMode();
+    }
+
+    private void DisablePreview()
+    {
+        if (lineRenderer != null)
+        {
+            lineRenderer.enabled = false;
         }
     }
 
@@ -171,7 +179,5 @@ public enum WireState
     WireModeOn,
     FirstHovered,
     FirstSelected,
-    SecondHovered,
-    SecondSelected,
     DeleteMode
 }

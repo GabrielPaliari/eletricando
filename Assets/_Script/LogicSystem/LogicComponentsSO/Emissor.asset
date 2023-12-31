@@ -15,6 +15,6 @@ MonoBehaviour:
   <Name>k__BackingField: Emissor
   <ID>k__BackingField: 4
   menuImage: {fileID: 2800000, guid: e364738b6bfe61c4bb53785b7a301443, type: 3}
-  <Size>k__BackingField: {x: 1, y: 1}
+  <Size>k__BackingField: {x: 2, y: 2}
   <Prefab>k__BackingField: {fileID: 3493615974341626966, guid: 94e88e81b72051d45b318ba2097dfc9e,
     type: 3}
