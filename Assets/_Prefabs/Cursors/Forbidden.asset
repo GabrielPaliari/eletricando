@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a138a58b45ec448b9f476c1f13024a, type: 3}
+  m_Name: Forbidden
+  m_EditorClassIdentifier: 
+  type: 6
+  texture: {fileID: 2800000, guid: e8bb3fbae4e389f49a1a8f07e550e2c5, type: 3}
+  hotspot: {x: 4, y: 0}

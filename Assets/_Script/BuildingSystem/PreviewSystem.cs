@@ -19,6 +19,9 @@ public class PreviewSystem : MonoBehaviour
     private Vector2Int objectSize = Vector2Int.one;
     private RotationDir previousRotationDir;
 
+    public GameEvent onChangeCursorAdd, onChangeCursorAddHighlight, onChangeCursorRemove, onChangeCursorRemoveHighlight;
+
+
     private void Start()
     {
         previewMaterialInstance = new Material(previewMaterialPrefab);
@@ -82,24 +85,44 @@ public class PreviewSystem : MonoBehaviour
         {          
             PrepareCursor(objectSize);
         }
-        MoveCursor(position);
-        ApplyFeedbackToCursor(validity);
+        MoveCursor(position);        
+        ApplyFeedbackToCursor(validity, previewObject == null);
     }
 
     private void ApplyFeedbackToPreview(bool validity)
     {
         Color c = validity ? Color.white : Color.red;
 
+        if (validity)
+        {
+            onChangeCursorAddHighlight.Raise();
+        } else
+        {
+            onChangeCursorAdd.Raise();
+        }
+
         c.a = 0.5f;
         previewMaterialInstance.color = c;
     }
 
-    private void ApplyFeedbackToCursor(bool validity)
+    private void ApplyFeedbackToCursor(bool validity, bool isRemovingState = false)
     {
         Color c = validity ? Color.white : Color.red;
 
         c.a = 0.5f;
         cellIndicatorRenderer.material.color = c;
+
+        if (isRemovingState)
+        {
+            if (validity)
+            {
+                onChangeCursorRemoveHighlight.Raise();
+            }
+            else
+            {
+                onChangeCursorRemove.Raise();
+            }
+        }
     }
 
     private void MoveCursor(Vector3 position)
@@ -121,6 +144,6 @@ public class PreviewSystem : MonoBehaviour
     {
         cellIndicator.SetActive(true);
         PrepareCursor(Vector2Int.one);
-        ApplyFeedbackToCursor(false);
+        ApplyFeedbackToCursor(false, true);
     }
 }

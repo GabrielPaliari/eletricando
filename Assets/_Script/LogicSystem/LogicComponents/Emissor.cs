@@ -40,9 +40,10 @@ public class Emissor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
         if (_signalComponent.signalSequence.Count > 0)
         {
             var cicledIndex = currentIndex % _signalComponent.signalSequence.Count;
-            isTrue = _signalComponent.signalSequence[cicledIndex] > 0;
             _signalComponent.currentIndex = cicledIndex;
             _signalComponent.currentValue = isTrue ? 1 : 0;
+
+            isTrue = _signalComponent.signalSequence[cicledIndex] > 0;
             LevelSignalsManager.Instance.UpdateSignalComponent.Invoke(_signalComponent);            
         }
     }

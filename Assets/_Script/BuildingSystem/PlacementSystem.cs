@@ -26,13 +26,7 @@ public class PlacementSystem : MonoBehaviour
 
     IBuildingState buildingState;
 
-    [SerializeField]
-    private SoundFeedback soundFeedback;
-
-    [Header("Events")]
-    public GameEvent onBuildComponentSelected;
-    public GameEvent onRemoveComponentSelected;
-    public GameEvent onPlaceComponent;
+    public GameEvent onBuildComponentSelected, onRemoveComponentSelected, onPlaceComponent, onChangeCursorRemove, onChangeCursorAdd;
 
     private int selectedComponentId;
 
@@ -44,6 +38,7 @@ public class PlacementSystem : MonoBehaviour
 
     public void StartPlacement(int ID)
     {
+        onChangeCursorAdd.Raise();
         selectedComponentId = ID;
         onBuildComponentSelected.Raise();
         StopPlacement();
@@ -53,8 +48,7 @@ public class PlacementSystem : MonoBehaviour
                                            preview,
                                            database,
                                            componentsData,
-                                           objectPlacer,
-                                           soundFeedback);
+                                           objectPlacer);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnRotate += RotateStructure;
         inputManager.OnExit += StopPlacement;
@@ -62,10 +56,11 @@ public class PlacementSystem : MonoBehaviour
 
     public void StartRemoving()
     {
+        onChangeCursorRemove.Raise();
         onRemoveComponentSelected.Raise();
         StopPlacement();
         gridVisualization.SetActive(true);
-        buildingState = new RemovingState(grid, preview, componentsData, objectPlacer, soundFeedback);
+        buildingState = new RemovingState(grid, preview, componentsData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }
@@ -113,7 +108,7 @@ public class PlacementSystem : MonoBehaviour
 
     private void StopPlacement()
     {
-        soundFeedback.PlaySound(SoundType.Click);
+        SoundFeedback.Instance.PlaySound(SoundType.Click);
         if (buildingState == null)
             return;
         gridVisualization.SetActive(false);

@@ -11,15 +11,13 @@ public class PlacementState : IBuildingState
     ObjectsDatabaseSO database;
     GridData componentsData;
     ObjectPlacer objectPlacer;
-    SoundFeedback soundFeedback;
 
     public PlacementState(int iD,
                           Grid grid,
                           PreviewSystem previewSystem,
                           ObjectsDatabaseSO database,
                           GridData componentsData,
-                          ObjectPlacer objectPlacer,
-                          SoundFeedback soundFeedback)
+                          ObjectPlacer objectPlacer)
     {
         ID = iD;
         this.grid = grid;
@@ -27,7 +25,6 @@ public class PlacementState : IBuildingState
         this.database = database;
         this.componentsData = componentsData;
         this.objectPlacer = objectPlacer;
-        this.soundFeedback = soundFeedback;
 
         selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
         if (selectedObjectIndex > -1)
@@ -50,10 +47,10 @@ public class PlacementState : IBuildingState
     {
         if (!CheckPlacementValidity(gridPosition, selectedObjectIndex))
         {
-            soundFeedback.PlaySound(SoundType.wrongPlacement);
+            SoundFeedback.Instance.PlaySound(SoundType.WrongPlacement);
             return;
         }
-        soundFeedback.PlaySound(SoundType.Place);
+        SoundFeedback.Instance.PlaySound(SoundType.Place);
         int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex], grid.CellToWorld(gridPosition), new List<int> { });
 
         GridData selectedData = componentsData;

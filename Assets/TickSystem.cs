@@ -13,6 +13,7 @@ public class TickSystem : MonoBehaviour
     
     private float tickTimer;
     private int tick;
+    public bool isOn = true;
     
     [SerializeField] private float tickDuration;
     [SerializeField] private int clockDuration;
@@ -36,17 +37,20 @@ public class TickSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        tickTimer += Time.deltaTime;
-        if (tickTimer >= tickDuration)
-        {
-            tickTimer -= tickDuration;
-            tick++;
-            OnPropagationTick.Raise();
-            
-            if (tick >= clockDuration)
+        if (isOn) {
+
+            tickTimer += Time.deltaTime;
+            if (tickTimer >= tickDuration)
             {
-                OnClockTick.Raise();
-                tick -= clockDuration;
+                tickTimer -= tickDuration;
+                tick++;
+                OnPropagationTick.Raise();
+            
+                if (tick >= clockDuration)
+                {
+                    OnClockTick.Raise();
+                    tick -= clockDuration;
+                }
             }
         }
     }

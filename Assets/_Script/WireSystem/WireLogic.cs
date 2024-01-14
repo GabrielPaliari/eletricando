@@ -66,5 +66,5 @@ public class WireLogic : MonoBehaviour, ILogicGateSpec
         splineContainer.AddSpline(spline);
         meshRenderer.material = offMaterial;
         splineExtrude.Rebuild();
-    }
+    }    
 }

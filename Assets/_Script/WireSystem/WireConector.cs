@@ -15,6 +15,8 @@ public class WireConector : MonoBehaviour
 
     private Renderer conectorIndicatorRenderer;
 
+    public GameEvent onChangeCursorAdd, onChangeCursorAddHighlight;
+
     private void Start()
     {
         conectorIndicatorRenderer = GetComponent<Renderer>();
@@ -73,6 +75,7 @@ public class WireConector : MonoBehaviour
         Color c = conectorIndicatorRenderer.material.color;
         c.a = 0.8f;
         conectorIndicatorRenderer.material.color = c;
+        onChangeCursorAddHighlight.Raise();
     }
 
     private void OnMouseExit()
@@ -80,5 +83,6 @@ public class WireConector : MonoBehaviour
         Color c = conectorIndicatorRenderer.material.color;
         c.a = 0.5f;
         conectorIndicatorRenderer.material.color = c;
+        onChangeCursorAdd.Raise();
     }
 }

@@ -4,8 +4,31 @@ using UnityEngine;
 
 public class SoundFeedback : MonoBehaviour
 {
+    private static SoundFeedback instance;
+    public static SoundFeedback Instance => instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     [SerializeField]
-    private AudioClip clickSound, placeSound, removeSound, wrongPlacementSound;
+    private AudioClip 
+        clickSound,
+        placeSound,
+        removeSound,
+        wrongPlacementSound,
+        correctSignalSound,
+        victorySound;
 
     [SerializeField]
     private AudioSource audioSource;
@@ -23,8 +46,14 @@ public class SoundFeedback : MonoBehaviour
             case SoundType.Remove:
                 audioSource.PlayOneShot(removeSound);
                 break;
-            case SoundType.wrongPlacement:
+            case SoundType.WrongPlacement:
                 audioSource.PlayOneShot(wrongPlacementSound);
+                break;
+            case SoundType.CorrectSignalSound:
+                audioSource.PlayOneShot(correctSignalSound);
+                break;
+            case SoundType.VictorySound:
+                audioSource.PlayOneShot(victorySound);
                 break;
             default:
                 break;
@@ -37,5 +66,7 @@ public enum SoundType
     Click,
     Place,
     Remove,
-    wrongPlacement
+    WrongPlacement,
+    CorrectSignalSound,
+    VictorySound
 }

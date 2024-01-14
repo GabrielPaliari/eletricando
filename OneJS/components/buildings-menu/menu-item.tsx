@@ -26,7 +26,7 @@ export const MenuItem = (props: MenuItemProps) => {
     <div
       style={borderStyle}
       class="rounded bg-teal-700 m-1 p-2"
-      onClick={props.onClick}
+      onMouseDown={props.onClick}
     >
       <div style={defaultInnerStyle}></div>
     </div>

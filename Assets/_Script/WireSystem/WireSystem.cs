@@ -14,10 +14,15 @@ public class WireSystem : MonoBehaviour
     [SerializeField]
     private GameObject wirePrefab;    
     private WireState wireState;
-    public GameEvent onHighlightInputs;
-    public GameEvent onHighlightOutputs;
-    public GameEvent onDisableHighlights;
-    public GameEvent onRemoveLogicGate;
+    public GameEvent
+        onHighlightInputs,
+        onHighlightOutputs,
+        onDisableHighlights,
+        onRemoveLogicGate,
+        onChangeCursorAdd,
+        onChangeCursorRemove,
+        onChangeCursorRemoveHighlight,
+        onChangeCursorDefault;
     LineRenderer lineRenderer;
 
     private void setState(WireState state)
@@ -31,13 +36,19 @@ public class WireSystem : MonoBehaviour
         switch (wireState)
         {
             case WireState.WireModeOn:
+                onChangeCursorAdd.Raise();
                 onHighlightOutputs.Raise();
                 break;
             case WireState.FirstSelected:
                 onHighlightInputs.Raise();
                 break;
             case WireState.WireModeOff:
+                onChangeCursorDefault.Raise();
+                DisablePreview();
+                onDisableHighlights.Raise();
+                break;
             case WireState.DeleteMode:
+                onChangeCursorRemove.Raise();
                 DisablePreview();
                 onDisableHighlights.Raise();
                 break;
@@ -78,9 +89,17 @@ public class WireSystem : MonoBehaviour
                 }
                 break;
             case WireState.DeleteMode:
-                if (Input.GetMouseButtonUp(0))
+                RaycastHit hit = inputManager.GetHoveredWire();
+                if (hit.collider != null)
                 {
-                    DeleteWire();
+                    onChangeCursorRemoveHighlight.Raise();
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        DeleteWire(hit);
+                    }
+                } else
+                {
+                    onChangeCursorRemove.Raise();
                 }
                 break;
         }
@@ -164,13 +183,9 @@ public class WireSystem : MonoBehaviour
         return pointList;
     }
 
-    private void DeleteWire()
-    {
-        RaycastHit hit = inputManager.GetHoveredWire();
-        if (hit.collider != null)
-        {
-            Destroy(hit.collider.gameObject);
-        }
+    private void DeleteWire(RaycastHit hit)
+    {                
+       Destroy(hit.collider.gameObject);
     }
 }
 public enum WireState

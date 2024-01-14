@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nameTMP: {fileID: 2091175465996016968}
+  levelCompleteEvent: {fileID: 11400000, guid: bd2ad92fbd9ba6b4d832ba1c5857ab99, type: 2}
 --- !u!1 &4675623453263195952
 GameObject:
   m_ObjectHideFlags: 0

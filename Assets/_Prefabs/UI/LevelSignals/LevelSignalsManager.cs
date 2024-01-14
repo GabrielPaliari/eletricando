@@ -8,6 +8,7 @@ public class LevelSignalsManager : MonoBehaviour
 {
     private static LevelSignalsManager instance;
     public static LevelSignalsManager Instance => instance;
+
     [NonSerialized]
     public UnityEvent<SignalComponentData> RegisterSignalComponent;
     [NonSerialized]

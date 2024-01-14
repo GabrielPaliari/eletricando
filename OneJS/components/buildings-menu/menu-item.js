@@ -13,7 +13,7 @@ var MenuItem = function (props) {
         borderColor: props.isSelected ? "white" : "transparent",
         borderWidth: 4,
     };
-    return ((0, preact_1.h)("div", { style: borderStyle, class: "rounded bg-teal-700 m-1 p-2", onClick: props.onClick },
+    return ((0, preact_1.h)("div", { style: borderStyle, class: "rounded bg-teal-700 m-1 p-2", onMouseDown: props.onClick },
         (0, preact_1.h)("div", { style: defaultInnerStyle })));
 };
 exports.MenuItem = MenuItem;

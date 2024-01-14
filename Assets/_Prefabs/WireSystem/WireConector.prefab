@@ -31,7 +31,7 @@ Transform:
   - {fileID: 6974785073995975207}
   - {fileID: 7425985700496943603}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4195225272688761519
 GameObject:
@@ -86,6 +86,9 @@ MonoBehaviour:
   type: 0
   index: 0
   conectorCollider: {fileID: 387022861077950652}
+  onChangeCursorAdd: {fileID: 11400000, guid: aef3336134a532a4ea7f5a52d06c2e51, type: 2}
+  onChangeCursorAddHighlight: {fileID: 11400000, guid: a1f0726e89d3b3943b2837abeab24be7,
+    type: 2}
 --- !u!65 &387022861077950652
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -27,9 +27,10 @@ public class Receptor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
 
     private SignalComponentData _signalComponent;
 
-    private bool _needUpdateAttempt = false;
     private int currentValue = 0;
     private int currentIndex = 0;
+
+    public GameEvent levelCompleteEvent;
 
     public void Initialize(int id, List<int> signalSeq)
     {
@@ -43,12 +44,18 @@ public class Receptor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
         if (_signalComponent.signalSequence.Count > 0)
         {
             var cicledIndex = currentIndex % _signalComponent.signalSequence.Count;
-            _signalComponent.currentIndex = cicledIndex;
-            _signalComponent.currentValue = currentValue;
-            LevelSignalsManager.Instance.UpdateSignalComponent.Invoke(_signalComponent);
+            _signalComponent.Update(cicledIndex, currentValue);
 
-            // use to complete level:
-            //var isTrue = _signalComponent.signalSequence[cicledIndex] == currentValue;
+            if (_signalComponent.hasChanged)
+            {
+                LevelSignalsManager.Instance.UpdateSignalComponent.Invoke(_signalComponent);
+                var soundType = _signalComponent.isCurrentCorrect ? SoundType.CorrectSignalSound : SoundType.WrongPlacement;
+                SoundFeedback.Instance.PlaySound(soundType);
+                if (_signalComponent.isAllcorrect)
+                {
+                    levelCompleteEvent.Raise();
+                }
+            }            
         }
     }
 

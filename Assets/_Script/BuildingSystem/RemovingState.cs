@@ -10,19 +10,16 @@ public class RemovingState : IBuildingState
     PreviewSystem previewSystem;
     GridData componentsData;
     ObjectPlacer objectPlacer;
-    SoundFeedback soundFeedback;
 
     public RemovingState(Grid grid,
                          PreviewSystem previewSystem,
                          GridData componentsData,
-                         ObjectPlacer objectPlacer,
-                         SoundFeedback soundFeedback)
+                         ObjectPlacer objectPlacer)
     {
         this.grid = grid;
         this.previewSystem = previewSystem;
         this.componentsData = componentsData;
         this.objectPlacer = objectPlacer;
-        this.soundFeedback = soundFeedback;
         previewSystem.StartShowingRemovePreview();
     }
 
@@ -41,12 +38,11 @@ public class RemovingState : IBuildingState
 
         if (selectedData == null)
         {
-            //sound
-            soundFeedback.PlaySound(SoundType.wrongPlacement);
+            SoundFeedback.Instance.PlaySound(SoundType.WrongPlacement);
         }
         else
         {
-            soundFeedback.PlaySound(SoundType.Remove);
+            SoundFeedback.Instance.PlaySound(SoundType.Remove);
             gameObjectIndex = selectedData.GetRepresentationIndex(gridPosition);
             if (gameObjectIndex == -1)
                 return;

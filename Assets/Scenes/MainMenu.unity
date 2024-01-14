@@ -1772,7 +1772,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "selecione um n\xEDvel"
+  m_text: selecione um nivel
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6e2f75b15f2966143af8532088f7cf05, type: 2}
   m_sharedMaterial: {fileID: 3783616052076163008, guid: 6e2f75b15f2966143af8532088f7cf05,
