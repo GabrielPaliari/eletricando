@@ -643,7 +643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _loadingCanvas: {fileID: 193330035274651947}
   _progressBar: {fileID: 7439162212501593702}
-  _selectedLevel: {fileID: 0}
+  _selectedLevel: {fileID: 11400000, guid: e7c6eab08b7531f40953d5cec0017031, type: 2}
 --- !u!114 &6159083414648349976
 MonoBehaviour:
   m_ObjectHideFlags: 0
