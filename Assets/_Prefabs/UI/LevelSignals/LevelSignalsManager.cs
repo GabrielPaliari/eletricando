@@ -24,15 +24,12 @@ public class LevelSignalsManager : MonoBehaviour
     {
         if (instance == null)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            instance = this;         
         }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+    }
 
+    private void Start()
+    {
         RegisterSignalComponent = new UnityEvent<SignalComponentData>();
         RegisterSignalComponent.AddListener((sigComp) => _RegisterSignalComponent(sigComp));
 

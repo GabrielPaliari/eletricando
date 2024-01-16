@@ -11,13 +11,7 @@ public class SoundFeedback : MonoBehaviour
     {
         if (instance == null)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
+            instance = this;         
         }
     }
 

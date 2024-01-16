@@ -28,14 +28,11 @@ public class LogicCircuitSystem : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+    }
 
+    private void Start()
+    {
         outputEvents = new Dictionary<int, Dictionary<int, UnityEvent<bool>>>();
         outputWires = new Dictionary<int, Dictionary<int, List<LogicGate>>>();
         inputWires = new Dictionary<int, Dictionary<int, List<LogicGate>>>();
