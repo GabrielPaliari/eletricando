@@ -111,6 +111,12 @@ public class WireSystem : MonoBehaviour
         inputManager.CallOnExit();
     }
 
+    public void EnterWireDeleteMode()
+    {
+        setState(WireState.DeleteMode);
+        inputManager.CallOnExit();
+    }
+
     public void ExitWireMode()
     {
         setState(WireState.WireModeOff);

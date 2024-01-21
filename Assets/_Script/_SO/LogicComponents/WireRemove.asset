@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d45a52da06ae13a4cb4dc82db6fa33e6, type: 3}
-  m_Name: Switch
+  m_Name: WireRemove
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Switch
-  <ID>k__BackingField: 2
-  menuImage: {fileID: 21300000, guid: ee203bcf019167040a996477e3cd3378, type: 3}
-  <Size>k__BackingField: {x: 2, y: 1}
-  <Prefab>k__BackingField: {fileID: 3493615974341626966, guid: 2409b8d09d3575e479464e11815ab7d9,
-    type: 3}
+  <Name>k__BackingField: Fio
+  <ID>k__BackingField: -2
+  menuImage: {fileID: 21300000, guid: 15fb6c19a21f3eb40b0f028fd1f7c581, type: 3}
+  <Size>k__BackingField: {x: 0, y: 0}
+  <Prefab>k__BackingField: {fileID: 0}
+  ComponentType: 1

@@ -11,18 +11,24 @@ public class ComponentsMenuManager : MonoBehaviour
     private PlacementSystem _placementSystem;
     [SerializeField]
     private WireSystem _wireSystem;
+    [SerializeField]
+    private EComponentType cTypeFilter;
+    [SerializeField]
 
     void Start()
     {
         _placeableComponents = LevelManager.Instance._selectedLevel.componentsAvailable.objectsData;
         _placeableComponents.ForEach(component =>
         {
-            var componentBtn = Instantiate(componentButton_pf);
-            componentBtn.transform.SetParent(gameObject.transform, false);
-            var selectComponent = componentBtn.GetComponent<SelectComponent>();
-            selectComponent.placementSystem = _placementSystem;
-            selectComponent.wireSystem = _wireSystem;
-            selectComponent.SetComponent(component);
+            if(component.ComponentType.Equals(cTypeFilter))
+            {
+                var componentBtn = Instantiate(componentButton_pf);
+                componentBtn.transform.SetParent(gameObject.transform, false);
+                var selectComponent = componentBtn.GetComponent<SelectComponent>();
+                selectComponent.placementSystem = _placementSystem;
+                selectComponent.wireSystem = _wireSystem;
+                selectComponent.SetComponent(component);
+            }
         });
     }
 }

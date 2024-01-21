@@ -27,6 +27,9 @@ public class SelectComponent : MonoBehaviour
             case 0:
                 wireSystem.EnterWireMode();
                 break;
+            case -2:
+                wireSystem.EnterWireDeleteMode();
+                break;
             default:
                 placementSystem.StartPlacement(id);
                 break;

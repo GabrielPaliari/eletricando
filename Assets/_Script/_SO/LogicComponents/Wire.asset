@@ -17,3 +17,4 @@ MonoBehaviour:
   menuImage: {fileID: 21300000, guid: 15fb6c19a21f3eb40b0f028fd1f7c581, type: 3}
   <Size>k__BackingField: {x: 0, y: 0}
   <Prefab>k__BackingField: {fileID: 0}
+  ComponentType: 1

@@ -18,3 +18,4 @@ MonoBehaviour:
   <Size>k__BackingField: {x: 2, y: 2}
   <Prefab>k__BackingField: {fileID: 3493615974341626966, guid: 94e88e81b72051d45b318ba2097dfc9e,
     type: 3}
+  ComponentType: 2

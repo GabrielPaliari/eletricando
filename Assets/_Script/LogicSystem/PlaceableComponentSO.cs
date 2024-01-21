@@ -22,4 +22,13 @@ public class PlaceableComponentSO : ScriptableObject
     [field: SerializeField]
     public GameObject Prefab { get; private set; }
 
+    [field: SerializeField]
+    public EComponentType ComponentType;
+}
+
+public enum EComponentType
+{
+    Logic,
+    Wiring,
+    IO
 }
