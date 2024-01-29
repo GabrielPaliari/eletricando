@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45a52da06ae13a4cb4dc82db6fa33e6, type: 3}
   m_Name: WireRemove
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Fio
+  <Name>k__BackingField: Remover Fio
   <ID>k__BackingField: -2
-  menuImage: {fileID: 21300000, guid: 15fb6c19a21f3eb40b0f028fd1f7c581, type: 3}
+  menuImage: {fileID: 21300000, guid: c159d9191ce257b4a94f17ed947fdf2e, type: 3}
   <Size>k__BackingField: {x: 0, y: 0}
   <Prefab>k__BackingField: {fileID: 0}
   ComponentType: 1

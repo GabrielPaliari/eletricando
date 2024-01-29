@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ComponentsMenuManager : MonoBehaviour
@@ -13,7 +14,10 @@ public class ComponentsMenuManager : MonoBehaviour
     private WireSystem _wireSystem;
     [SerializeField]
     private EComponentType cTypeFilter;
-    [SerializeField]
+
+    private Dictionary<int, ComponentMenuBtn> _buttons = new Dictionary<int, ComponentMenuBtn>();
+
+    private int _selectedComponent;
 
     void Start()
     {
@@ -22,13 +26,31 @@ public class ComponentsMenuManager : MonoBehaviour
         {
             if(component.ComponentType.Equals(cTypeFilter))
             {
-                var componentBtn = Instantiate(componentButton_pf);
-                componentBtn.transform.SetParent(gameObject.transform, false);
-                var selectComponent = componentBtn.GetComponent<SelectComponent>();
-                selectComponent.placementSystem = _placementSystem;
-                selectComponent.wireSystem = _wireSystem;
-                selectComponent.SetComponent(component);
+                var componentBtnObj = Instantiate(componentButton_pf);
+                componentBtnObj.transform.SetParent(gameObject.transform, false);
+
+                var componentMenuBtn = componentBtnObj.GetComponent<ComponentMenuBtn>();
+                componentMenuBtn.SetConfig(component, _placementSystem, _wireSystem, this);
+                
+                _buttons.Add(component.ID, componentMenuBtn);
             }
         });
+    }
+
+    public void HighlightComponent(int compId = -1000)
+    {        
+        _buttons.TryGetValue(compId, out ComponentMenuBtn currentSelected);
+        if(currentSelected != null)
+        {
+            currentSelected.HighlightBtn(true);
+            _selectedComponent = compId;
+        }
+    }
+
+    public void RemoveHighlight() {
+        _buttons.ToList().ForEach((item) =>
+        {
+            item.Value.HighlightBtn(false);
+        });      
     }
 }
