@@ -24,6 +24,12 @@ public class PlaceableComponentSO : ScriptableObject
 
     [field: SerializeField]
     public EComponentType ComponentType;
+
+    [field: SerializeField]
+    public string tooltipHeader;
+
+    [field: SerializeField]
+    public string tooltipText;
 }
 
 public enum EComponentType

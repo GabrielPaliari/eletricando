@@ -25,6 +25,7 @@ public class Switch : MonoBehaviour, ILogicGateSpec
     [SerializeField] private Transform indicatorTransform;
     [SerializeField] private float onIndicatorX;
     [SerializeField] private float offIndicatorX;
+
     private float animDuration = .25f;
 
     void Start()
@@ -49,6 +50,7 @@ public class Switch : MonoBehaviour, ILogicGateSpec
     private void UpdateState()
     {
         isOn = !isOn;
+        SoundFeedback.Instance.PlaySound(isOn ? SoundType.SwitchOn : SoundType.SwitchOff);
         if (logicGate != null)
         {
             logicGate.OnInputChange(0, false);
@@ -56,7 +58,8 @@ public class Switch : MonoBehaviour, ILogicGateSpec
         if (indicatorMeshRenderer != null && indicatorTransform != null)
         {
             indicatorMeshRenderer.material = isOn ? onMaterial :offMaterial;
-            indicatorTransform.DOLocalMoveX(isOn ? onIndicatorX : offIndicatorX, animDuration).SetEase(Ease.InOutCubic);
+            var rotation = new Vector3(isOn ? onIndicatorX : offIndicatorX, 0f, 0f);
+            indicatorTransform.DOLocalRotate(rotation, animDuration).SetEase(Ease.InOutCubic);
         }
     }
 }

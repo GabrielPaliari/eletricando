@@ -18,3 +18,5 @@ MonoBehaviour:
   <Size>k__BackingField: {x: 0, y: 0}
   <Prefab>k__BackingField: {fileID: 0}
   ComponentType: 1
+  tooltipHeader: Fio
+  tooltipText: "Conecta a sa\xEDda de um componente \xE0 entrada de outro"

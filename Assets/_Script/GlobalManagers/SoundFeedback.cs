@@ -22,7 +22,9 @@ public class SoundFeedback : MonoBehaviour
         removeSound,
         wrongPlacementSound,
         correctSignalSound,
-        victorySound;
+        victorySound,
+        switchOn,
+        switchOff;
 
     [SerializeField]
     private AudioSource audioSource;
@@ -49,6 +51,12 @@ public class SoundFeedback : MonoBehaviour
             case SoundType.VictorySound:
                 audioSource.PlayOneShot(victorySound);
                 break;
+            case SoundType.SwitchOn:
+                audioSource.PlayOneShot(switchOn);
+                break;
+            case SoundType.SwitchOff:
+                audioSource.PlayOneShot(switchOff);
+                break;
             default:
                 break;
         }
@@ -62,5 +70,7 @@ public enum SoundType
     Remove,
     WrongPlacement,
     CorrectSignalSound,
-    VictorySound
+    VictorySound,
+    SwitchOn,
+    SwitchOff
 }

@@ -33,6 +33,8 @@ public class ComponentsMenuManager : MonoBehaviour
                 componentMenuBtn.SetConfig(component, _placementSystem, _wireSystem, this);
                 
                 _buttons.Add(component.ID, componentMenuBtn);
+
+                var tooltipTrigger = componentBtnObj.GetComponent<TooltipTrigger>();
             }
         });
     }

@@ -25,6 +25,9 @@ public class ComponentMenuBtn : MonoBehaviour
         _placementSystem = placeSys;
         _wireSystem = wireSys;
         _menuManager = menuManager;
+        TooltipTrigger tooltipTrigger = GetComponent<TooltipTrigger>();
+        tooltipTrigger.header = componentSO.tooltipHeader;
+        tooltipTrigger.content = componentSO.tooltipText;
     }
 
     public void OnSelectComponent(int id)

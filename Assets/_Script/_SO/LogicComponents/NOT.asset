@@ -15,6 +15,10 @@ MonoBehaviour:
   <Name>k__BackingField: Inversor
   <ID>k__BackingField: 3
   menuImage: {fileID: 21300000, guid: 1decd13ca69328c4d9362866269fb422, type: 3}
-  <Size>k__BackingField: {x: 1, y: 1}
+  <Size>k__BackingField: {x: 2, y: 2}
   <Prefab>k__BackingField: {fileID: 3493615974341626966, guid: 16eba57a0638d39438e26f9e11c1e725,
     type: 3}
+  ComponentType: 0
+  tooltipHeader: Inversor
+  tooltipText: "Inverte o valor da entrada (se \xE9 a entrada \xE9 1 a sa\xEDda \xE9
+    0 e se \xE9 0 a sa\xEDda \xE9 1)"

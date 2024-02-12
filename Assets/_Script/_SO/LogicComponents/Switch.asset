@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d45a52da06ae13a4cb4dc82db6fa33e6, type: 3}
-  m_Name: Remove
+  m_Name: Switch
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Remover
-  <ID>k__BackingField: -1
-  menuImage: {fileID: 21300000, guid: d6a48202e9bed1d4286619af2a1e3226, type: 3}
-  <Size>k__BackingField: {x: 1, y: 1}
-  <Prefab>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: Switch
+  <ID>k__BackingField: 1
+  menuImage: {fileID: 21300000, guid: c643051d24776764bbf4375f58db5962, type: 3}
+  <Size>k__BackingField: {x: 3, y: 2}
+  <Prefab>k__BackingField: {fileID: 3493615974341626966, guid: 2409b8d09d3575e479464e11815ab7d9,
+    type: 3}
   ComponentType: 0
-  tooltipHeader: Remover Componente
-  tooltipText: Remove um componente do circuito
+  tooltipHeader: Interruptor
+  tooltipText: Liga (1) ou desliga (0) quando pressionado

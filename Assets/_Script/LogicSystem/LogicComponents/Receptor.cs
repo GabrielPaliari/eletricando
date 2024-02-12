@@ -49,8 +49,8 @@ public class Receptor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
             if (_signalComponent.hasChanged)
             {
                 LevelSignalsManager.Instance.UpdateSignalComponent.Invoke(_signalComponent);
-                var soundType = _signalComponent.isCurrentCorrect ? SoundType.CorrectSignalSound : SoundType.WrongPlacement;
-                SoundFeedback.Instance.PlaySound(soundType);
+                //var soundType = _signalComponent.isCurrentCorrect ? SoundType.CorrectSignalSound : SoundType.WrongPlacement;
+                //SoundFeedback.Instance.PlaySound(soundType);
                 if (_signalComponent.isAllcorrect)
                 {
                     levelCompleteEvent.Raise();

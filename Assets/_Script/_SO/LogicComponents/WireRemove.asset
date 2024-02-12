@@ -18,3 +18,5 @@ MonoBehaviour:
   <Size>k__BackingField: {x: 0, y: 0}
   <Prefab>k__BackingField: {fileID: 0}
   ComponentType: 1
+  tooltipHeader: Remover Fio
+  tooltipText: "Remove uma conex\xE3o do circuito"

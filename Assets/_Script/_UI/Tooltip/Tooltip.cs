@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,8 +11,9 @@ public class Tooltip : MonoBehaviour
 {
     public TextMeshProUGUI headerField;
     public TextMeshProUGUI contentField;
+    public Image backgroundImage;
     public LayoutElement layoutElement;
-
+    public float fadeTime = 0.2f;
     public int characterWrapLimit;
 
     private RectTransform m_rectTransform;
@@ -42,9 +45,9 @@ public class Tooltip : MonoBehaviour
 
     private void Update()
     {
-        Vector2 mousePos = Input.mousePosition;
+        Vector2 mousePos = new Vector2(Input.mousePosition.x + 20, Input.mousePosition.y);
         transform.position = mousePos;
-        m_rectTransform.pivot = CalcPivot(mousePos);
+        m_rectTransform.pivot = CalcPivot(Input.mousePosition);
     }
 
     private Vector2 CalcPivot(Vector2 mousePos)
@@ -53,5 +56,15 @@ public class Tooltip : MonoBehaviour
         float pivotY = mousePos.y / Screen.height;
 
         return new Vector2(pivotX, pivotY);
+    }
+
+    private void OnEnable()
+    {
+        backgroundImage.DOFade(1f, fadeTime).SetEase(Ease.Linear);
+    }
+
+    private void OnDisable()
+    {
+        backgroundImage.DOFade(0f, fadeTime).SetEase(Ease.Linear);
     }
 }
