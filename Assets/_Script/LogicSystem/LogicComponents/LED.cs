@@ -27,7 +27,8 @@ public class LED : MonoBehaviour, ILogicGateSpec
     {
         if (lightMeshRenderer != null)
         {
-            lightMeshRenderer.material = inputs[0] ? onMaterial : offMaterial;
+            var isOn = inputs[0];
+            lightMeshRenderer.material = isOn ? onMaterial : offMaterial;
         }
         return inputs[0];
     }

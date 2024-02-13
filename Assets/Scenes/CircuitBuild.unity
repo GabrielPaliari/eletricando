@@ -369,7 +369,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _selectedLevel
       value: 
-      objectReference: {fileID: 11400000, guid: e7c6eab08b7531f40953d5cec0017031,
+      objectReference: {fileID: 11400000, guid: 7944e99f302df6d41ba9f13a4b9a2344,
         type: 2}
     - target: {fileID: 3442142006997306696, guid: 7370fd32b22437c4c84a20ad92c93889,
         type: 3}
@@ -2660,7 +2660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4508,13 +4508,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a361dcc5bf9f0145b82baa009d008eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: bd2ad92fbd9ba6b4d832ba1c5857ab99, type: 2}
+  gameEvent: {fileID: 11400000, guid: 05cb108034c6f474494147bfba2eb037, type: 2}
   callback:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2024627254}
         m_TargetAssemblyTypeName: CompleteLevel, Assembly-CSharp
-        m_MethodName: LevelCompleted
+        m_MethodName: OnClock
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4523,18 +4523,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 546157163}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!4 &2024627253
 Transform:

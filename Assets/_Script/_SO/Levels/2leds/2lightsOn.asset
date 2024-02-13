@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8ee0eacc692a6a4ba298fbe943f9e84, type: 3}
-  m_Name: InversorLevel
+  m_Name: 2lightsOn
   m_EditorClassIdentifier: 
-  id: 1
-  title: "N\xEDvel 1"
+  id: 2
+  title: "N\xEDvel 2"
   subtitle: Invertendo para desinverter
   description: "O componente mais b\xE1sico da l\xF3gica \xE9 o inversor. Como o
     nome diz, ele \xE9 capaz de inverter um sinal (se receber 0 de um lado, ir\xE1
     emitir 1 do outro)\n\nUtilize um inversor para inverter o sinal do emissor e
     produzir os valores corretos para o receptor."
   preBuiltComponents:
-  - {fileID: 11400000, guid: 58b11676223e9f04180d94f05b83073f, type: 2}
+  - {fileID: 11400000, guid: ba691da6b7dff6649934404b0808191b, type: 2}
   - {fileID: 11400000, guid: f5b5b053087bc094eac2881824e38db3, type: 2}
   componentsAvailable: {fileID: 11400000, guid: da66196a80f02c64c9137ffb109508a2,
     type: 2}

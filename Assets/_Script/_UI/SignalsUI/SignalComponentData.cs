@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using Unity.VisualScripting;
-using static UnityEngine.Rendering.DebugUI;
 
 public enum ESignalComponent
 {
@@ -61,7 +58,7 @@ public class SignalComponentData
                 case ESignalComponent.Emissor:
                     return $"Emissor {id}";
                 case ESignalComponent.Receptor:
-                    return $"Receptor {id}";
+                    return $"LED {id}";
                 default:
                     return $"Sinal {id}";
             }

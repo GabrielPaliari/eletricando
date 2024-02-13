@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,6 +20,9 @@ public class LevelSignalsManager : MonoBehaviour
     [SerializeField]
     private GameObject signalsRowUI_pf;
     private Dictionary<int, SignalsRowManager> signalCompsRows = new Dictionary<int, SignalsRowManager>();
+    private Dictionary<int, SignalComponentData> signalComps = new Dictionary<int, SignalComponentData>();
+
+    public GameEvent completeLevelEvent;
 
     private void Awake()
     {
@@ -39,21 +43,26 @@ public class LevelSignalsManager : MonoBehaviour
 
     private void _RegisterSignalComponent(SignalComponentData sigComp)
     {
-        var signalsRowUI = Instantiate(signalsRowUI_pf);
-        signalsRowUI.transform.SetParent(signalsCompsGrid.transform, false);
+        //var signalsRowUI = Instantiate(signalsRowUI_pf);
+        //signalsRowUI.transform.SetParent(signalsCompsGrid.transform, false);
 
-        var signalsRowManager = signalsRowUI.GetComponent<SignalsRowManager>();
-        signalsRowManager.Initialize(sigComp);
-        
-        signalCompsRows.Add(sigComp.id, signalsRowManager);
+        //var signalsRowManager = signalsRowUI.GetComponent<SignalsRowManager>();
+        //signalsRowManager.Initialize(sigComp);
+
+        //signalCompsRows.Add(sigComp.id, signalsRowManager);
+        signalComps.Add(sigComp.id, sigComp);
     }
 
     private void _UpdateSignalComponent(SignalComponentData sigComp)
     {
-        signalCompsRows.TryGetValue(sigComp.id, out var signalsRow);
-        if (signalsRow != null)
+        if (signalComps.All((comp) => comp.Value.isAllcorrect))
         {
-            signalsRow.UpdateSignalComponent(sigComp);
+            completeLevelEvent.Raise();
         }
+        //signalCompsRows.TryGetValue(sigComp.id, out var signalsRow);
+        //if (signalsRow != null)
+        //{
+        //    signalsRow.UpdateSignalComponent(sigComp);
+        //}
     }
 }

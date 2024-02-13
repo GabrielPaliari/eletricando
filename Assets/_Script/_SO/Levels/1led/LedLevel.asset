@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ee0eacc692a6a4ba298fbe943f9e84, type: 3}
+  m_Name: LedLevel
+  m_EditorClassIdentifier: 
+  id: 1
+  title: "N\xEDvel 1"
+  subtitle: "Que se fa\xE7a a luz"
+  description: "O componente mais b\xE1sico da l\xF3gica \xE9 o inversor. Como o
+    nome diz, ele \xE9 capaz de inverter um sinal (se receber 0 de um lado, ir\xE1
+    emitir 1 do outro)\n\nUtilize um inversor para inverter o sinal do emissor e
+    produzir os valores corretos para o receptor."
+  preBuiltComponents:
+  - {fileID: 11400000, guid: 0f5c9d89a7204f64bbb2c5dd57a03d61, type: 2}
+  componentsAvailable: {fileID: 11400000, guid: fee15da90054bb14a9370766c5a462e0,
+    type: 2}

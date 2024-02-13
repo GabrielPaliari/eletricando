@@ -1,35 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Receptor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
+public class LEDReceptor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
 {
-    public OutputFunction[] outputFunctions => new OutputFunction[] {};
+    public OutputFunction[] outputFunctions => new OutputFunction[] { };
     public StateFunction[] stateFunctions => new StateFunction[] {
-        UpdateState
+        OnOffState
     };
-
     public int inputsLength => 1;
     public int outputsLength => 0;
     public int stateLength => 1;
 
-    public List<int> _signalSequence => new List<int>();
-    public ESignalComponent compType => ESignalComponent.Receptor;
+    [SerializeField]
+    private MeshRenderer lightMeshRenderer;
+    [SerializeField]
+    private Material onMaterial;
+    [SerializeField]
+    private Material offMaterial;
+
+    private SignalComponentData _signalComponent;
 
     [SerializeField]
     private TextMeshPro _nameTMP;
     public TextMeshPro nameTMP => _nameTMP;
 
+    public ESignalComponent compType => ESignalComponent.Receptor;
 
-    private SignalComponentData _signalComponent;
+    public List<int> _signalSequence => new List<int>();
 
     private int currentValue = 0;
     private int currentIndex = 0;
 
+    void Start()
+    {
+        lightMeshRenderer.material = offMaterial;
+    }
     public void Initialize(int id, List<int> signalSeq)
     {
         _signalComponent = new SignalComponentData(id, compType, signalSeq, 0, 0);
@@ -38,7 +45,7 @@ public class Receptor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
     }
 
     private void UpdateAttempt()
-    {        
+    {
         if (_signalComponent.signalSequence.Count > 0)
         {
             var cicledIndex = currentIndex % _signalComponent.signalSequence.Count;
@@ -47,18 +54,22 @@ public class Receptor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
             if (_signalComponent.hasChanged)
             {
                 LevelSignalsManager.Instance.UpdateSignalComponent.Invoke(_signalComponent);
-            }            
+            }
         }
     }
-
     public void OnClock()
     {
         currentIndex++;
     }
 
-    public bool UpdateState(BitArray inputs)
+    private bool OnOffState(BitArray inputs)
     {
-        currentValue = inputs[0] ? 1 : 0;
+        var isOn = inputs[0];
+        currentValue = isOn ? 1 : 0;
+        if (lightMeshRenderer != null)
+        {
+            lightMeshRenderer.material = isOn ? onMaterial : offMaterial;
+        }
         UpdateAttempt();
         return inputs[0];
     }

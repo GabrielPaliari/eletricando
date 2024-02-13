@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb1a3c16a25d4c44eb86424dc36e7b25, type: 3}
-  m_Name: LevelsList
+  m_Script: {fileID: 11500000, guid: 760661c6592a2444b8aa60c1d2edded9, type: 3}
+  m_Name: LED_On
   m_EditorClassIdentifier: 
-  levelData:
-  - {fileID: 11400000, guid: 7944e99f302df6d41ba9f13a4b9a2344, type: 2}
-  - {fileID: 11400000, guid: e7c6eab08b7531f40953d5cec0017031, type: 2}
+  componentId: 5
+  position: {x: -1, y: 0, z: -4}
+  rotation: 2
+  signalSequence: 000000000000000000000000
