@@ -40,6 +40,7 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _isOn: 0
     - _metallic: 0
     - _smoothness: 0
     m_Colors:

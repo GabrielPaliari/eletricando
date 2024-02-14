@@ -15,4 +15,4 @@ MonoBehaviour:
   componentId: 4
   position: {x: -3, y: 0, z: 2}
   rotation: 0
-  signalSequence: 0100000000000000
+  signalSequence: 00000000010000000000000001000000
