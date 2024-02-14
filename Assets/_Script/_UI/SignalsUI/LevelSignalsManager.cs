@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class LevelSignalsManager : MonoBehaviour
 {
@@ -18,9 +19,11 @@ public class LevelSignalsManager : MonoBehaviour
     [SerializeField]
     private GameObject signalsCompsGrid;
     [SerializeField]
+    private RectTransform gridRectTransform;
+    [SerializeField]
     private GameObject signalsRowUI_pf;
     private Dictionary<int, SignalsRowManager> signalCompsRows = new Dictionary<int, SignalsRowManager>();
-    private Dictionary<int, SignalComponentData> signalComps = new Dictionary<int, SignalComponentData>();
+    private Dictionary<int, SignalComponentData> receptors = new Dictionary<int, SignalComponentData>();
 
     public GameEvent completeLevelEvent;
 
@@ -43,26 +46,29 @@ public class LevelSignalsManager : MonoBehaviour
 
     private void _RegisterSignalComponent(SignalComponentData sigComp)
     {
-        //var signalsRowUI = Instantiate(signalsRowUI_pf);
-        //signalsRowUI.transform.SetParent(signalsCompsGrid.transform, false);
+        var signalsRowUI = Instantiate(signalsRowUI_pf);
+        signalsRowUI.transform.SetParent(signalsCompsGrid.transform, false);
 
-        //var signalsRowManager = signalsRowUI.GetComponent<SignalsRowManager>();
-        //signalsRowManager.Initialize(sigComp);
-
-        //signalCompsRows.Add(sigComp.id, signalsRowManager);
-        signalComps.Add(sigComp.id, sigComp);
+        var signalsRowManager = signalsRowUI.GetComponent<SignalsRowManager>();
+        signalsRowManager.Initialize(sigComp);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(signalsCompsGrid.GetComponent<RectTransform>());
+        signalCompsRows.Add(sigComp.id, signalsRowManager);
+        if (sigComp.type == ESignalComponent.Receptor)
+        {
+            receptors.Add(sigComp.id, sigComp);
+        }
     }
 
     private void _UpdateSignalComponent(SignalComponentData sigComp)
     {
-        if (signalComps.All((comp) => comp.Value.isAllcorrect))
+        signalCompsRows.TryGetValue(sigComp.id, out var signalsRow);
+        if (signalsRow != null)
+        {
+            signalsRow.UpdateSignalComponent(sigComp);
+        }
+        if (receptors.All((comp) => comp.Value.isAllcorrect))
         {
             completeLevelEvent.Raise();
         }
-        //signalCompsRows.TryGetValue(sigComp.id, out var signalsRow);
-        //if (signalsRow != null)
-        //{
-        //    signalsRow.UpdateSignalComponent(sigComp);
-        //}
     }
 }

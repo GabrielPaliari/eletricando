@@ -28,6 +28,13 @@ public class Emissor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
     private bool isTrue = false;
     private int currentIndex = 0;
 
+    [SerializeField]
+    private MeshRenderer lightMeshRenderer;
+    [SerializeField]
+    private Material onMaterial;
+    [SerializeField]
+    private Material offMaterial;
+
     public void Initialize(int id, List<int> signalSeq)
     {
         _signalComponent = new SignalComponentData(id, ESignalComponent.Emissor, signalSeq, 0, 0);
@@ -54,6 +61,10 @@ public class Emissor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
     private bool OutputCurrentState(BitArray inputs)
     {
         UpdateOutput();
+        if (lightMeshRenderer != null)
+        {
+            lightMeshRenderer.material = isTrue ? onMaterial : offMaterial;
+        }
         return isTrue;
     }
 

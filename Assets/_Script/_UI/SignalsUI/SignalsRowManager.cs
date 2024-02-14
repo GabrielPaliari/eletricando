@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SignalsRowManager : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class SignalsRowManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI nameTMP;
     private List<SignalValueManager> _signalValuesManagers = new List<SignalValueManager>();
-
+    
     public void Initialize(SignalComponentData sigComp)
     {
         nameTMP.text = sigComp.displayName;
@@ -25,6 +26,7 @@ public class SignalsRowManager : MonoBehaviour
             _signalValuesManagers.Add(sigValueManager);
             sigIndex++;
         });
+        LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
     }
 
     public void UpdateSignalComponent(SignalComponentData sigComp)
