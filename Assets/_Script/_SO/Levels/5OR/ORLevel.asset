@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ee0eacc692a6a4ba298fbe943f9e84, type: 3}
   m_Name: ORLevel
   m_EditorClassIdentifier: 
-  id: 4
+  id: 5
   title: "N\xEDvel 4"
-  subtitle: OU
-  description: "O componente mais b\xE1sico da l\xF3gica \xE9 o inversor. Como o
-    nome diz, ele \xE9 capaz de inverter um sinal (se receber 0 de um lado, ir\xE1
-    emitir 1 do outro)\n\nUtilize um inversor para inverter o sinal do emissor e
-    produzir os valores corretos para o receptor."
+  subtitle: A porta "OU" (||)
+  description: "Nesse n\xEDvel voc\xEA ir\xE1 aprender sobre a primeira porta l\xF3gica
+    de 2 bits: a porta \"OU\", que tem o s\xEDmbolo \"||\".\n\nEssa porta tem duas
+    entradas. Se uma delas for 1 (ou verdadeira) a sa\xEDda ser\xE1 verdadeira. Ou
+    seja, a sa\xEDda \xE9 1 se a entrada \"A\" for 1 \"OU\" a entrada \"B\" for 1.
+    A sa\xEDda s\xF3 ser\xE1 falsa quando as duas entradas forem falsas.\n\nUtilize
+    a porta \"OU\" para acender a luz apenas quando necess\xE1rio."
   preBuiltComponents:
   - {fileID: 11400000, guid: 107ab38b5d42ee141b2aacb40b94b642, type: 2}
   - {fileID: 11400000, guid: 13830d243ebca1f41908bd35f7bfc80a, type: 2}

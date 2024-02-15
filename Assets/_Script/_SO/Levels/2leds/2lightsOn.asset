@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   title: "N\xEDvel 2"
-  subtitle: Invertendo para desinverter
-  description: "O componente mais b\xE1sico da l\xF3gica \xE9 o inversor. Como o
-    nome diz, ele \xE9 capaz de inverter um sinal (se receber 0 de um lado, ir\xE1
-    emitir 1 do outro)\n\nUtilize um inversor para inverter o sinal do emissor e
-    produzir os valores corretos para o receptor."
+  subtitle: "M\xFAltiplas conex\xF5es"
+  description: "O objetivo desse n\xEDvel \xE9 que voc\xEA construa algo semelhante
+    ao circuito do level anterior, mas com duas l\xE2mpadas.\n\nAproveite para testar
+    as fun\xE7\xF5es de remover componente (x \xE0 esquerda) e remover fio (x \xE0
+    direita)."
   preBuiltComponents:
   - {fileID: 11400000, guid: ba691da6b7dff6649934404b0808191b, type: 2}
   - {fileID: 11400000, guid: f5b5b053087bc094eac2881824e38db3, type: 2}

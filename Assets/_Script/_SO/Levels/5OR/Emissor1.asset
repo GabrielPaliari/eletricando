@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 760661c6592a2444b8aa60c1d2edded9, type: 3}
-  m_Name: Emissor2
+  m_Name: Emissor1
   m_EditorClassIdentifier: 
   componentId: 4
-  position: {x: -7, y: 0, z: 2}
+  componentName: A
+  position: {x: -1, y: 0, z: 2}
   rotation: 0
-  signalSequence: 00000000000000000100000001000000
+  signalSequence: 00000000010000000000000001000000

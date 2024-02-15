@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LED
   m_EditorClassIdentifier: 
   componentId: 2
-  componentName: Receptor
+  componentName: A || B
   position: {x: -1, y: 0, z: -4}
   rotation: 2
-  signalSequence: 010000000000000001000000000000000100000000000000
+  signalSequence: 00000000010000000100000001000000

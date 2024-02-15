@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Emissor1
   m_EditorClassIdentifier: 
   componentId: 4
+  componentName: Emissor
   position: {x: -3, y: 0, z: 2}
   rotation: 0
   signalSequence: 0100000000000000

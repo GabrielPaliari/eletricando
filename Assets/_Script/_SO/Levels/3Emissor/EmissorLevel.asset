@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   title: "N\xEDvel 3"
-  subtitle: Invertendo para desinverter
-  description: "O componente mais b\xE1sico da l\xF3gica \xE9 o inversor. Como o
-    nome diz, ele \xE9 capaz de inverter um sinal (se receber 0 de um lado, ir\xE1
-    emitir 1 do outro)\n\nUtilize um inversor para inverter o sinal do emissor e
-    produzir os valores corretos para o receptor."
+  subtitle: "Emissores: Interruptores autom\xE1ticos"
+  description: "Nesse n\xEDvel voc\xEA vai conhecer o emissor. Ele funciona como
+    um interruptor que emite um sinal peri\xF3dico, ou seja, que repete uma sequ\xEAncia
+    de valores.\n\nUtilize o painel de \"Sinais do N\xEDvel\" na parte de baixo da
+    tela para entender melhor os valores que a l\xE2mpada (receptor) est\xE1 esperando
+    e entender os valores que o emissor ir\xE1 emitir.\n\nVoc\xEA completa um n\xEDvel
+    quando todos os receptores do n\xEDvel recebem todos valores esperados."
   preBuiltComponents:
   - {fileID: 11400000, guid: 5fbbbd6ad32374f49a714bde3060f5d2, type: 2}
   - {fileID: 11400000, guid: e52f1ed32eb95804abfc811016e4b0a4, type: 2}
