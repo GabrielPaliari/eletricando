@@ -10,9 +10,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private GameObject _loadingCanvas;
 
-    [SerializeField]
-    private Image _progressBar;
-
     public LevelSO _selectedLevel;
     public LevelsListSO _levelsList;
 
@@ -61,7 +58,6 @@ public class LevelManager : MonoBehaviour
         AsyncOperation scene = SceneManager.LoadSceneAsync(sceneName);
         while (!scene.isDone)
         {
-            _progressBar.fillAmount = scene.progress;
             yield return null;
         }
         _loadingCanvas.SetActive(false);
