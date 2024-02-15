@@ -37,11 +37,11 @@ public class LEDReceptor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
     {
         lightMeshRenderer.material = offMaterial;
     }
-    public void Initialize(int id, List<int> signalSeq)
+    public void Initialize(int id, BuildedComponentSO buildedComponent)
     {
-        _signalComponent = new SignalComponentData(id, compType, signalSeq, 0, 0);
+        _signalComponent = new SignalComponentData(id, compType, buildedComponent.signalSequence, 0, 0);
         LevelSignalsManager.Instance.RegisterSignalComponent.Invoke(_signalComponent);
-        nameTMP.text = _signalComponent.displayName;
+        nameTMP.text = buildedComponent.componentName != "" ? buildedComponent.componentName : _signalComponent.displayName;
     }
 
     private void UpdateAttempt()

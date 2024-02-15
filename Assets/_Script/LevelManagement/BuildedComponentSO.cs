@@ -18,6 +18,9 @@ public class BuildedComponentSO : ScriptableObject
     public int componentId;
 
     [SerializeField]
+    public string componentName = "";
+
+    [SerializeField]
     public Vector3Int position;
 
     [SerializeField]

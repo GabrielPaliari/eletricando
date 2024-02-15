@@ -51,7 +51,7 @@ public class PlacementState : IBuildingState
             return;
         }
         SoundFeedback.Instance.PlaySound(SoundType.Place);
-        int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex], grid.CellToWorld(gridPosition), new List<int> { });
+        int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex], grid.CellToWorld(gridPosition));
 
         GridData selectedData = componentsData;
         selectedData.AddObjectAt(gridPosition,

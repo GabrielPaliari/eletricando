@@ -9,7 +9,7 @@ public class ObjectPlacer : MonoBehaviour
     private List<GameObject> placedGameObjects = new();
     public GameEvent onRemoveLogicGate;
 
-    public int PlaceObject(PlaceableComponentSO componentData, Vector3 position, List<int> signalSequence)
+    public int PlaceObject(PlaceableComponentSO componentData, Vector3 position, BuildedComponentSO buildedCompSpec = null)
     {
         GameObject newObject = Instantiate(componentData.Prefab);
 
@@ -17,7 +17,7 @@ public class ObjectPlacer : MonoBehaviour
         if(logicGate != null ) { logicGate.Initialize(); }
 
         ISignalSeqGateSpec signalGate = newObject.GetComponent<ISignalSeqGateSpec>();
-        if (signalGate != null) { signalGate.Initialize(logicGate.id, signalSequence); }
+        if (signalGate != null) { signalGate.Initialize(logicGate.id, buildedCompSpec); }
 
         Vector2Int rotationOffset = RotationUtil.GetRotationOffset(componentData.Size);
         newObject.transform.position = new Vector3(

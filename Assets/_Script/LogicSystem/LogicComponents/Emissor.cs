@@ -35,11 +35,11 @@ public class Emissor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
     [SerializeField]
     private Material offMaterial;
 
-    public void Initialize(int id, List<int> signalSeq)
+    public void Initialize(int id, BuildedComponentSO buildedComponent)
     {
-        _signalComponent = new SignalComponentData(id, ESignalComponent.Emissor, signalSeq, 0, 0);
+        _signalComponent = new SignalComponentData(id, compType, buildedComponent.signalSequence, 0, 0);
         LevelSignalsManager.Instance.RegisterSignalComponent.Invoke(_signalComponent);
-        nameTMP.text = _signalComponent.displayName;
+        nameTMP.text = buildedComponent.componentName != "" ? buildedComponent.componentName : _signalComponent.displayName;
     }
 
     public void UpdateOutput()

@@ -6,7 +6,7 @@ public interface ISignalSeqGateSpec
 {
     List<int> _signalSequence { get; }
     ESignalComponent compType { get; }
-    public void Initialize(int id, List<int> signalSeq);
+    public void Initialize(int id, BuildedComponentSO buildedComponent);
 
     TextMeshPro nameTMP { get; }
 }

@@ -72,7 +72,7 @@ public class PlacementSystem : MonoBehaviour
         level.preBuiltComponents.ForEach(component => {
             var selectedComponentIndex = database.objectsData.FindIndex(data => data.ID == component.componentId);
             RotationUtil.currentDir = component.rotation;
-            int index = objectPlacer.PlaceObject(database.objectsData[selectedComponentIndex], grid.CellToWorld(component.position), component.signalSequence);
+            int index = objectPlacer.PlaceObject(database.objectsData[selectedComponentIndex], grid.CellToWorld(component.position), component);
             selectedData.AddObjectAt(component.position,
                 database.objectsData[selectedComponentIndex].Size,
                 database.objectsData[selectedComponentIndex].ID,
