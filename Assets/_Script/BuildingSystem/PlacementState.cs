@@ -29,8 +29,9 @@ public class PlacementState : IBuildingState
         selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
         if (selectedObjectIndex > -1)
         {
+            var placeableObject = database.objectsData[selectedObjectIndex];
             previewSystem.StartShowingPlacementPreview(
-                database.objectsData[selectedObjectIndex].Prefab,
+                placeableObject.PreviewPrefab != null ? placeableObject.PreviewPrefab : placeableObject.Prefab,
                 database.objectsData[selectedObjectIndex].Size);
         }
         else
