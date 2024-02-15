@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     private Image _progressBar;
 
     public LevelSO _selectedLevel;
+    public LevelsListSO _levelsList;
 
     private void Awake()
     {
@@ -27,10 +28,24 @@ public class LevelManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
+    public void LoadNextLevel()
+    {
+        var nextLevelId = _selectedLevel.id + 1;
+        var nextLevel = _levelsList.levelData.Find((level) => level.id == nextLevelId);
+        if (nextLevel == null)
+        {
+            Debug.Log("ZEROOOOOU");
+        } else
+        {
+            _selectedLevel = nextLevel;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
 
     public void LoadLevel(LevelSO level)
     {
-        _selectedLevel = level;
+        _selectedLevel = level;        
         StartCoroutine(LoadAsync("CircuitBuild"));          
     }    
 
