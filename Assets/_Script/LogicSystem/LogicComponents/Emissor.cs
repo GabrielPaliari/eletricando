@@ -37,9 +37,9 @@ public class Emissor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
 
     public void Initialize(int id, BuildedComponentSO buildedComponent)
     {
-        _signalComponent = new SignalComponentData(id, compType, buildedComponent.signalSequence, 0, 0);
+        _signalComponent = new SignalComponentData(id, compType, buildedComponent.signalSequence, 0, 0, buildedComponent.componentName);
         LevelSignalsManager.Instance.RegisterSignalComponent.Invoke(_signalComponent);
-        nameTMP.text = buildedComponent.componentName != "" ? buildedComponent.componentName : _signalComponent.displayName;
+        nameTMP.text = _signalComponent.displayName;
     }
 
     public void UpdateOutput()

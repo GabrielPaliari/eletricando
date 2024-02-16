@@ -22,8 +22,8 @@ MonoBehaviour:
     A sa\xEDda s\xF3 ser\xE1 falsa quando as duas entradas forem falsas.\n\nUtilize
     a porta \"OU\" para acender a luz apenas quando necess\xE1rio."
   preBuiltComponents:
-  - {fileID: 11400000, guid: 107ab38b5d42ee141b2aacb40b94b642, type: 2}
   - {fileID: 11400000, guid: 13830d243ebca1f41908bd35f7bfc80a, type: 2}
   - {fileID: 11400000, guid: 4a4ec17afbf139a448996db89561ccaf, type: 2}
+  - {fileID: 11400000, guid: 107ab38b5d42ee141b2aacb40b94b642, type: 2}
   componentsAvailable: {fileID: 11400000, guid: 45397a0510c447049ab5d29c43ac8483,
     type: 2}

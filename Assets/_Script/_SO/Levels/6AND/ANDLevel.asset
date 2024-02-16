@@ -22,8 +22,8 @@ MonoBehaviour:
     Ou seja, a sa\xEDda ser\xE1 1 se \"A\" = 1 \"E\" \"B\" = 1.\n\nUtilize a porta
     \"E\" para acender a luz apenas quando necess\xE1rio."
   preBuiltComponents:
-  - {fileID: 11400000, guid: 2c79c849275acb84eb9fa4215f81b787, type: 2}
   - {fileID: 11400000, guid: be9afb03276d600429804e9cdbd98ecd, type: 2}
   - {fileID: 11400000, guid: ff37a99cf2204f542ac13086db1d483a, type: 2}
+  - {fileID: 11400000, guid: 2c79c849275acb84eb9fa4215f81b787, type: 2}
   componentsAvailable: {fileID: 11400000, guid: 5632c15be10fe8248a5eb1777ab814f2,
     type: 2}

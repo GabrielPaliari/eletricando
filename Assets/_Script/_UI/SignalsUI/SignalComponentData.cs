@@ -19,13 +19,14 @@ public class SignalComponentData
     public bool isCurrentCorrect = false;
     public bool isAllcorrect = false;
 
-    public SignalComponentData(int id, ESignalComponent type, List<int> signalSequence, int currentIndex, int currentValue)
+    public SignalComponentData(int id, ESignalComponent type, List<int> signalSequence, int currentIndex, int currentValue, string displayName)
     {
         this.id = id;
         this.type = type;
         this.signalSequence = signalSequence;
         this.currentIndex = currentIndex;
         this.currentValue = currentValue;
+        this.displayName = displayName;
         correctSequence = Enumerable.Repeat(false, signalSequence.Count).ToList();
     }
 
@@ -49,19 +50,5 @@ public class SignalComponentData
         hasChanged = true;
     }
 
-    public string displayName
-    {
-        get
-        {
-            switch (type)
-            {
-                case ESignalComponent.Emissor:
-                    return $"Emissor {id}";
-                case ESignalComponent.Receptor:
-                    return $"LED {id}";
-                default:
-                    return $"Sinal {id}";
-            }
-        }
-    }
+    public string displayName;
 }

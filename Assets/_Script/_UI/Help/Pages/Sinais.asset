@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f2fba770c1093743b12e998c34534cb, type: 3}
+  m_Name: Sinais
+  m_EditorClassIdentifier: 
+  tabImage: {fileID: 21300000, guid: 29009ea023f0f89429900f23ef5cd34d, type: 3}
+  <title>k__BackingField: Sinais
+  content: "O jogo se baseia em sinais, seus valores e seus tipos. Para conseguir
+    se orientar melhor sobre o funcionamento do circuito durante a sua constru\xE7\xE3o,
+    voc\xEA pode se utilizar do painel de sinais do n\xEDvel, que se localiza na
+    parte de baixo da tela.\n\nNeste painel, os componentes ter\xE3o o mesmo nome
+    que \xE9 mostrado no circuito.\n\nUm intervalo de CLOCK \xE9 o intervalo de tempo
+    que os emissores e receptores se baseiam para emitir o pr\xF3ximo valor ou validar
+    a pr\xF3xima entrada.\n\nA cada clock o emissor ir\xE1 emitir o pr\xF3ximo valor
+    da lista e o receptor ir\xE1 verificar se o valor recebido est\xE1 correto (mudando
+    a cor para verde) ou errado (mudando a cor para vermelho)."
