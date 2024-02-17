@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentId: 4
   componentName: Invertido
-  position: {x: -3, y: 0, z: 2}
+  position: {x: -2, y: 0, z: 2}
   rotation: 0
   signalSequence: 0000000001000000

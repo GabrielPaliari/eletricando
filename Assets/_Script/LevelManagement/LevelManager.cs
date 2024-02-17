@@ -62,4 +62,10 @@ public class LevelManager : MonoBehaviour
         }
         _loadingCanvas.SetActive(false);
     }
+
+    public bool IsLastLevel()
+    {
+        var lastLevel = _levelsList.levelData[_levelsList.levelData.Count - 1];
+        return lastLevel.id == _selectedLevel.id;
+    }
 }

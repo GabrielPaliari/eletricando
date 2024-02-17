@@ -15,9 +15,10 @@ MonoBehaviour:
   <Name>k__BackingField: Emissor
   <ID>k__BackingField: 4
   menuImage: {fileID: 21300000, guid: c643051d24776764bbf4375f58db5962, type: 3}
-  <Size>k__BackingField: {x: 2, y: 3}
+  <Size>k__BackingField: {x: 3, y: 2}
   <Prefab>k__BackingField: {fileID: 3493615974341626966, guid: 94e88e81b72051d45b318ba2097dfc9e,
     type: 3}
+  <PreviewPrefab>k__BackingField: {fileID: 0}
   ComponentType: 2
   tooltipHeader: Emissor
   tooltipText: "Emite valores em sequ\xEAncia (1 valor a cada clock)"

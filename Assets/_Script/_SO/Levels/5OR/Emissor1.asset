@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentId: 4
   componentName: A
-  position: {x: -1, y: 0, z: 2}
+  position: {x: 0, y: 0, z: 2}
   rotation: 0
   signalSequence: 00000000010000000000000001000000
