@@ -22,7 +22,7 @@ MonoBehaviour:
     for 1 a sa\xEDda do inversor ser\xE1 0 e se ele receber 0, sua sa\xEDda ser\xE1
     1.\n\nUse o inversor para atender ao sinal esperado pela l\xE2mpada."
   preBuiltComponents:
-  - {fileID: 11400000, guid: fdb3344a0833ccc4c8a570d1da3d5baf, type: 2}
   - {fileID: 11400000, guid: 3063c0e3d55784749a53be5545d3f99d, type: 2}
+  - {fileID: 11400000, guid: fdb3344a0833ccc4c8a570d1da3d5baf, type: 2}
   componentsAvailable: {fileID: 11400000, guid: bb9d89c97dc470543ad848b8e4c85cc7,
     type: 2}

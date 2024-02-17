@@ -22,7 +22,7 @@ MonoBehaviour:
     e entender os valores que o emissor ir\xE1 emitir.\n\nVoc\xEA completa um n\xEDvel
     quando todos os receptores do n\xEDvel recebem todos valores esperados."
   preBuiltComponents:
-  - {fileID: 11400000, guid: 5fbbbd6ad32374f49a714bde3060f5d2, type: 2}
   - {fileID: 11400000, guid: e52f1ed32eb95804abfc811016e4b0a4, type: 2}
+  - {fileID: 11400000, guid: 5fbbbd6ad32374f49a714bde3060f5d2, type: 2}
   componentsAvailable: {fileID: 11400000, guid: 47c53cc52379c5a438c4463f374b8301,
     type: 2}
