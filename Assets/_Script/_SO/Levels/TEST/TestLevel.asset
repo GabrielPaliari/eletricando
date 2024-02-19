@@ -16,10 +16,6 @@ MonoBehaviour:
   title: Level Teste
   subtitle: Teste
   description: Level para testar os componentes
-  preBuiltComponents:
-  - {fileID: 11400000, guid: d83ade695fcb54b4d95c7495bdf3ddd3, type: 2}
-  - {fileID: 11400000, guid: 306e96461065ff64ebb49172818e5b10, type: 2}
-  - {fileID: 11400000, guid: f27aa5edc9a93574ca50fa2cf3919a58, type: 2}
-  - {fileID: 11400000, guid: 6f4af9e8dc7608541bdcd1a28ef9aaa1, type: 2}
+  preBuiltComponents: []
   componentsAvailable: {fileID: 11400000, guid: 6b1219d6490d7804caa1e60848126e03,
     type: 2}

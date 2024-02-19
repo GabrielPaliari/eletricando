@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class Switch : MonoBehaviour, ILogicGateSpec
 {
@@ -39,16 +40,7 @@ public class Switch : MonoBehaviour, ILogicGateSpec
         return (byte)(isOn ? 1 : 0);
     }
 
-    private void OnMouseEnter()
-    {
-        LogicCircuitSystem.Instance.OnClicked += UpdateState;
-    }
-    private void OnMouseExit()
-    {
-        LogicCircuitSystem.Instance.OnClicked -= UpdateState;
-    }
-
-    private void UpdateState()
+    public void UpdateState()
     {
         isOn = !isOn;
         SoundFeedback.Instance.PlaySound(isOn ? SoundType.SwitchOn : SoundType.SwitchOff);
