@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LED : MonoBehaviour, ILogicGateSpec
@@ -23,11 +24,11 @@ public class LED : MonoBehaviour, ILogicGateSpec
         lightMeshRenderer.material = offMaterial;
     }
 
-    private bool OnOffState(BitArray inputs)
+    private byte OnOffState(byte[] inputs)
     {
         if (lightMeshRenderer != null)
         {
-            var isOn = inputs[0];
+            var isOn = inputs[0] > 0;
             lightMeshRenderer.material = isOn ? onMaterial : offMaterial;
         }
         return inputs[0];

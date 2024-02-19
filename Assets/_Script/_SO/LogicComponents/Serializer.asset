@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d45a52da06ae13a4cb4dc82db6fa33e6, type: 3}
-  m_Name: LedReceptor
+  m_Name: Serializer
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: LedReceptor
-  <ID>k__BackingField: 2
-  menuImage: {fileID: 21300000, guid: 39dd60ec92c64d442bb771ac637cff61, type: 3}
-  <Size>k__BackingField: {x: 2, y: 2}
-  <Prefab>k__BackingField: {fileID: 3493615974341626966, guid: f0345dd0ceae1c740ac2434307f75b28,
+  <Name>k__BackingField: Serializer
+  <ID>k__BackingField: 11
+  menuImage: {fileID: 21300000, guid: 198b34ae9fb0e6d4383555cd9e3cba52, type: 3}
+  <Size>k__BackingField: {x: 1, y: 1}
+  <Prefab>k__BackingField: {fileID: 3493615974341626966, guid: 7b0c4d3394a3d2049be76484405732dd,
     type: 3}
   <PreviewPrefab>k__BackingField: {fileID: 0}
-  ComponentType: 2
-  tooltipHeader: LED
-  tooltipText: Acende
+  ComponentType: 0
+  tooltipHeader: Serializador
+  tooltipText: "Transforma 3 bits em 1 n\xFAmero de 0 a 7"

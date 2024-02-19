@@ -32,24 +32,24 @@ public class WireLogic : MonoBehaviour, ILogicGateSpec
         meshFilter.mesh = mesh;
     }    
 
-    private bool OnOffState(BitArray inputs)
+    private byte OnOffState(byte[] inputs)
     {
         UpdateVisuals(inputs[0]);
         return inputs[0];
     }
 
-    private bool BufferInput(BitArray inputs)
+    private byte BufferInput(byte[] inputs)
     {
         return inputs[0];
     }
 
-    private void UpdateVisuals(bool isOn)
+    private void UpdateVisuals(int state)
     {
         if (meshRenderer == null)
         {
             return;
         }
-        meshRenderer.material = isOn ? onMaterial : offMaterial;
+        meshRenderer.material = state > 0 ? onMaterial : offMaterial;
         splineExtrude.Rebuild();
         if (meshFilter.mesh.vertexCount > 0)
         {

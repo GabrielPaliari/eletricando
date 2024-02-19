@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d45a52da06ae13a4cb4dc82db6fa33e6, type: 3}
-  m_Name: LedReceptor
+  m_Name: XOR
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: LedReceptor
-  <ID>k__BackingField: 2
-  menuImage: {fileID: 21300000, guid: 39dd60ec92c64d442bb771ac637cff61, type: 3}
+  <Name>k__BackingField: XOR
+  <ID>k__BackingField: 9
+  menuImage: {fileID: 21300000, guid: 213450377e51bea4b814d90af591b1dd, type: 3}
   <Size>k__BackingField: {x: 2, y: 2}
-  <Prefab>k__BackingField: {fileID: 3493615974341626966, guid: f0345dd0ceae1c740ac2434307f75b28,
+  <Prefab>k__BackingField: {fileID: 3493615974341626966, guid: 3fcaf47cbeace824cb2ad82f22b54dbe,
     type: 3}
   <PreviewPrefab>k__BackingField: {fileID: 0}
-  ComponentType: 2
-  tooltipHeader: LED
-  tooltipText: Acende
+  ComponentType: 0
+  tooltipHeader: XOR (^)
+  tooltipText: Ou exclusivo

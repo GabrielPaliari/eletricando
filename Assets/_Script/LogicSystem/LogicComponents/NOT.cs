@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class NOT : MonoBehaviour, ILogicGateSpec
 {
@@ -12,8 +15,16 @@ public class NOT : MonoBehaviour, ILogicGateSpec
     public int outputsLength => 1;
     public int stateLength => 0;
 
-    private bool NOTFunction(BitArray inputs)
+    private byte NOTFunction(byte[] inputs)
     {
-        return !inputs[0];
+        var num = inputs[0];
+        if (num == 0)
+        {
+            return 1;
+        }
+        var bits = (int)Math.Ceiling(Math.Log(num + 1, 2));
+        var mask = (1 << bits) - 1;
+        return (byte)((byte)~num & (byte)mask);
+
     }
 }

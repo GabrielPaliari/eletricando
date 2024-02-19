@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class OR : MonoBehaviour, ILogicGateSpec
@@ -12,8 +13,8 @@ public class OR : MonoBehaviour, ILogicGateSpec
     public int outputsLength => 1;
     public int stateLength => 0;
 
-    private bool ORFunction(BitArray inputs)
+    private byte ORFunction(byte[] inputs)
     {
-        return inputs[0] | inputs[1];
+        return (byte)(inputs[0] | inputs[1]);
     }
 }

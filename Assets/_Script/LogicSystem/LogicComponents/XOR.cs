@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class XOR : MonoBehaviour, ILogicGateSpec
@@ -12,8 +13,8 @@ public class XOR : MonoBehaviour, ILogicGateSpec
     public int outputsLength => 1;
     public int stateLength => 0;
 
-    private bool XORFunction(BitArray inputs)
+    private byte XORFunction(byte[] inputs)
     {
-        return inputs[0] ^ inputs[1];
+        return (byte)(inputs[0] ^ inputs[1]);
     }
 }

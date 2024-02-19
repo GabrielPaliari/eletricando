@@ -56,9 +56,9 @@ public class Receptor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
         currentIndex++;
     }
 
-    public bool UpdateState(BitArray inputs)
+    public byte UpdateState(byte[] inputs)
     {
-        currentValue = inputs[0] ? 1 : 0;
+        currentValue = inputs[0];
         UpdateAttempt();
         return inputs[0];
     }

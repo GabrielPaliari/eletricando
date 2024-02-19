@@ -9,7 +9,7 @@ public class LogicCircuitSystem : MonoBehaviour
     private int currentComponentId = 0;
     private static LogicCircuitSystem instance;
     private List<LogicGate> logicGates = new List<LogicGate>();
-    private Dictionary<int, Dictionary<int, UnityEvent<bool>>> outputEvents;
+    private Dictionary<int, Dictionary<int, UnityEvent<byte>>> outputEvents;
     private Dictionary<int, Dictionary<int, List<LogicGate>>> outputWires;
     private Dictionary<int, Dictionary<int, List<LogicGate>>> inputWires;
 
@@ -33,7 +33,7 @@ public class LogicCircuitSystem : MonoBehaviour
 
     private void Start()
     {
-        outputEvents = new Dictionary<int, Dictionary<int, UnityEvent<bool>>>();
+        outputEvents = new Dictionary<int, Dictionary<int, UnityEvent<byte>>>();
         outputWires = new Dictionary<int, Dictionary<int, List<LogicGate>>>();
         inputWires = new Dictionary<int, Dictionary<int, List<LogicGate>>>();
     }
@@ -51,7 +51,7 @@ public class LogicCircuitSystem : MonoBehaviour
         int id = currentComponentId;
         if (!outputEvents.ContainsKey(id))
         {
-            outputEvents[id] = new Dictionary<int, UnityEvent<bool>>();
+            outputEvents[id] = new Dictionary<int, UnityEvent<byte>>();
             logicGates.Add(logicGate);
         }
         if (!outputWires.ContainsKey(id))
@@ -65,17 +65,17 @@ public class LogicCircuitSystem : MonoBehaviour
         return id;
     }
 
-    public UnityEvent<bool> RegisterOutputEmitter(int component, int outputIndex)
+    public UnityEvent<byte> RegisterOutputEmitter(int component, int outputIndex)
     {
         if (!outputEvents.ContainsKey(component))
         {
-            outputEvents[component] = new Dictionary<int, UnityEvent<bool>>();
+            outputEvents[component] = new Dictionary<int, UnityEvent<byte>>();
         }
 
-        UnityEvent<bool> emitter = null;
+        UnityEvent<byte> emitter = null;
         if (!outputEvents[component].ContainsKey(outputIndex))
         {
-            emitter = new UnityEvent<bool>();   
+            emitter = new UnityEvent<byte>();   
             outputEvents[component][outputIndex] = emitter;
         }
         return emitter;
@@ -93,13 +93,13 @@ public class LogicCircuitSystem : MonoBehaviour
 
     public void RegisterOutputListener(LogicGate outputGate, int outputIndex, LogicGate inputGate, int inputIndex, LogicGate wire)
     {
-        UnityEvent<bool> outputEmitter = outputEvents[outputGate.id][outputIndex];
+        UnityEvent<byte> outputEmitter = outputEvents[outputGate.id][outputIndex];
         outputEmitter.AddListener((outValue) => wire.OnInputChange(0, outValue));
 
         inputWires[inputGate.id][inputIndex].Add(wire);
         outputWires[outputGate.id][outputIndex].Add(wire);
 
-        UnityEvent<bool> wireEmitter = outputEvents[wire.id][0];
+        UnityEvent<byte> wireEmitter = outputEvents[wire.id][0];
         wireEmitter.AddListener((outValue) => inputGate.OnInputChange(inputIndex, outValue));
     }
 
@@ -116,7 +116,7 @@ public class LogicCircuitSystem : MonoBehaviour
         {
             var componentOutputsEvents = outputEvents[logicGate.id];
             componentOutputsEvents.ToList().ForEach((emitter) => {
-                emitter.Value.Invoke(false);
+                emitter.Value.Invoke(0);
                 emitter.Value.RemoveAllListeners();
             });
             outputEvents.Remove(logicGate.id);

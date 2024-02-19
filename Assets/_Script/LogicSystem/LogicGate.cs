@@ -4,24 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public delegate bool StateFunction(BitArray inputs);
-public delegate bool OutputFunction(BitArray inputs);
+public delegate byte StateFunction(byte[] inputs);
+public delegate byte OutputFunction(byte[] inputs);
 
 public class LogicGate : MonoBehaviour
 {
     public int id;
     public ILogicGateSpec specification;
     
-    private BitArray inputsValues;
+    private byte[] inputsValues;
     
-    private BitArray outputsValues;
+    private byte[] outputsValues;
     private OutputFunction[] outputFunctions;
-    private UnityEvent<bool>[] outputEmitters;
+    private UnityEvent<byte>[] outputEmitters;
     
-    private BitArray stateValues;
+    private byte[] stateValues;
     private StateFunction[] stateFunctions;
 
-    public void OnInputChange(int inputIndex, bool value)
+    public void OnInputChange(int inputIndex, byte value)
     {
         if (inputsValues != null) {
             inputsValues[inputIndex] = value;
@@ -35,13 +35,13 @@ public class LogicGate : MonoBehaviour
         {
             id = LogicCircuitSystem.Instance.AddComponent(this);
             
-            inputsValues = new BitArray(specification.inputsLength);
+            inputsValues = new byte[(specification.inputsLength)];
             
-            outputsValues = new BitArray(specification.outputsLength);
+            outputsValues = new byte[(specification.outputsLength)];
             outputFunctions = specification.outputFunctions;
-            outputEmitters = new UnityEvent<bool>[specification.outputsLength];
+            outputEmitters = new UnityEvent<byte>[specification.outputsLength];
 
-            stateValues = new BitArray(specification.stateLength);
+            stateValues = new byte[(specification.stateLength)];
             stateFunctions = specification.stateFunctions;
 
             RegisterOutputs();

@@ -62,13 +62,13 @@ public class LEDReceptor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
         currentIndex++;
     }
 
-    private bool OnOffState(BitArray inputs)
+    private byte OnOffState(byte[] inputs)
     {
-        var isOn = inputs[0];
-        currentValue = isOn ? 1 : 0;
+        currentValue = inputs[0];
+        
         if (lightMeshRenderer != null)
         {
-            lightMeshRenderer.material = isOn ? onMaterial : offMaterial;
+            lightMeshRenderer.material = currentValue > 0 ? onMaterial : offMaterial;
         }
         UpdateAttempt();
         return inputs[0];

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using System.Collections.Generic;
 
 public class Switch : MonoBehaviour, ILogicGateSpec
 {
@@ -33,9 +34,9 @@ public class Switch : MonoBehaviour, ILogicGateSpec
         logicGate = GetComponent<LogicGate>();
     }
 
-    private bool OnOffState(BitArray inputs)
+    private byte OnOffState(byte[] inputs)
     {
-        return isOn;
+        return (byte)(isOn ? 1 : 0);
     }
 
     private void OnMouseEnter()
@@ -53,7 +54,7 @@ public class Switch : MonoBehaviour, ILogicGateSpec
         SoundFeedback.Instance.PlaySound(isOn ? SoundType.SwitchOn : SoundType.SwitchOff);
         if (logicGate != null)
         {
-            logicGate.OnInputChange(0, false);
+            logicGate.OnInputChange(0, 0);
         }
         if (indicatorMeshRenderer != null && indicatorTransform != null)
         {

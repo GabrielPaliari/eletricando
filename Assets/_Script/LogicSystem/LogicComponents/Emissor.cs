@@ -25,7 +25,7 @@ public class Emissor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
 
     private SignalComponentData _signalComponent;
 
-    private bool isTrue = false;
+    private byte state = 0;
     private int currentIndex = 0;
 
     [SerializeField]
@@ -48,9 +48,9 @@ public class Emissor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
         {
             var cicledIndex = currentIndex % _signalComponent.signalSequence.Count;
             _signalComponent.currentIndex = cicledIndex;
-            _signalComponent.currentValue = isTrue ? 1 : 0;
+            state = (byte)_signalComponent.signalSequence[cicledIndex];
+            _signalComponent.currentValue = state;
 
-            isTrue = _signalComponent.signalSequence[cicledIndex] > 0;
             LevelSignalsManager.Instance.UpdateSignalComponent.Invoke(_signalComponent);            
         }
     }
@@ -58,14 +58,14 @@ public class Emissor : MonoBehaviour, ILogicGateSpec, ISignalSeqGateSpec
     public void OnClock() {
         currentIndex++;
     }
-    private bool OutputCurrentState(BitArray inputs)
+    private byte OutputCurrentState(byte[] inputs)
     {
         UpdateOutput();
         if (lightMeshRenderer != null)
         {
-            lightMeshRenderer.material = isTrue ? onMaterial : offMaterial;
+            lightMeshRenderer.material = state > 0 ? onMaterial : offMaterial;
         }
-        return isTrue;
+        return state;
     }
 
 }
