@@ -62,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightMeshRenderer: {fileID: 8211700859033638574}
   onMaterial: {fileID: 2100000, guid: 2b5b58c85af499048a6152263c51ac60, type: 2}
-  offMaterial: {fileID: 2100000, guid: c7cf92ae4c18f3140b41b48999a88b3c, type: 2}
+  offMaterial: {fileID: 2100000, guid: a65c71440dfde8048a804cda5aae5f82, type: 2}
 --- !u!1 &6960349085609431867
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
 
-public class InteractionManager : MonoBehaviour
+public class SwitchInteractionManager : MonoBehaviour
 {
     [SerializeField] private Switch _switchComp;
 
