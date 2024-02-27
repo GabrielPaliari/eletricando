@@ -906,6 +906,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7584712523690956022, guid: 7370fd32b22437c4c84a20ad92c93889,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3907,7 +3912,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 887603264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 087c7066f27dea9488afca365e3926d7, type: 3}
+  m_Script: {fileID: 11500000, guid: fd91742aaa7bf554f885c2b15de6f8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &924828015
@@ -4996,7 +5001,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1069665883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51f0726f249b7fe4293888c19d540629, type: 3}
+  m_Script: {fileID: 11500000, guid: b1b212cf5fbad2940ad18d3982d9017e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1074334259
@@ -5018,7 +5023,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &1074334260
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5262,8 +5267,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: dce7702b6228a34449fd91e8330b27c4, type: 2}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5488,7 +5492,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.78
+  m_Volume: 0.47
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5875,6 +5879,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GridVisualization
+      objectReference: {fileID: 0}
+    - target: {fileID: 3706936160302216349, guid: 1a58cd6aa9af4a348a27868ec16a4596,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3952697397410380797, guid: 1a58cd6aa9af4a348a27868ec16a4596,
         type: 3}

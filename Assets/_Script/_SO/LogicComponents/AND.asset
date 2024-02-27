@@ -15,9 +15,10 @@ MonoBehaviour:
   <Name>k__BackingField: E
   <ID>k__BackingField: 7
   menuImage: {fileID: 21300000, guid: bd4166aefc2ae94438edae5156d45688, type: 3}
-  <Size>k__BackingField: {x: 2, y: 2}
+  <Size>k__BackingField: {x: 5, y: 3}
   <Prefab>k__BackingField: {fileID: 3493615974341626966, guid: 5ad6a7dbc81a5c641bae3efc4d68fa88,
     type: 3}
+  <PreviewPrefab>k__BackingField: {fileID: 0}
   ComponentType: 0
   tooltipHeader: E (&)
   tooltipText: um "E" outro
