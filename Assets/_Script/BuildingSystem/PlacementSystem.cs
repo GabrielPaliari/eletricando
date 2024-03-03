@@ -45,6 +45,7 @@ public class PlacementSystem : MonoBehaviour
         gridVisualization.SetActive(false);
         componentsData = new();
         globalGrid = grid;
+        PreBuildLevelComponents();
     }
 
     public void StartPlacement(int ID)
@@ -83,12 +84,22 @@ public class PlacementSystem : MonoBehaviour
         level.preBuiltComponents.ForEach(component => {
             var selectedComponentIndex = database.objectsData.FindIndex(data => data.ID == component.componentId);
             RotationUtil.currentDir = component.rotation;
-            int index = objectPlacer.PlaceObject(database.objectsData[selectedComponentIndex], grid.CellToWorld(component.position), component);
-            selectedData.AddObjectAt(component.position,
-                database.objectsData[selectedComponentIndex].Size,
-                database.objectsData[selectedComponentIndex].ID,
-                index,
-                true);
+            var databaseComponent = database.objectsData[selectedComponentIndex];
+
+            switch(databaseComponent.ID)
+            {
+                case 0:
+                    WireSystem.instance.CreatePrebuildedWire(component.connectorA, component.connectorB, component.wireNodes);
+                    break;
+                default:
+                    int index = objectPlacer.PlaceObject(databaseComponent, component.position, component);
+                    selectedData.AddObjectAt(component.position,
+                        database.objectsData[selectedComponentIndex].Size,
+                        database.objectsData[selectedComponentIndex].ID,
+                        index,
+                        true);
+                    break;
+            }
         });
     }
 

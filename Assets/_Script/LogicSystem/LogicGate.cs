@@ -21,6 +21,13 @@ public class LogicGate : MonoBehaviour
     private byte[] stateValues;
     private StateFunction[] stateFunctions;
 
+    public int componentId;
+    public Vector3Int position;
+    public RotationDir rotationDir;
+    public List<Vector3> wireNodes = new();
+    public Vector2Int connectorA;
+    public Vector2Int connectorB;
+
     public void OnInputChange(int inputIndex, byte value)
     {
         if (inputsValues != null) {
@@ -29,15 +36,31 @@ public class LogicGate : MonoBehaviour
         UpdateGate();
     }
 
-    public void Initialize()
+    public void Initialize(int id, Vector3Int pos, RotationDir rot)
+    {
+        Initialize();
+        componentId = id;
+        position = pos;
+        rotationDir = rot;
+    }
+
+    public void Initialize(List<Vector3> nodes, Vector2Int connA, Vector2Int connB)
+    {
+        Initialize();
+        wireNodes = nodes;
+        connectorA = connA;
+        connectorB = connB;
+    }
+
+    private void Initialize()
     {
         specification = GetComponent<ILogicGateSpec>();
         if (specification != null)
         {
             id = LogicCircuitSystem.Instance.AddComponent(this);
-            
+
             inputsValues = new byte[(specification.inputsLength)];
-            
+
             outputsValues = new byte[(specification.outputsLength)];
             outputFunctions = specification.outputFunctions;
             outputEmitters = new UnityEvent<byte>[specification.outputsLength];

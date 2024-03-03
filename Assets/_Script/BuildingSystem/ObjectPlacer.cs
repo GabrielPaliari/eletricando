@@ -9,21 +9,26 @@ public class ObjectPlacer : MonoBehaviour
     private List<GameObject> placedGameObjects = new();
     public GameEvent onRemoveLogicGate;
 
-    public int PlaceObject(PlaceableComponentSO componentData, Vector3 position, BuildedComponentSO buildedCompSpec = null)
+    public int PlaceObject(PlaceableComponentSO componentData, Vector3Int cellPos, BuildedComponentSO buildedCompSpec = null)
     {
         GameObject newObject = Instantiate(componentData.Prefab);
 
         LogicGate logicGate = newObject.GetComponent<LogicGate>();
-        if(logicGate != null ) { logicGate.Initialize(); }
+        if(logicGate != null) {
+            var rotationDir = RotationUtil.currentDir;
+            var compId = componentData.ID;
+            logicGate.Initialize(compId, cellPos, rotationDir); 
+        }
 
         ISignalSeqGateSpec signalGate = newObject.GetComponent<ISignalSeqGateSpec>();
         if (signalGate != null) { signalGate.Initialize(logicGate.id, buildedCompSpec); }
 
         Vector2Int rotationOffset = RotationUtil.GetRotationOffset(componentData.Size);
+        Vector3 pos = PlacementSystem.globalGrid.CellToWorld(cellPos);
         newObject.transform.position = new Vector3(
-            position.x + rotationOffset.x,
-            position.y,
-            position.z + rotationOffset.y);
+            pos.x + rotationOffset.x,
+            pos.y,
+            pos.z + rotationOffset.y);
         newObject.transform.rotation = RotationUtil.GetRotationAngle();
 
         placedGameObjects.Add(newObject);

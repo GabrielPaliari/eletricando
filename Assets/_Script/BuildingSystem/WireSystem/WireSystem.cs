@@ -28,6 +28,12 @@ public class WireSystem : MonoBehaviour
 
     private List<Vector3> wireNodes = new();
 
+    public static WireSystem instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void setState(WireState state)
     {
@@ -203,12 +209,28 @@ public class WireSystem : MonoBehaviour
         var secondConnector = secondComponentGO.GetComponent<WireConector>();
 
         var wireObject = Instantiate(wirePrefab);
+        ConnectWire(firstLogicGate.id, firstConnector.index, secondLogicGate.id, secondConnector.index, wireObject, wireNodes);
         var wireLogic = wireObject.GetComponent<WireLogic>();
-        LogicGate wire = wireObject.GetComponent<LogicGate>();
-        wire.Initialize();
-
-        LogicCircuitSystem.Instance.RegisterOutputListener(firstLogicGate, firstConnector.index, secondLogicGate, secondConnector.index, wire);
         wireLogic.CreateBranch(wireNodes);
+    }
+
+    public void CreatePrebuildedWire(Vector2Int connectorA, Vector2Int connectorB, List<Vector3> savedNodes)
+    {
+        var wireObject = Instantiate(wirePrefab);
+        ConnectWire(connectorA.x, connectorA.y, connectorB.x, connectorB.y, wireObject, savedNodes);
+        var wireLogic = wireObject.GetComponent<WireLogic>();
+        wireLogic.CreateBranch(savedNodes);
+    }
+
+    private void ConnectWire(int firstLogicGateId, int firstConnIndex, int secondLogicGate, int secondConnIndex, GameObject wireObject, List<Vector3> wireNodes)
+    {
+        LogicGate wire = wireObject.GetComponent<LogicGate>();
+        var connA = new Vector2Int(firstLogicGateId, firstConnIndex);
+        var connB = new Vector2Int(secondLogicGate, secondConnIndex);
+
+        wire.Initialize(wireNodes, connA, connB);
+
+        LogicCircuitSystem.Instance.RegisterOutputListener(firstLogicGateId, firstConnIndex, secondLogicGate, secondConnIndex, wire);
     }
 
     private void DeleteWire(RaycastHit hit)

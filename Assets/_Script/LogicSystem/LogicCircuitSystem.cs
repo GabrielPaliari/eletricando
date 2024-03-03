@@ -8,10 +8,12 @@ public class LogicCircuitSystem : MonoBehaviour
 {
     private int currentComponentId = 0;
     private static LogicCircuitSystem instance;
-    private List<LogicGate> logicGates = new List<LogicGate>();
+    private List<LogicGate> _logicGates = new List<LogicGate>();
     private Dictionary<int, Dictionary<int, UnityEvent<byte>>> outputEvents;
-    private Dictionary<int, Dictionary<int, List<LogicGate>>> outputWires;
-    private Dictionary<int, Dictionary<int, List<LogicGate>>> inputWires;
+    private Dictionary<int, Dictionary<int, List<LogicGate>>> _outputWires;
+    private Dictionary<int, Dictionary<int, List<LogicGate>>> _inputWires;
+
+    public List<LogicGate> logicGates => _logicGates;
 
     public static LogicCircuitSystem Instance => instance;
 
@@ -29,18 +31,14 @@ public class LogicCircuitSystem : MonoBehaviour
         {
             instance = this;
         }
-    }
-
-    private void Start()
-    {
         outputEvents = new Dictionary<int, Dictionary<int, UnityEvent<byte>>>();
-        outputWires = new Dictionary<int, Dictionary<int, List<LogicGate>>>();
-        inputWires = new Dictionary<int, Dictionary<int, List<LogicGate>>>();
+        _outputWires = new Dictionary<int, Dictionary<int, List<LogicGate>>>();
+        _inputWires = new Dictionary<int, Dictionary<int, List<LogicGate>>>();
     }
 
     public void UpdateLogicGates()
     {
-        logicGates.ForEach(logicGate => {
+        _logicGates.ForEach(logicGate => {
             logicGate.UpdateGate();
         });
     }
@@ -52,15 +50,15 @@ public class LogicCircuitSystem : MonoBehaviour
         if (!outputEvents.ContainsKey(id))
         {
             outputEvents[id] = new Dictionary<int, UnityEvent<byte>>();
-            logicGates.Add(logicGate);
+            _logicGates.Add(logicGate);
         }
-        if (!outputWires.ContainsKey(id))
+        if (!_outputWires.ContainsKey(id))
         {
-            outputWires[id] = new Dictionary<int, List<LogicGate>>();
+            _outputWires[id] = new Dictionary<int, List<LogicGate>>();
         }
-        if (!inputWires.ContainsKey(id))
+        if (!_inputWires.ContainsKey(id))
         {
-            inputWires[id] = new Dictionary<int, List<LogicGate>>();
+            _inputWires[id] = new Dictionary<int, List<LogicGate>>();
         }
         return id;
     }
@@ -84,22 +82,24 @@ public class LogicCircuitSystem : MonoBehaviour
     public void RegisterWireConectors(int component, int inputsLength, int outputsLength)
     {
         for (int i = 0; i < inputsLength; i++) {
-            inputWires[component][i] = new List<LogicGate>();
+            _inputWires[component][i] = new List<LogicGate>();
         }
         for (int j = 0; j < outputsLength; j++) {
-            outputWires[component][j] = new List<LogicGate>();
+            _outputWires[component][j] = new List<LogicGate>();
         }
     }
 
-    public void RegisterOutputListener(LogicGate outputGate, int outputIndex, LogicGate inputGate, int inputIndex, LogicGate wire)
+    public void RegisterOutputListener(int outputGateId, int outputIndex, int inputGateId, int inputIndex, LogicGate wire)
     {
-        UnityEvent<byte> outputEmitter = outputEvents[outputGate.id][outputIndex];
+        UnityEvent<byte> outputEmitter = outputEvents[outputGateId][outputIndex];
         outputEmitter.AddListener((outValue) => wire.OnInputChange(0, outValue));
 
-        inputWires[inputGate.id][inputIndex].Add(wire);
-        outputWires[outputGate.id][outputIndex].Add(wire);
+        _inputWires[inputGateId][inputIndex].Add(wire);
+        _outputWires[outputGateId][outputIndex].Add(wire);
 
         UnityEvent<byte> wireEmitter = outputEvents[wire.id][0];
+
+        var inputGate = _logicGates.First((gate) => gate.id == inputGateId);
         wireEmitter.AddListener((outValue) => inputGate.OnInputChange(inputIndex, outValue));
     }
 
@@ -107,6 +107,7 @@ public class LogicCircuitSystem : MonoBehaviour
     {
         if (logicGate != null && logicGate.gameObject != null)
         {
+            _logicGates.Remove(logicGate);
             Destroy(logicGate.gameObject);
         } else
         {
@@ -120,28 +121,28 @@ public class LogicCircuitSystem : MonoBehaviour
                 emitter.Value.RemoveAllListeners();
             });
             outputEvents.Remove(logicGate.id);
-        }
-        if (outputWires.ContainsKey(logicGate.id))
+        }        
+        if (_outputWires.ContainsKey(logicGate.id))
         {
-            var allOutputsWires = outputWires[logicGate.id];
+            var allOutputsWires = _outputWires[logicGate.id];
             allOutputsWires.ToList().ForEach((outputWires) => {
                 outputWires.Value.ForEach((wire) =>
                 {
                     UnregisterComponent(wire);
                 });
             });
-            outputWires.Remove(logicGate.id);
+            _outputWires.Remove(logicGate.id);
         }
-        if (inputWires.ContainsKey(logicGate.id))
+        if (_inputWires.ContainsKey(logicGate.id))
         {
-            var allOutputsWires = inputWires[logicGate.id];
+            var allOutputsWires = _inputWires[logicGate.id];
             allOutputsWires.ToList().ForEach((inputWires) => {
                 inputWires.Value.ForEach((wire) =>
                 {
                     UnregisterComponent(wire);
                 });
             });
-            inputWires.Remove(logicGate.id);
+            _inputWires.Remove(logicGate.id);
         }
     }
 }

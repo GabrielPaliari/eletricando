@@ -9,12 +9,10 @@ public class Switch : MonoBehaviour, ILogicGateSpec
     public OutputFunction[] outputFunctions => new OutputFunction[] {
         OnOffState
     };
-    public StateFunction[] stateFunctions => new StateFunction[] {
-        OnOffState
-    };
+    public StateFunction[] stateFunctions => new StateFunction[] {};
     public int inputsLength => 1;
     public int outputsLength => 1;
-    public int stateLength => 1;
+    public int stateLength => 0;
 
     private bool isOn = false;
 

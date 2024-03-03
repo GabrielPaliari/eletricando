@@ -18,10 +18,10 @@ public class LevelDetailsManager : MonoBehaviour
 
     void Start()
     {
-        _level = LevelManager.Instance._selectedLevel;
-        _titleTMP.text = _level.title;
-        _subtitleTMP.text = _level.subtitle;
-        _descriptionTMP.text = _level.description;
+        //_level = LevelManager.Instance._selectedLevel;
+        //_titleTMP.text = _level.title;
+        //_subtitleTMP.text = _level.subtitle;
+        //_descriptionTMP.text = _level.description;
     }
     
     public void RaiseEvent(GameEvent gameEvent)

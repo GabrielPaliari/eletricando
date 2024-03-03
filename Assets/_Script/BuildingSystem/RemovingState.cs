@@ -55,8 +55,8 @@ public class RemovingState : IBuildingState
 
     private bool CheckIfSelectionIsValid(Vector3Int gridPosition)
     {
-        return (!componentsData.CanPlaceObejctAt(gridPosition, Vector2Int.one)
-            && !componentsData.HasIndestructibleObject(gridPosition));
+        return (!componentsData.CanPlaceObejctAt(gridPosition, Vector2Int.one));
+            //&& !componentsData.HasIndestructibleObject(gridPosition));
     }
 
     public void UpdateState(Vector3Int gridPosition)

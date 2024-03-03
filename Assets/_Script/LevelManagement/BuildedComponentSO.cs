@@ -28,4 +28,10 @@ public class BuildedComponentSO : ScriptableObject
 
     [SerializeField]
     public List<int> signalSequence;
+
+    [SerializeField]
+    public List<Vector3> wireNodes;
+
+    public Vector2Int connectorA;
+    public Vector2Int connectorB;
 }
