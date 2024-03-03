@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Splines;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class WireSystem : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class WireSystem : MonoBehaviour
         onChangeCursorRemoveHighlight,
         onChangeCursorDefault;
     LineRenderer lineRenderer;
+
+    private List<Vector3> wireNodes = new();
+
 
     private void setState(WireState state)
     {
@@ -76,16 +80,16 @@ public class WireSystem : MonoBehaviour
         switch (wireState)
         {
             case WireState.WireModeOn:
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonUp(0))
                 {
                     StartWiring();
                 }
                 break;
             case WireState.FirstSelected:
-                UpdatePreviewVisual();
+                UpdatePreviewLastNode();
                 if (Input.GetMouseButtonUp(0))
                 {
-                    EndWiring();
+                    CreateNextNode();
                 }
                 break;
             case WireState.DeleteMode:
@@ -127,28 +131,57 @@ public class WireSystem : MonoBehaviour
         GameObject connectorObject = inputManager.GetSelectedWireConector();
         if (connectorObject != null)
         {
+            lineRenderer.positionCount = 1;
+            wireNodes = new()
+            {
+                SetDefaultHeight(connectorObject.transform.position)
+            };
+            UpdatePreviewNodes();
             lineRenderer.enabled = true;
             firstComponentGO = connectorObject;
             setState(WireState.FirstSelected);
         }
     }
 
-    private void UpdatePreviewVisual()
+    private Vector3 SetDefaultHeight(Vector3 pos)
     {
-        var startPos = firstComponentGO.transform.position;
-        var endPos = inputManager.GetSelectedMapPosition();
-        lineRenderer.SetPosition(0, startPos);
-        lineRenderer.SetPosition(1, endPos);
+        pos.y = .1f;
+        return pos;
+    }
+    private void UpdatePreviewNodes()
+    {
+        lineRenderer.SetPositions(wireNodes.ToArray());
     }
 
-    private void EndWiring()
+    private void UpdatePreviewLastNode()
     {
-        GameObject secConnectorObject = inputManager.GetSelectedWireConector();
-        if (secConnectorObject != null)
+        var pointedCell = (Vector3)inputManager.GetHoveredCellCenter();
+        lineRenderer.positionCount = wireNodes.Count + 1;
+        lineRenderer.SetPosition(wireNodes.Count, SetDefaultHeight(pointedCell));
+    }
+
+    private void CreateNextNode()
+    {
+        GameObject lastConector = inputManager.GetSelectedWireConector();
+        if (lastConector != null)
         {
-            secondComponentGO = secConnectorObject;           
-            CreateWirePrefab();
+            EndWiring(lastConector);
+        } else
+        {
+            var nextPos = inputManager.GetHoveredCellCenter();
+            if (nextPos != null)
+            {
+                wireNodes.Add(SetDefaultHeight((Vector3) nextPos));
+                UpdatePreviewNodes();
+            }
         }
+    }
+
+    private void EndWiring(GameObject lastConector)
+    {
+        secondComponentGO = lastConector;
+        wireNodes.Add(SetDefaultHeight(lastConector.transform.position));
+        CreateWirePrefab();        
         DisablePreview();
         EnterWireMode();
     }
@@ -175,18 +208,7 @@ public class WireSystem : MonoBehaviour
         wire.Initialize();
 
         LogicCircuitSystem.Instance.RegisterOutputListener(firstLogicGate, firstConnector.index, secondLogicGate, secondConnector.index, wire);
-        wireLogic.CreateBranch(GetWirePositions());
-    }
-
-    private List<Vector3> GetWirePositions()
-    {
-        var pointList = new List<Vector3>();
-        Vector3 posA = firstComponentGO.transform.position;
-        Vector3 posB = secondComponentGO.transform.position;
-        pointList.Add(posA);
-        pointList.Add(posB);
-
-        return pointList;
+        wireLogic.CreateBranch(wireNodes);
     }
 
     private void DeleteWire(RaycastHit hit)

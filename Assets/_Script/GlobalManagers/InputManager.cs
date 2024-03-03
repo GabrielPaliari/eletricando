@@ -18,6 +18,8 @@ public class InputManager : MonoBehaviour
     private LayerMask wireConectorsLayermask;
     [SerializeField]
     private LayerMask wireLayerMask;
+    [SerializeField]
+    private LayerMask gridLayerMask;
 
     public event Action OnClicked, OnExit, OnRotate;
 
@@ -69,6 +71,22 @@ public class InputManager : MonoBehaviour
         {
             return hit.collider.gameObject;
         }
+        return null;
+    }
+
+    public Vector3? GetHoveredCellCenter()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = sceneCamera.nearClipPlane;
+        Ray ray = sceneCamera.ScreenPointToRay(mousePos);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100, gridLayerMask))
+        {
+            var pos = hit.point;
+            var cell = PlacementSystem.globalGrid.WorldToCell(pos);
+            var cellCenter = PlacementSystem.globalGrid.GetCellCenterWorld(cell);
+            return cellCenter;
+        };
         return null;
     }
 

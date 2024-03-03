@@ -3,10 +3,15 @@ using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
 {
+    public static PlacementSystem instance;
+
     [SerializeField]
     private InputManager inputManager;
+
     [SerializeField]
     private Grid grid;
+
+    public static Grid globalGrid;
 
     [SerializeField]
     public ObjectsDatabaseSO database;
@@ -30,10 +35,16 @@ public class PlacementSystem : MonoBehaviour
 
     private int selectedComponentId;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         gridVisualization.SetActive(false);
         componentsData = new();
+        globalGrid = grid;
     }
 
     public void StartPlacement(int ID)

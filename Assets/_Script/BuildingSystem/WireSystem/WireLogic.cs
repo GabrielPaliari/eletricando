@@ -15,11 +15,7 @@ public class WireLogic : MonoBehaviour, ILogicGateSpec
     public int outputsLength => 1;
     public int stateLength => 1;
 
-    [SerializeField] private MeshFilter meshFilter;
-    [SerializeField] private MeshCollider meshCollider;
-    [SerializeField] private MeshRenderer meshRenderer;
-    [SerializeField] private SplineContainer splineContainer;
-    [SerializeField] private SplineExtrude splineExtrude;
+    [SerializeField] private LineRenderer lineRenderer;
     
     [SerializeField]
     private Material onMaterial;
@@ -28,8 +24,6 @@ public class WireLogic : MonoBehaviour, ILogicGateSpec
 
     private void Start()
     {
-        Mesh mesh = new Mesh();
-        meshFilter.mesh = mesh;
     }    
 
     private byte OnOffState(byte[] inputs)
@@ -45,26 +39,16 @@ public class WireLogic : MonoBehaviour, ILogicGateSpec
 
     private void UpdateVisuals(int state)
     {
-        if (meshRenderer == null)
+        if (lineRenderer == null)
         {
             return;
         }
-        meshRenderer.material = state > 0 ? onMaterial : offMaterial;
-        splineExtrude.Rebuild();
-        if (meshFilter.mesh.vertexCount > 0)
-        {
-            meshCollider.sharedMesh = meshFilter.mesh;
-        }
+        lineRenderer.material = state > 0 ? onMaterial : offMaterial;
     }
 
     public void CreateBranch(List<Vector3> points)
     {
-        var spline = new Spline();
-        points.ForEach(p => {        
-            spline.Add(new BezierKnot(p), TangentMode.AutoSmooth);
-        });
-        splineContainer.AddSpline(spline);
-        meshRenderer.material = offMaterial;
-        splineExtrude.Rebuild();
+        lineRenderer.positionCount = points.Count;
+        lineRenderer.SetPositions(points.ToArray());
     }    
 }

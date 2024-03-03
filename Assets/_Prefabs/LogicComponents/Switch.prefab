@@ -63,7 +63,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicatorMeshRenderer: {fileID: 9129424220596699941}
   onMaterial: {fileID: 2100000, guid: 2b5b58c85af499048a6152263c51ac60, type: 2}
-  offMaterial: {fileID: 2100000, guid: a65c71440dfde8048a804cda5aae5f82, type: 2}
+  offMaterial: {fileID: -3441144646385535801, guid: 389742017ed084d44b269050fb5a77bd,
+    type: 3}
   indicatorTransform: {fileID: 1309810852000384180}
   onIndicatorX: -78
   offIndicatorX: -90
@@ -279,7 +280,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a65c71440dfde8048a804cda5aae5f82, type: 2}
+      objectReference: {fileID: -3441144646385535801, guid: 389742017ed084d44b269050fb5a77bd,
+        type: 3}
     - target: {fileID: -8679921383154817045, guid: c312cb65689dfc241ae28c75719e8004,
         type: 3}
       propertyPath: m_RootOrder

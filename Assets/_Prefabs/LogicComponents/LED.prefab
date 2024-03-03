@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3493615974341626966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.107, y: 0, z: 0.975}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -62,7 +62,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightMeshRenderer: {fileID: 8211700859033638574}
   onMaterial: {fileID: 2100000, guid: 2b5b58c85af499048a6152263c51ac60, type: 2}
-  offMaterial: {fileID: 2100000, guid: a65c71440dfde8048a804cda5aae5f82, type: 2}
+  offMaterial: {fileID: -4973734387028869240, guid: 806e2603d7675604c804c0f4f52715a4,
+    type: 3}
 --- !u!1 &6960349085609431867
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,8 +90,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6960349085609431867}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.044, y: 0.758, z: 1.0250001}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7851286881167693695}
@@ -124,7 +125,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: c7cf92ae4c18f3140b41b48999a88b3c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -177,7 +178,7 @@ PrefabInstance:
     - target: {fileID: 6106040124030227953, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.061
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6106040124030227953, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
         type: 3}
@@ -187,7 +188,7 @@ PrefabInstance:
     - target: {fileID: 6106040124030227953, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.016
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6106040124030227953, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
         type: 3}
