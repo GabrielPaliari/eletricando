@@ -25,7 +25,8 @@ public class LogicGate : MonoBehaviour
     {
         if (inputsValues != null) {
             inputsValues[inputIndex] = value;
-        }   
+        }
+        UpdateGate();
     }
 
     public void Initialize()

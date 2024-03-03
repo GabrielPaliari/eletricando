@@ -35,21 +35,21 @@ public class TickSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        OnPropagationTick.Raise();
-        if (isOn) {
-            tickTimer += Time.deltaTime;
-            if (tickTimer >= tickDuration)
-            {
-                tickTimer -= tickDuration;
-                //tick++;
-                OnClockTick.Raise();
-            
-                //if (tick >= clockDuration)
-                //{
-                //    OnClockTick.Raise();
-                //    tick -= clockDuration;
-                //}
-            }
-        }
+        //OnPropagationTick.Raise();
+        //if (isOn) {
+        //    tickTimer += Time.deltaTime;
+        //    if (tickTimer >= tickDuration)
+        //    {
+        //        tickTimer -= tickDuration;
+        //        tick++;
+        //        OnClockTick.Raise();
+
+        //        if (tick >= clockDuration)
+        //        {
+        //            OnClockTick.Raise();
+        //            tick -= clockDuration;
+        //        }
+        //    }
+        //}
     }
 }
