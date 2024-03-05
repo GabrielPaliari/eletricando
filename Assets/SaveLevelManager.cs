@@ -4,18 +4,21 @@ using UnityEngine;
 using System.IO;
 using UnityEditor;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class SaveLevelManager : MonoBehaviour
 {
     public static string pathToSaveComps = "Assets/_Script/_SO/Levels/TEST/Components/";
-    
+
     public void SaveLevel()
     {
         DeleteAllFilesInFolder();
         var selectedLevel = LevelManager.Instance._selectedLevel;
         var logicGates = LogicCircuitSystem.Instance.logicGates;
+        var orderedGates = logicGates.OrderBy((gate) => gate.componentId).Reverse();
         selectedLevel.preBuiltComponents = new();
-        foreach (var gate in logicGates)
+
+        foreach (var gate in orderedGates)  
         {
             var builded = ScriptableObject.CreateInstance<BuildedComponentSO>();
             builded.name = gate.name;
@@ -29,7 +32,7 @@ public class SaveLevelManager : MonoBehaviour
                 builded.connectorB = gate.connectorB;
             }
             SaveSO(builded, $"{gate.name}");
-            selectedLevel.preBuiltComponents.Add(builded); 
+            selectedLevel.preBuiltComponents.Add(builded);
         }
     }
 

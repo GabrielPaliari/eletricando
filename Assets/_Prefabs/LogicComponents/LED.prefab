@@ -48,6 +48,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  componentId: 0
+  position: {x: 0, y: 0, z: 0}
+  rotationDir: 0
+  wireNodes: []
+  connectorA: {x: 0, y: 0}
+  connectorB: {x: 0, y: 0}
 --- !u!114 &6490601760690773806
 MonoBehaviour:
   m_ObjectHideFlags: 0

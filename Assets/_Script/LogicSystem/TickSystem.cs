@@ -11,7 +11,7 @@ public class TickSystem : MonoBehaviour
 
     public GameEvent OnPropagationTick, OnClockTick;
     
-    private float tickTimer;
+    //private float tickTimer;
     //private int tick;
     public bool isOn = true;
     
@@ -29,7 +29,7 @@ public class TickSystem : MonoBehaviour
     private void Start()
     {
         //tick = 0;
-        tickTimer = 0;
+        //tickTimer = 0;
     }
 
     // Update is called once per frame

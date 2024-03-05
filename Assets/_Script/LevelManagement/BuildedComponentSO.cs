@@ -34,4 +34,6 @@ public class BuildedComponentSO : ScriptableObject
 
     public Vector2Int connectorA;
     public Vector2Int connectorB;
+
+    public int? buidedId;
 }

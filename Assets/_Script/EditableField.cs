@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class EditableField : MonoBehaviour
 {
-    [SerializeField] private string label = "Valor";
+    //[SerializeField] private string label = "Valor";
     [SerializeField] private int defaultValue = 0;
     [SerializeField] private int minValue = 0;
     [SerializeField] private int maxValue = 8;

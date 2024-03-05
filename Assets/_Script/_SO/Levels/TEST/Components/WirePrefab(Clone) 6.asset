@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760661c6592a2444b8aa60c1d2edded9, type: 3}
+  m_Name: WirePrefab(Clone) 6
+  m_EditorClassIdentifier: 
+  componentId: 0
+  componentName: 
+  position: {x: 0, y: 0, z: 0}
+  rotation: 0
+  signalSequence: 
+  wireNodes:
+  - {x: -0.50899994, y: 0.1, z: -4.502}
+  - {x: -0.49700022, y: 0.1, z: -2.5119998}
+  connectorA: {x: 4, y: 0}
+  connectorB: {x: 6, y: 0}

@@ -49,6 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  componentId: 0
+  position: {x: 0, y: 0, z: 0}
+  rotationDir: 0
+  wireNodes: []
+  connectorA: {x: 0, y: 0}
+  connectorB: {x: 0, y: 0}
 --- !u!114 &1468842632279995304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicatorMeshRenderer: {fileID: 9129424220596699941}
-  onMaterial: {fileID: 2100000, guid: 2b5b58c85af499048a6152263c51ac60, type: 2}
+  onMaterial: {fileID: 2100000, guid: 89e1b8009c1ed254ea0d509d5de63827, type: 2}
   offMaterial: {fileID: -3441144646385535801, guid: 389742017ed084d44b269050fb5a77bd,
     type: 3}
   indicatorTransform: {fileID: 1309810852000384180}
@@ -171,6 +177,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7851286881167693695}
     m_Modifications:
+    - target: {fileID: 387022861077950652, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.80047774
+      objectReference: {fileID: 0}
+    - target: {fileID: 387022861077950652, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.77511555
+      objectReference: {fileID: 0}
+    - target: {fileID: 387022861077950652, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.016850175
+      objectReference: {fileID: 0}
+    - target: {fileID: 387022861077950652, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.02517396
+      objectReference: {fileID: 0}
     - target: {fileID: 387022861077950652, guid: 6ce30c65ccc52094da29cabd3dcbe80f,
         type: 3}
       propertyPath: m_IsTrigger

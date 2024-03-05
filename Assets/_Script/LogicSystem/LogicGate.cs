@@ -47,6 +47,7 @@ public class LogicGate : MonoBehaviour
     public void Initialize(List<Vector3> nodes, Vector2Int connA, Vector2Int connB)
     {
         Initialize();
+        componentId = 0;
         wireNodes = nodes;
         connectorA = connA;
         connectorB = connB;
