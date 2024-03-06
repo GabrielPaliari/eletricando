@@ -67,9 +67,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightMeshRenderer: {fileID: 8211700859033638574}
-  onMaterial: {fileID: 2100000, guid: 2b5b58c85af499048a6152263c51ac60, type: 2}
-  offMaterial: {fileID: -4973734387028869240, guid: 806e2603d7675604c804c0f4f52715a4,
-    type: 3}
+  onMaterial: {fileID: 2100000, guid: 4e04999bd3ff9aa41ad438609230f4c2, type: 2}
+  offMaterial: {fileID: 2100000, guid: e7436e18e0163c046b8b5ad488f02197, type: 2}
 --- !u!1 &6960349085609431867
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +130,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c7cf92ae4c18f3140b41b48999a88b3c, type: 2}
+  - {fileID: 2100000, guid: e7436e18e0163c046b8b5ad488f02197, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

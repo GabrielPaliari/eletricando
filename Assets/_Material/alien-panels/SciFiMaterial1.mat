@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SciFiMaterial
+  m_Name: SciFiMaterial1
   m_Shader: {fileID: -6465566751694194690, guid: 20f025188c173834dae6490553f0ad91,
     type: 3}
   m_Parent: {fileID: 0}
@@ -91,11 +91,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _EmissionWidth: 0.035
+    - _EmissionWidth: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _Tilling: {r: 1.5, g: 1.5, b: 0, a: 0}
+    - _Tilling: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
