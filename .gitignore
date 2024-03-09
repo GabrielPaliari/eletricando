@@ -72,3 +72,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 /Assets/_Script/_SO/Levels/TEST/**
+/Assets/_Script/_SO/Levels/TEST/
