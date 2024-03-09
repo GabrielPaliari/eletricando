@@ -11,7 +11,6 @@ public class WireLogic : MonoBehaviour, ILogicGateSpec
 
     public int inputsLength => 1;
     public int outputsLength => 1;
-    public int stateLength => 1;
 
     [SerializeField] private LineRenderer lineRenderer;
     

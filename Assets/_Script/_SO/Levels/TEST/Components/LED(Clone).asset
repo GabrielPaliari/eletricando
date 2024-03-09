@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentId: 8
   componentName: 
-  position: {x: -7, y: 0, z: 7}
+  position: {x: 0, y: 0, z: 2}
   rotation: 0
   signalSequence: 
   wireNodes: []
   connectorA: {x: 0, y: 0}
   connectorB: {x: 0, y: 0}
-  buidedId: 5
+  buidedId: 2
   initialState: 0

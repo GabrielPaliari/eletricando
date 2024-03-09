@@ -18,9 +18,9 @@ MonoBehaviour:
   rotation: 0
   signalSequence: 
   wireNodes:
-  - {x: -1.502, y: 0.1, z: 0.48199987}
-  - {x: -5.499, y: 0.1, z: 6.5}
+  - {x: 1.498, y: 0.1, z: -5.518}
+  - {x: 1.5009999, y: 0.1, z: 1.4999998}
   connectorA: {x: 1, y: 0}
-  connectorB: {x: 5, y: 0}
-  buidedId: 9
+  connectorB: {x: 2, y: 0}
+  buidedId: 3
   initialState: 0
