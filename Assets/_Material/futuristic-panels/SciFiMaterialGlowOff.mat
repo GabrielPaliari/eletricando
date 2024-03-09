@@ -27,7 +27,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -92,8 +92,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _EmissionWidth: 0
-    - _GlowIntensity: 1
-    - _GlowVelocity: 2
+    - _GlowIntensity: 0
+    - _GlowVelocity: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:

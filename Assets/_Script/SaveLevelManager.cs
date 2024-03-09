@@ -15,28 +15,37 @@ public class SaveLevelManager : MonoBehaviour
         DeleteAllFilesInFolder();
         var selectedLevel = LevelManager.Instance._selectedLevel;
         var logicGates = LogicCircuitSystem.Instance.logicGates;
-        var orderedGates = logicGates.OrderBy((gate) => gate.componentId).Reverse();
         selectedLevel.preBuiltComponents = new();
 
-        foreach (var gate in orderedGates)  
+        foreach (var gate in logicGates)  
         {
             var builded = ScriptableObject.CreateInstance<BuildedComponentSO>();
             builded.name = gate.name;
             builded.componentId = gate.componentId;
             builded.position = gate.position;
-            builded.rotation = gate.rotationDir;
+            builded.rotation = gate.rotationDir;            
+            builded.buidedId = gate.id;
             if (gate.wireNodes.Count > 0) // wire
             {
                 builded.wireNodes = gate.wireNodes;
                 builded.connectorA = gate.connectorA;
                 builded.connectorB = gate.connectorB;
             }
+            builded.initialState = GetGateState(gate);
             SaveSO(builded, $"{gate.name}");
             selectedLevel.preBuiltComponents.Add(builded);
         }
     }
 
-
+    private int GetGateState(LogicGate gate)
+    {
+       var stateGate = gate.gameObject.GetComponent<IStateGateSpec>();
+        if (stateGate != null)
+        {
+            return stateGate.state;
+        }
+        return 0;
+    }
 
     private string SaveSO(ScriptableObject so, string name)
     {
@@ -60,5 +69,4 @@ public class SaveLevelManager : MonoBehaviour
         }
         AssetDatabase.DeleteAssets(assetPaths, new());
     }
-
 }

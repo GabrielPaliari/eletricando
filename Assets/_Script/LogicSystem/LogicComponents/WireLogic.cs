@@ -8,9 +8,7 @@ public class WireLogic : MonoBehaviour, ILogicGateSpec
     public OutputFunction[] outputFunctions => new OutputFunction[] {
         BufferInput
     };
-    public StateFunction[] stateFunctions => new StateFunction[] {
-        OnOffState
-    };
+
     public int inputsLength => 1;
     public int outputsLength => 1;
     public int stateLength => 1;
@@ -22,18 +20,9 @@ public class WireLogic : MonoBehaviour, ILogicGateSpec
     [SerializeField]
     private Material offMaterial;
 
-    private void Start()
-    {
-    }    
-
-    private byte OnOffState(byte[] inputs)
-    {
-        UpdateVisuals(inputs[0]);
-        return inputs[0];
-    }
-
     private byte BufferInput(byte[] inputs)
     {
+        UpdateVisuals(inputs[0]);
         return inputs[0];
     }
 

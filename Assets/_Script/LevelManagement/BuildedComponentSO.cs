@@ -35,5 +35,8 @@ public class BuildedComponentSO : ScriptableObject
     public Vector2Int connectorA;
     public Vector2Int connectorB;
 
-    public int? buidedId;
+    [SerializeField]
+    public int buidedId;
+
+    public int initialState;
 }

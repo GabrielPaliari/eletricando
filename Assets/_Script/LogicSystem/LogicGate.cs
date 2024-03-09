@@ -17,9 +17,6 @@ public class LogicGate : MonoBehaviour
     private byte[] outputsValues;
     private OutputFunction[] outputFunctions;
     private UnityEvent<byte>[] outputEmitters;
-    
-    private byte[] stateValues;
-    private StateFunction[] stateFunctions;
 
     public int componentId;
     public Vector3Int position;
@@ -36,26 +33,32 @@ public class LogicGate : MonoBehaviour
         UpdateGate();
     }
 
-    public void Initialize(int id, Vector3Int pos, RotationDir rot)
+    public void Initialize(int compId, Vector3Int pos, RotationDir rot, int buildedId = 0, int initialState = 0)
     {
-        Initialize();
-        componentId = id;
+        id = buildedId;
+        componentId = compId;
         position = pos;
         rotationDir = rot;
+        Initialize(initialState);
     }
 
     public void Initialize(List<Vector3> nodes, Vector2Int connA, Vector2Int connB)
     {
-        Initialize();
         componentId = 0;
         wireNodes = nodes;
         connectorA = connA;
         connectorB = connB;
+        Initialize();
     }
 
-    private void Initialize()
+    private void Initialize(int initialState = 0)
     {
         specification = GetComponent<ILogicGateSpec>();
+        if (specification is IStateGateSpec)
+        {
+            (specification as IStateGateSpec).InitState(initialState);
+        }
+
         if (specification != null)
         {
             id = LogicCircuitSystem.Instance.AddComponent(this);
@@ -65,9 +68,6 @@ public class LogicGate : MonoBehaviour
             outputsValues = new byte[(specification.outputsLength)];
             outputFunctions = specification.outputFunctions;
             outputEmitters = new UnityEvent<byte>[specification.outputsLength];
-
-            stateValues = new byte[(specification.stateLength)];
-            stateFunctions = specification.stateFunctions;
 
             RegisterOutputs();
             LogicCircuitSystem.Instance.RegisterWireConectors(id, specification.inputsLength, specification.outputsLength);
@@ -95,7 +95,6 @@ public class LogicGate : MonoBehaviour
     public void UpdateGate()
     {
         UpdateOutputs();
-        UpdateState();
     }
 
     private void UpdateOutputs()
@@ -103,22 +102,10 @@ public class LogicGate : MonoBehaviour
         if (outputFunctions == null || outputFunctions.Length == 0) return;
         for (int n = 0; n < outputFunctions.Length; n++)
         {
-            var newOutput = outputFunctions[n](inputsValues);
+            var outputFunction = outputFunctions[n];
+            var newOutput = outputFunction(inputsValues);
             outputsValues[n] = newOutput;
             outputEmitters[n].Invoke(newOutput);
-        }
-    }
-    private void UpdateState()
-    {
-        if (stateFunctions == null || stateFunctions.Length == 0) return;
-        for (int n = 0; n < stateFunctions.Length; n++)
-        {
-            var stateFunction = stateFunctions[n];
-            var newState = stateFunction(inputsValues);
-            if (stateValues[n] != newState)
-            {
-                stateValues[n] = newState;
-            }
         }
     }
 }

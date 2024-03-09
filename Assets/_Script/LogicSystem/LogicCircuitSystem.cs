@@ -45,22 +45,18 @@ public class LogicCircuitSystem : MonoBehaviour
 
     public int AddComponent(LogicGate logicGate)
     {
-        currentComponentId++;
-        int id = currentComponentId;
-        if (!outputEvents.ContainsKey(id))
+        if (logicGate.id != 0)
         {
-            outputEvents[id] = new Dictionary<int, UnityEvent<byte>>();
-            _logicGates.Add(logicGate);
-        }
-        if (!_outputWires.ContainsKey(id))
+            currentComponentId = logicGate.id;
+        } else
         {
-            _outputWires[id] = new Dictionary<int, List<LogicGate>>();
+            currentComponentId++;
         }
-        if (!_inputWires.ContainsKey(id))
-        {
-            _inputWires[id] = new Dictionary<int, List<LogicGate>>();
-        }
-        return id;
+        outputEvents[currentComponentId] = new Dictionary<int, UnityEvent<byte>>();
+        _logicGates.Add(logicGate);
+        _outputWires[currentComponentId] = new Dictionary<int, List<LogicGate>>();
+        _inputWires[currentComponentId] = new Dictionary<int, List<LogicGate>>();
+        return currentComponentId;
     }
 
     public UnityEvent<byte> RegisterOutputEmitter(int component, int outputIndex)
@@ -92,15 +88,15 @@ public class LogicCircuitSystem : MonoBehaviour
     public void RegisterOutputListener(int outputGateId, int outputIndex, int inputGateId, int inputIndex, LogicGate wire)
     {
         UnityEvent<byte> outputEmitter = outputEvents[outputGateId][outputIndex];
-        outputEmitter.AddListener((outValue) => wire.OnInputChange(0, outValue));
 
         _inputWires[inputGateId][inputIndex].Add(wire);
         _outputWires[outputGateId][outputIndex].Add(wire);
 
-        UnityEvent<byte> wireEmitter = outputEvents[wire.id][0];
-
         var inputGate = _logicGates.First((gate) => gate.id == inputGateId);
-        wireEmitter.AddListener((outValue) => inputGate.OnInputChange(inputIndex, outValue));
+        outputEmitter.AddListener((outValue) => wire.OnInputChange(0, outValue));
+        outputEmitter.AddListener((outValue) => inputGate.OnInputChange(inputIndex, outValue));
+        var outputGate = _logicGates.First((gate) => gate.id == outputGateId);
+        outputGate.UpdateGate();
     }
 
     public void UnregisterComponent(LogicGate logicGate)

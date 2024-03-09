@@ -8,10 +8,8 @@ public class AND : MonoBehaviour, ILogicGateSpec
     public OutputFunction[] outputFunctions => new OutputFunction[] {
         ANDFunction
     };
-    public StateFunction[] stateFunctions => new StateFunction[] {};
     public int inputsLength => 2;
     public int outputsLength => 1;
-    public int stateLength => 0;
 
     private byte ANDFunction(byte[] inputs)
     {

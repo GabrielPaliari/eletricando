@@ -17,7 +17,9 @@ public class ObjectPlacer : MonoBehaviour
         if(logicGate != null) {
             var rotationDir = RotationUtil.currentDir;
             var compId = componentData.ID;
-            logicGate.Initialize(compId, cellPos, rotationDir); 
+            var buildedId = buildedCompSpec != null ? buildedCompSpec.buidedId : 0;
+            var initialState = buildedCompSpec != null ? buildedCompSpec.initialState : 0;
+            logicGate.Initialize(compId, cellPos, rotationDir, buildedId, initialState); 
         }
 
         ISignalSeqGateSpec signalGate = newObject.GetComponent<ISignalSeqGateSpec>();

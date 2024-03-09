@@ -1,20 +1,17 @@
-using System.Collections;
 using UnityEngine;
 using DG.Tweening;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using static UnityEngine.Rendering.DebugUI;
 
-public class Switch : MonoBehaviour, ILogicGateSpec
+public class Switch : MonoBehaviour, IStateGateSpec, ILogicGateSpec
 {
     public OutputFunction[] outputFunctions => new OutputFunction[] {
-        OnOffState
+        UpdateOutputs
     };
-    public StateFunction[] stateFunctions => new StateFunction[] {};
     public int inputsLength => 1;
     public int outputsLength => 1;
-    public int stateLength => 0;
 
-    private bool isOn = false;
+    private int _currentState = 0;
+    public int state => _currentState;
 
     private LogicGate logicGate;
 
@@ -28,19 +25,41 @@ public class Switch : MonoBehaviour, ILogicGateSpec
 
     private float animDuration = .25f;
 
+    
     void Start()
     {
         logicGate = GetComponent<LogicGate>();
     }
 
-    private byte OnOffState(byte[] inputs)
+    public void InitState(int initialState)
     {
-        return (byte)(isOn ? 1 : 0);
+        _currentState = initialState;
+        UpdateVisuals();
+    }
+
+    private byte UpdateOutputs(byte[] inputs)
+    {
+        return (byte)(_currentState);
     }
 
     public void UpdateState()
     {
-        isOn = !isOn;
+        switch (_currentState)
+        {
+            case 0:
+                _currentState = 1;
+                break;
+            case 1:
+            default:
+                _currentState = 0;
+                break;
+        }
+        UpdateVisuals();
+    }
+
+    public void UpdateVisuals()
+    {
+        var isOn = _currentState == 1;
         SoundFeedback.Instance.PlaySound(isOn ? SoundType.SwitchOn : SoundType.SwitchOff);
         if (logicGate != null)
         {
@@ -48,7 +67,7 @@ public class Switch : MonoBehaviour, ILogicGateSpec
         }
         if (indicatorMeshRenderer != null && indicatorTransform != null)
         {
-            indicatorMeshRenderer.material = isOn ? onMaterial :offMaterial;
+            indicatorMeshRenderer.material = isOn ? onMaterial : offMaterial;
             var rotation = new Vector3(isOn ? onIndicatorX : offIndicatorX, 0f, 0f);
             indicatorTransform.DOLocalRotate(rotation, animDuration).SetEase(Ease.InOutCubic);
         }
