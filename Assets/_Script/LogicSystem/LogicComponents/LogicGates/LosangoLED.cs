@@ -18,11 +18,14 @@ public class LosangoLED : MonoBehaviour, ILogicGateSpec
     [SerializeField]
     private Material offMaterial;
 
-    private Tween animation;
+    private Tween losangoAnimation;
+    private int id = -1;
 
     private void Start()
     {
-        animation = lightMeshRenderer.transform.DOLocalRotate(new Vector3(0, 180, 0), 2).SetEase(Ease.Linear).SetLoops(-1);
+        StartCoroutine(RegisterStarTracker());
+        losangoAnimation = lightMeshRenderer.transform.DOLocalRotate(new Vector3(0, 180, 0), 2).SetEase(Ease.Linear).SetLoops(-1);
+        losangoAnimation.Pause();
     }
 
     public byte OnOffState(byte[] inputs)
@@ -33,13 +36,29 @@ public class LosangoLED : MonoBehaviour, ILogicGateSpec
             if (isOn)
             {
                 lightMeshRenderer.material = onMaterial;
-                animation.Play();
+                losangoAnimation.Play();
+                if (id != -1)
+                {
+                    CompleteLevelManager.Instance.TurnOnStarTracker(id);
+                }
             } else
             {
                 lightMeshRenderer.material = offMaterial;
-                animation.Pause();
+                losangoAnimation.Pause();
+                if (id != -1)
+                {
+                    CompleteLevelManager.Instance.TurnOffStarTracker(id);
+                }
             }
         }
         return inputs[0];
+    }
+
+    IEnumerator RegisterStarTracker()
+    {
+        yield return new WaitForSeconds(.1f);
+        var logicGate = gameObject.GetComponent<LogicGate>();
+        id = logicGate.id;
+        CompleteLevelManager.Instance.RegisterStarTracker(id);
     }
 }

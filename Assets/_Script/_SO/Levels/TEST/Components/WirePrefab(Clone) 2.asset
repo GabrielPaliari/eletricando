@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 760661c6592a2444b8aa60c1d2edded9, type: 3}
-  m_Name: WirePrefab(Clone)
+  m_Name: WirePrefab(Clone) 2
   m_EditorClassIdentifier: 
   componentId: 0
   componentName: 
@@ -18,9 +18,9 @@ MonoBehaviour:
   rotation: 0
   signalSequence: 
   wireNodes:
-  - {x: 9.498, y: 0.1, z: -2.5180001}
-  - {x: 9.507, y: 0.1, z: 0.76999986}
-  connectorA: {x: 7, y: 0}
-  connectorB: {x: 10, y: 0}
-  buidedId: 11
+  - {x: 4.498, y: 0.1, z: -1.5180001}
+  - {x: 4.501, y: 0.1, z: 6.5}
+  connectorA: {x: 5, y: 0}
+  connectorB: {x: 1, y: 0}
+  buidedId: 13
   initialState: 0
