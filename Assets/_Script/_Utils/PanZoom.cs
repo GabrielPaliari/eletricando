@@ -8,6 +8,8 @@ public class PanZoom : MonoBehaviour
     [SerializeField] private float _zoomMin = 1;
     [SerializeField] private float _zoomMax = 10;
     [SerializeField] private float _zoomMultiplier = 0.01f;
+    [SerializeField] private float _limitX = 10f;
+    [SerializeField] private float _limitY = 10f;
     private Camera _camera;
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,7 @@ public class PanZoom : MonoBehaviour
         {
             Vector3 direction = _touchStart - _camera.ScreenToWorldPoint(Input.mousePosition);
             _camera.transform.position += direction;
+            LimitCameraPos();
         }
         zoom(Input.GetAxis("Mouse ScrollWheel"));
     }
@@ -47,5 +50,12 @@ public class PanZoom : MonoBehaviour
     void zoom(float increment)
     {
         _camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize - increment, _zoomMin, _zoomMax);
+    }
+
+    void LimitCameraPos()
+    {
+        _camera.transform.position = new Vector3(Mathf.Clamp(_camera.transform.position.x, -_limitX, _limitX),
+                Mathf.Clamp(_camera.transform.position.y, -_limitY, _limitY),
+                Mathf.Clamp(_camera.transform.position.z, -_limitX, _limitX));
     }
 }
