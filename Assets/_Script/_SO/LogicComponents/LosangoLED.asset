@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d45a52da06ae13a4cb4dc82db6fa33e6, type: 3}
-  m_Name: Debugger
+  m_Name: LosangoLED
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Debugger
-  <ID>k__BackingField: 10
-  menuImage: {fileID: 21300000, guid: 29009ea023f0f89429900f23ef5cd34d, type: 3}
-  <Size>k__BackingField: {x: 3, y: 1}
-  <Prefab>k__BackingField: {fileID: 3493615974341626966, guid: 44a9082900686014993cbd4940e2f2d6,
+  <Name>k__BackingField: LosangoLed
+  <ID>k__BackingField: 3
+  menuImage: {fileID: 21300000, guid: 7b26621eafdd68541b07dc146ce90682, type: 3}
+  <Size>k__BackingField: {x: 1, y: 1}
+  <Prefab>k__BackingField: {fileID: 3493615974341626966, guid: 5b99bf96f0832784d8bbf99dc0065a67,
     type: 3}
   <PreviewPrefab>k__BackingField: {fileID: 0}
   ComponentType: 0
-  tooltipHeader: Debugger
-  tooltipText: 'Mostra o Valor '
+  tooltipHeader: LED
+  tooltipText: "Acende quando entrada \xE9 maior que zero"

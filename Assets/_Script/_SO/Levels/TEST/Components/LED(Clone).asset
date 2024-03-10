@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 760661c6592a2444b8aa60c1d2edded9, type: 3}
   m_Name: LED(Clone)
   m_EditorClassIdentifier: 
-  componentId: 8
+  componentId: 2
   componentName: 
-  position: {x: 0, y: 0, z: 2}
+  position: {x: -3, y: 0, z: 10}
   rotation: 0
   signalSequence: 
   wireNodes: []
   connectorA: {x: 0, y: 0}
   connectorB: {x: 0, y: 0}
-  buidedId: 2
+  buidedId: 10
   initialState: 0
