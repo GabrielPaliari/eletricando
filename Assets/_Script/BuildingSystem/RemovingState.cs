@@ -36,13 +36,7 @@ public class RemovingState : IBuildingState
             selectedData = componentsData;
         }
 
-        if (selectedData == null)
-        {
-            SoundFeedback.Instance.PlaySound(SoundType.WrongPlacement);
-        }
-        else
-        {
-            SoundFeedback.Instance.PlaySound(SoundType.Remove);
+        if (selectedData != null) {
             gameObjectIndex = selectedData.GetRepresentationIndex(gridPosition);
             if (gameObjectIndex == -1)
                 return;

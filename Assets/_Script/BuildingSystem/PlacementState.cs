@@ -48,10 +48,8 @@ public class PlacementState : IBuildingState
     {
         if (!CheckPlacementValidity(gridPosition, selectedObjectIndex))
         {
-            SoundFeedback.Instance.PlaySound(SoundType.WrongPlacement);
             return;
         }
-        SoundFeedback.Instance.PlaySound(SoundType.Place);
         int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex], gridPosition);
 
         GridData selectedData = componentsData;

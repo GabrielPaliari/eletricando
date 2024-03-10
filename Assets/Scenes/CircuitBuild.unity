@@ -945,7 +945,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
-  m_LocalPosition: {x: -9.7309265, y: 12.530874, z: -8.770928}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2799,14 +2799,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c802ff021b37c964da30f2e7a9b665d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickSound: {fileID: 8300000, guid: 81124813ded3a8d46834a6154dc5ea7b, type: 3}
-  placeSound: {fileID: 8300000, guid: 9987f456a6216b24b81c1efac5119f63, type: 3}
-  removeSound: {fileID: 8300000, guid: 9adbc1ac0e6304741b853db74f87ba12, type: 3}
-  wrongPlacementSound: {fileID: 8300000, guid: bf53fb3d374e3da409e376b09086c26a, type: 3}
-  correctSignalSound: {fileID: 8300000, guid: 71af6d3363aea824db72d2b38b8f484f, type: 3}
-  victorySound: {fileID: 8300000, guid: 635b6e4969d3eb14ca93ca4bef0c0e90, type: 3}
   switchOn: {fileID: 8300000, guid: 4e4481069284b3945aa77d724ad6befd, type: 3}
   switchOff: {fileID: 8300000, guid: 58fbe751b8c8f2d4cab90647b23618e8, type: 3}
+  winStar: {fileID: 8300000, guid: c8814551abae17245a8700db470fca35, type: 3}
+  ledChargeUp: {fileID: 8300000, guid: 4ff033884d3d1b54282a930bbbbae1ac, type: 3}
+  ledChargeDown: {fileID: 8300000, guid: 337aa2d6fb1d26345b6b8afcef0c5f1b, type: 3}
+  completeLevel: {fileID: 8300000, guid: 07bad066bc4001144a21a6a454aacdf8, type: 3}
   audioSource: {fileID: 1203156368}
 --- !u!1 &1209989261
 GameObject:
@@ -3263,6 +3261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b1313308c8f6b47a41935ab697b009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundSystem: {fileID: 0}
 --- !u!1 &1643004762
 GameObject:
   m_ObjectHideFlags: 0

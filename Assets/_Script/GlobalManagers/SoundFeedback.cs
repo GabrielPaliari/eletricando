@@ -17,14 +17,12 @@ public class SoundFeedback : MonoBehaviour
 
     [SerializeField]
     private AudioClip 
-        clickSound,
-        placeSound,
-        removeSound,
-        wrongPlacementSound,
-        correctSignalSound,
-        victorySound,
         switchOn,
-        switchOff;
+        switchOff,
+        winStar,
+        ledChargeUp, 
+        ledChargeDown,
+        completeLevel;
 
     [SerializeField]
     private AudioSource audioSource;
@@ -33,29 +31,25 @@ public class SoundFeedback : MonoBehaviour
     {
         switch (soundType)
         {
-            case SoundType.Click:
-                audioSource.PlayOneShot(clickSound);
-                break;
-            case SoundType.Place:
-                audioSource.PlayOneShot(placeSound);
-                break;
-            case SoundType.Remove:
-                audioSource.PlayOneShot(removeSound);
-                break;
-            case SoundType.WrongPlacement:
-                audioSource.PlayOneShot(wrongPlacementSound);
-                break;
-            case SoundType.CorrectSignalSound:
-                audioSource.PlayOneShot(correctSignalSound);
-                break;
-            case SoundType.VictorySound:
-                audioSource.PlayOneShot(victorySound);
-                break;
             case SoundType.SwitchOn:
                 audioSource.PlayOneShot(switchOn);
                 break;
             case SoundType.SwitchOff:
                 audioSource.PlayOneShot(switchOff);
+                break;
+            case SoundType.WinStarSound:
+                audioSource.PlayOneShot(winStar);
+                break;
+            case SoundType.CompleteLevelSound:
+                audioSource.PlayOneShot(completeLevel);
+                break;
+            case SoundType.LedChargeUp:
+                audioSource.Stop();
+                audioSource.PlayOneShot(ledChargeUp);
+                break;
+            case SoundType.LedChargeDown:
+                audioSource.Stop();
+                audioSource.PlayOneShot(ledChargeDown);
                 break;
             default:
                 break;
@@ -65,12 +59,10 @@ public class SoundFeedback : MonoBehaviour
 
 public enum SoundType
 {
-    Click,
-    Place,
-    Remove,
-    WrongPlacement,
-    CorrectSignalSound,
-    VictorySound,
     SwitchOn,
-    SwitchOff
+    SwitchOff,
+    WinStarSound,
+    LedChargeUp,
+    LedChargeDown,
+    CompleteLevelSound,
 }

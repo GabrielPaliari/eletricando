@@ -9,6 +9,8 @@ public class CompleteLevelManager : MonoBehaviour
     public static CompleteLevelManager Instance;
     private Dictionary<int, bool> starTrackers = new();
 
+    [SerializeField] private SoundFeedback soundSystem;
+
     private void Awake()
     {
         Instance = this;
@@ -27,6 +29,7 @@ public class CompleteLevelManager : MonoBehaviour
         if (starTrackers.ContainsKey(compId))
         {
             starTrackers[compId] = true;
+            SoundFeedback.Instance.PlaySound(SoundType.WinStarSound);
         }
     }
 
@@ -42,6 +45,7 @@ public class CompleteLevelManager : MonoBehaviour
     {
         var totalTrackers = starTrackers.Count + 1;
         var completedTrackers = starTrackers.Values.ToArray().Count((isCompleted) => isCompleted) + 1;
+        SoundFeedback.Instance.PlaySound(SoundType.CompleteLevelSound);
         Debug.Log($"Level Concluído. Estrelas: {completedTrackers}/{totalTrackers}");
     }
 

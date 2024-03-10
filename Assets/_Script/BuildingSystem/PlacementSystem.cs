@@ -131,7 +131,6 @@ public class PlacementSystem : MonoBehaviour
 
     private void StopPlacement()
     {
-        SoundFeedback.Instance.PlaySound(SoundType.Click);
         if (buildingState == null)
             return;
         gridVisualization.SetActive(false);

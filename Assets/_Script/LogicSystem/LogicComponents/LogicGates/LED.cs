@@ -50,10 +50,12 @@ public class LED : MonoBehaviour, ILogicGateSpec
             if (isOn)
             {
                 completeLevelAnimation.PlayForward();
+                SoundFeedback.Instance.PlaySound(SoundType.LedChargeUp);
             }
             else
             {
                 completeLevelAnimation.PlayBackwards();
+                SoundFeedback.Instance.PlaySound(SoundType.LedChargeDown);
             }
         }
         return inputs[0];

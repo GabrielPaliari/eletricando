@@ -1,6 +1,5 @@
 using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LosangoLED : MonoBehaviour, ILogicGateSpec
@@ -39,7 +38,7 @@ public class LosangoLED : MonoBehaviour, ILogicGateSpec
                 losangoAnimation.Play();
                 if (id != -1)
                 {
-                    CompleteLevelManager.Instance.TurnOnStarTracker(id);
+                    CompleteLevelManager.Instance.TurnOnStarTracker(id);                    
                 }
             } else
             {
