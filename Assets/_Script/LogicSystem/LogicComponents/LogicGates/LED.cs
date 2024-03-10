@@ -30,7 +30,7 @@ public class LED : MonoBehaviour, ILogicGateSpec
     private float completeScale;
 
     private Tween completeLevelAnimation;
-
+    private bool isFirstUpdate = true;
     private void Start()
     {
         completeLevelAnimation = completeIndicatorTransform
@@ -42,6 +42,7 @@ public class LED : MonoBehaviour, ILogicGateSpec
 
     public byte OnOffState(byte[] inputs)
     {
+
         if (lightMeshRenderer != null)
         {
             var isOn = inputs[0] > 0;
@@ -55,7 +56,11 @@ public class LED : MonoBehaviour, ILogicGateSpec
             else
             {
                 completeLevelAnimation.PlayBackwards();
-                SoundFeedback.Instance.PlaySound(SoundType.LedChargeDown);
+                if (!isFirstUpdate)
+                {
+                    SoundFeedback.Instance.PlaySound(SoundType.LedChargeDown);
+                }
+                isFirstUpdate = false;
             }
         }
         return inputs[0];
