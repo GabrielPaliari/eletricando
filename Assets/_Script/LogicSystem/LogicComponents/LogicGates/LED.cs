@@ -56,7 +56,7 @@ public class LED : MonoBehaviour, ILogicGateSpec
             else
             {
                 completeLevelAnimation.PlayBackwards();
-                if (!isFirstUpdate)
+                if (!isFirstUpdate && SoundFeedback.Instance != null)
                 {
                     SoundFeedback.Instance.PlaySound(SoundType.LedChargeDown);
                 }

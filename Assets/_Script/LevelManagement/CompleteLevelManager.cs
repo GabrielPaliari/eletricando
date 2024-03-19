@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,8 +9,25 @@ public class CompleteLevelManager : MonoBehaviour
 {
     public static CompleteLevelManager Instance;
     private Dictionary<int, bool> starTrackers = new();
+    [SerializeField]
+    private Transform mainCameraPivot;
+    [SerializeField]
+    private Material cubeGlowMaterial;
+    [SerializeField]
+    private MeshRenderer cubeMeshRenderer;
+    [SerializeField]
+    private GameObject completeLevelModal;
 
-    [SerializeField] private SoundFeedback soundSystem;
+    [SerializeField]
+    private Camera mainCamera;
+    private Vector3 mainCameraInitialPos;
+    private float mainCameraInitialSize;
+
+    private void Start()
+    {
+        mainCameraInitialPos = mainCamera.transform.position;
+        mainCameraInitialSize = mainCamera.orthographicSize;
+    }
 
     private void Awake()
     {
@@ -18,7 +36,6 @@ public class CompleteLevelManager : MonoBehaviour
 
     public void RegisterStarTracker(int compId)
     {
-        Debug.Log(compId);
         if (compId <= 0 || starTrackers.ContainsKey(compId)) { return; }
 
         starTrackers.Add(compId, false);
@@ -30,6 +47,16 @@ public class CompleteLevelManager : MonoBehaviour
         {
             starTrackers[compId] = true;
             SoundFeedback.Instance.PlaySound(SoundType.WinStarSound);
+            var completed = GetCompletedStars();
+            switch (completed)
+            {
+                case 1:
+                    StarsIndicator.Instance.ShowStar(LosangoType.Left);
+                    break;
+                case 2:
+                    StarsIndicator.Instance.ShowStar(LosangoType.Right);
+                    break;
+            }
         }
     }
 
@@ -38,15 +65,44 @@ public class CompleteLevelManager : MonoBehaviour
         if (starTrackers.ContainsKey(compId))
         {
             starTrackers[compId] = false;
+            var completed = GetCompletedStars();
+            switch (completed)
+            {
+                case 0:
+                    StarsIndicator.Instance.DisableStar(LosangoType.Left);
+                    StarsIndicator.Instance.DisableStar(LosangoType.Right);
+                    break;
+                case 1:
+                    StarsIndicator.Instance.DisableStar(LosangoType.Right);
+                    break;
+            }
         }
     }
 
     public void CompleteLevel()
     {
-        var totalTrackers = starTrackers.Count + 1;
-        var completedTrackers = starTrackers.Values.ToArray().Count((isCompleted) => isCompleted) + 1;
+        var completedTrackers = GetCompletedStars() + 1;
+        StarsIndicator.Instance.ShowStar(LosangoType.Top);
         SoundFeedback.Instance.PlaySound(SoundType.CompleteLevelSound);
-        Debug.Log($"Level Concluído. Estrelas: {completedTrackers}/{totalTrackers}");
+        DoCameraAnimation();
+        completeLevelModal.SetActive(true);
+        cubeMeshRenderer.material = cubeGlowMaterial;
     }
 
+    private void DoCameraAnimation()
+    {
+        DOTween.To(() => mainCamera.orthographicSize, x => mainCamera.orthographicSize = x, mainCameraInitialSize, 2f);
+        Sequence animSequence = DOTween.Sequence();
+        animSequence.Append(mainCamera.transform.DOMove(mainCameraInitialPos, 2f));
+        animSequence.Append(mainCameraPivot
+            .DORotate(new Vector3(0, 180, 0), 4f)
+            .SetEase(Ease.Linear)
+            .SetLoops(int.MaxValue, LoopType.Incremental)
+        );
+    }
+
+    private int GetCompletedStars()
+    {
+        return starTrackers.Values.ToArray().Count((isCompleted) => isCompleted);
+    }
 }

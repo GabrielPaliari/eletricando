@@ -87,10 +87,10 @@ public class LogicGate : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        LogicCircuitSystem.Instance.UnregisterComponent(this);
-    }
+    //private void OnDestroy()
+    //{
+    //    LogicCircuitSystem.Instance.UnregisterComponent(this);
+    //}
 
     public void UpdateGate()
     {
