@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : MonoBehaviour, IDataPersistence
 {
     public static LevelManager Instance;
     
@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
 
     public LevelSO _selectedLevel;
     public LevelsListSO _levelsList;
+    private GameData _gameData;
 
     private void Awake()
     {
@@ -25,24 +26,13 @@ public class LevelManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-    public void LoadNextLevel()
-    {
-        var nextLevelId = _selectedLevel.id + 1;
-        var nextLevel = _levelsList.levelData.Find((level) => level.id == nextLevelId);
-        if (nextLevel == null)
-        {
-            Debug.Log("ZEROOOOOU");
-        } else
-        {
-            _selectedLevel = nextLevel;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+
+    public void SelectLevel(LevelSO level) {
+        _selectedLevel = level;
     }
 
-    public void LoadLevel(LevelSO level)
+    public void LoadSelectedLevel()
     {
-        _selectedLevel = level;        
         StartCoroutine(LoadAsync("CircuitBuild"));          
     }    
 
@@ -63,9 +53,26 @@ public class LevelManager : MonoBehaviour
         _loadingCanvas.SetActive(false);
     }
 
-    public bool IsLastLevel()
+    public void CompleteSelectedLevel(int stars)
     {
-        var lastLevel = _levelsList.levelData[_levelsList.levelData.Count - 1];
-        return lastLevel.id == _selectedLevel.id;
+        var id = _selectedLevel.id;
+        _gameData.completedLevels.RemoveAll((level) => level.id == id);
+        
+        _gameData.completedLevels.Add(new()
+        {
+            id = id,
+            starsNumber = stars
+        });
+        
+    }
+
+    public void LoadData(GameData data)
+    {
+        _gameData = data;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.completedLevels = _gameData.completedLevels;
     }
 }

@@ -87,6 +87,7 @@ public class CompleteLevelManager : MonoBehaviour
         DoCameraAnimation();
         completeLevelModal.SetActive(true);
         cubeMeshRenderer.material = cubeGlowMaterial;
+        LevelManager.Instance.CompleteSelectedLevel(completedTrackers);
     }
 
     private void DoCameraAnimation()

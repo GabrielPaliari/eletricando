@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
 using UnityEditor;
-using System.Linq;
-using Unity.VisualScripting;
 
-public class SaveLevelManager : MonoBehaviour
+public class SaveLevelConfigManager : MonoBehaviour
 {
     public static string pathToSaveComps = "Assets/_Script/_SO/Levels/TEST/Components/";
 
