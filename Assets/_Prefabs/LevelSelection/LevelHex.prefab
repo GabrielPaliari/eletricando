@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7618790635205391455}
   - component: {fileID: 7822684493099205491}
   - component: {fileID: 7435374425949563816}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LevelNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7124867677889509131}
   - component: {fileID: 7417214224681067093}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LevelBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8744126037372934295}
   - component: {fileID: 1925530262458601445}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LevelHex
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ Transform:
   - {fileID: 8343294905760941840}
   - {fileID: 7124867677889509131}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1925530262458601445
 SpriteRenderer:
@@ -357,7 +357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5869205833151902226}
   - component: {fileID: 1960083259648832312}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NumberCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,10 +441,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8744126037372934295}
     m_Modifications:
+    - target: {fileID: 1012117833604578240, guid: 110b7ded710b4bc49878dc35251c0e1e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5419751466414469696, guid: 110b7ded710b4bc49878dc35251c0e1e,
         type: 3}
       propertyPath: m_Name
       value: RightLosango
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419751466414469696, guid: 110b7ded710b4bc49878dc35251c0e1e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5434881979180480449, guid: 110b7ded710b4bc49878dc35251c0e1e,
         type: 3}
@@ -501,6 +511,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 5605061736048898959, guid: 110b7ded710b4bc49878dc35251c0e1e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -520,10 +535,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8744126037372934295}
     m_Modifications:
+    - target: {fileID: 1012117833604578240, guid: 110b7ded710b4bc49878dc35251c0e1e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5419751466414469696, guid: 110b7ded710b4bc49878dc35251c0e1e,
         type: 3}
       propertyPath: m_Name
       value: LeftLosango
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419751466414469696, guid: 110b7ded710b4bc49878dc35251c0e1e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5434881979180480449, guid: 110b7ded710b4bc49878dc35251c0e1e,
         type: 3}
@@ -580,6 +605,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -60
       objectReference: {fileID: 0}
+    - target: {fileID: 5605061736048898959, guid: 110b7ded710b4bc49878dc35251c0e1e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -599,10 +629,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8744126037372934295}
     m_Modifications:
+    - target: {fileID: 1012117833604578240, guid: 110b7ded710b4bc49878dc35251c0e1e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5419751466414469696, guid: 110b7ded710b4bc49878dc35251c0e1e,
         type: 3}
       propertyPath: m_Name
       value: TopLosango
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419751466414469696, guid: 110b7ded710b4bc49878dc35251c0e1e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5434881979180480449, guid: 110b7ded710b4bc49878dc35251c0e1e,
         type: 3}
@@ -658,6 +698,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5605061736048898959, guid: 110b7ded710b4bc49878dc35251c0e1e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

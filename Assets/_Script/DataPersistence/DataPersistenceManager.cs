@@ -47,7 +47,13 @@ public class DataPersistenceManager : MonoBehaviour
         }
     }
 
-    public void SaveGame() { }
+    public void SaveGame() {
+        foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+        {
+            dataPersistenceObj.SaveData(ref gameData);
+        }
+        dataHandler.Save(gameData);
+    }
 
     private void OnApplicationQuit()
     {

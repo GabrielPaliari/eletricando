@@ -12,10 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ee0eacc692a6a4ba298fbe943f9e84, type: 3}
   m_Name: TestLevel
   m_EditorClassIdentifier: 
-  id: 0
+  id: 3
   title: Level Teste
   subtitle: Teste
   description: Level para testar os componentes
-  preBuiltComponents: []
+  preBuiltComponents:
+  - {fileID: 11400000, guid: edc8c86775d80364ea8c959492f330db, type: 2}
+  - {fileID: 11400000, guid: c845a0ba353778e43a5bb62dd01be05b, type: 2}
+  - {fileID: 11400000, guid: e98b0498c80e77a42a1a311dd70d7671, type: 2}
+  - {fileID: 11400000, guid: 7300671cf6f29fc44be0a43e3dc839d3, type: 2}
+  - {fileID: 11400000, guid: 706bc9c5ee687d04997499ac326c22f6, type: 2}
+  - {fileID: 11400000, guid: cdf32f4ab363fd5428854e225ea8efbb, type: 2}
+  - {fileID: 11400000, guid: 4f51090432d95bd4bb76323dee7ce141, type: 2}
+  - {fileID: 11400000, guid: a4ec17a6d49ddf54c91f0395d60a2581, type: 2}
+  - {fileID: 11400000, guid: 3118a83deef803f42923dd0c4268faaa, type: 2}
   componentsAvailable: {fileID: 11400000, guid: 6b1219d6490d7804caa1e60848126e03,
     type: 2}

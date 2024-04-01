@@ -22,6 +22,6 @@ public class AnimateOnEnter : MonoBehaviour
     private void OnDisable()
     {
         overlay.SetActive(false);
-        modalTransform.DOScale(0, .5f).SetEase(Ease.Linear);
+        modalTransform.gameObject.SetActive(false);
     }
 }

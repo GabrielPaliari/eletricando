@@ -8,7 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 8b49779075a7d7f438f1e91e57329e37
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CircuitBuild.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/PuzzleLevel.unity
+    guid: 7f10c4c45692ee84495f64f90994f761
+  - enabled: 1
+    path: Assets/Scenes/LevelSelection.unity
+    guid: acc4eb6fa266ef94e81041c8256d9d37
   m_configObjects: {}

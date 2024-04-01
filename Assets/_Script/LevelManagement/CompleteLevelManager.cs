@@ -22,6 +22,7 @@ public class CompleteLevelManager : MonoBehaviour
     private Camera mainCamera;
     private Vector3 mainCameraInitialPos;
     private float mainCameraInitialSize;
+    private Sequence animSequence;
 
     private void Start()
     {
@@ -80,20 +81,25 @@ public class CompleteLevelManager : MonoBehaviour
     }
 
     public void CompleteLevel()
-    {
-        var completedTrackers = GetCompletedStars() + 1;
+    {        
         StarsIndicator.Instance.ShowStar(LosangoType.Top);
         SoundFeedback.Instance.PlaySound(SoundType.CompleteLevelSound);
         DoCameraAnimation();
         completeLevelModal.SetActive(true);
         cubeMeshRenderer.material = cubeGlowMaterial;
-        LevelManager.Instance.CompleteSelectedLevel(completedTrackers);
+    }
+
+    public void ContinueToLevelSelection()
+    {
+        var completedStars = GetCompletedStars() + 1;
+        DOTween.KillAll();
+        LevelManager.Instance.CompleteSelectedLevel(completedStars);
     }
 
     private void DoCameraAnimation()
     {
         DOTween.To(() => mainCamera.orthographicSize, x => mainCamera.orthographicSize = x, mainCameraInitialSize, 2f);
-        Sequence animSequence = DOTween.Sequence();
+        animSequence = DOTween.Sequence();
         animSequence.Append(mainCamera.transform.DOMove(mainCameraInitialPos, 2f));
         animSequence.Append(mainCameraPivot
             .DORotate(new Vector3(0, 180, 0), 4f)

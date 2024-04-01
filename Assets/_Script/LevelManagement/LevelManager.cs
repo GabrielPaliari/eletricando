@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour, IDataPersistence
     public LevelSO _selectedLevel;
     public LevelsListSO _levelsList;
     private GameData _gameData;
+    public int lastCompletedLevelStars = 0;
 
     private void Awake()
     {
@@ -33,37 +34,35 @@ public class LevelManager : MonoBehaviour, IDataPersistence
 
     public void LoadSelectedLevel()
     {
-        StartCoroutine(LoadAsync("CircuitBuild"));          
+        lastCompletedLevelStars = 0;
+        StartCoroutine(LoadAsync("PuzzleLevel"));          
     }    
 
     public void LoadMainMenu()
     {
-        _selectedLevel = null;
         StartCoroutine(LoadAsync("MainMenu"));
+    }
+
+    public void LoadLevelSelection()
+    {
+        StartCoroutine(LoadAsync("LevelSelection"));
     }
 
     IEnumerator LoadAsync(string sceneName)
     {
-        _loadingCanvas.SetActive(true);
+        //_loadingCanvas.SetActive(true);
         AsyncOperation scene = SceneManager.LoadSceneAsync(sceneName);
         while (!scene.isDone)
         {
             yield return null;
         }
-        _loadingCanvas.SetActive(false);
+        //_loadingCanvas.SetActive(false);
     }
 
     public void CompleteSelectedLevel(int stars)
     {
-        var id = _selectedLevel.id;
-        _gameData.completedLevels.RemoveAll((level) => level.id == id);
-        
-        _gameData.completedLevels.Add(new()
-        {
-            id = id,
-            starsNumber = stars
-        });
-        
+        lastCompletedLevelStars = stars;
+        LoadLevelSelection();
     }
 
     public void LoadData(GameData data)
