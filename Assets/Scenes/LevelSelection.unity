@@ -519,7 +519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loadingCanvas: {fileID: 0}
-  _selectedLevel: {fileID: 0}
+  _selectedLevel: {fileID: 11400000, guid: 55389a3d2959d324d8a4e7b53d08a5b7, type: 2}
   _levelsList: {fileID: 11400000, guid: 4474f322748762d458de51f03151aa8e, type: 2}
   lastCompletedLevelStars: 0
 --- !u!4 &768788852

@@ -78,7 +78,10 @@ public class LevelSelectorManager : MonoBehaviour, IDataPersistence
     {
         _gameData = data;
         InitializeLevelButtons();
-        OnCompletedLevel();
+        if (!CompletedLevelRecently())
+        {
+            SelectLastCompletedLevel();
+        }
     }
 
     public void SaveData(ref GameData data)
@@ -86,16 +89,33 @@ public class LevelSelectorManager : MonoBehaviour, IDataPersistence
         data.completedLevels = _gameData.completedLevels;
     }
 
-    private void OnCompletedLevel()
+    private void SelectLastCompletedLevel()
+    {
+        LevelSelectorButton lastCompletedLevelBtn;
+        var lastCompletedId = _gameData.completedLevels.Count;
+        if (lastCompletedId < LevelManager.Instance._levelsList.levelData.Count)
+        {
+            lastCompletedLevelBtn = _levelButtons[lastCompletedId];
+        } else
+        {
+            lastCompletedLevelBtn = _levelButtons[lastCompletedId - 1];
+        }        
+        _cameraController.SelectLevelButton(lastCompletedLevelBtn.gameObject);
+    }
+
+    private bool CompletedLevelRecently()
     {
         var currentLevelStars = LevelManager.Instance.lastCompletedLevelStars;
-        Debug.Log(currentLevelStars);
         if (currentLevelStars > 0)
         {
             var currentLevelId = LevelManager.Instance._selectedLevel.id;
             var currentLevelIndex = currentLevelId - 1;
             AnimateCurrentLevelStars(currentLevelIndex, currentLevelStars);
             SaveLevelComplete(currentLevelId, currentLevelStars);
+            return true;
+        } else
+        {
+            return false;
         }
     }
 
